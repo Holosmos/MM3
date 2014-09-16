@@ -1,0 +1,160 @@
+\documentclass{mybourbaki}
+
+\newcommand{\card}{\sharp}
+\renewcommand{\div}{\mid}
+\titre{Groupes et groupes symétriques}
+
+\begin{document}
+
+\section{Introduction}
+
+\subsection{Groupe abstrait}
+
+\definition{ 
+Un groupe est la donnée d'un couple $(G,\cdot)$ où $G$ est un ensemble et $\cdot : G\fois G \vers G$ une loi de composition interne, telle que :
+\begin{enumerate}
+\item associativité : \[ \forall a,b,c\in G, \; (a\cdot b) \cdot c = a \cdot (b\cdot c) ;\]
+\item existence de l'élément neutre $e\in G$ : \[ \forall g \in G, \; g\cdot e = e\cdot g = g ;\]
+\item existence de l'inverse : \[\forall x\in G, \exists y \in G, \; x\cdot y  = y\cdot x = e. \]
+\end{enumerate}
+}{}
+
+\paragraph{Notations}Pour un groupe multiplicatif on note $ab$ l'élément $a\cdot b$, l'élément neutre est noté $1$ et l'inverse de $a$ est noté de $a^{-1}$.
+
+\demonstration{ 
+Soient $e,e'$ deux éléments neutres. Alors \[ e' =e\cdot e' = e.\]
+
+Soient $b,c$ inverses de $a$. Alors : \[ b = b\cdot a \cdot c = c.\]
+}{Unicité de l'élément neutre et de l'inverse}
+
+\subsection{Groupe commutatif}
+
+\definition{ 
+Un groupe $G$ est commutatif si la loi de composition l'est : \[\forall x,y\in G, \; xy = yx. \]
+}{Groupe commutatif (ou Abélien)}
+\paragraph{Notations}
+En général la loi de composition d'un tel groupe est notée comme un groupe additif $(G,+)$. Le neutre est alors $0$ et l'inverse de $x$ est $-x$.
+
+\subsection{Exemples}
+
+\begin{itemize}
+\item Le couple $(\Z,+)$ est un groupe abélien où $+$ est l'addition usuelle des entiers.
+\item $(\R,+)$ et $(\Q,+)$ sont également des groupes abéliens.
+\item $(\R\prive{0},\fois)$ et $(\Q\prive{0},\fois)$ sont des groupes abéliens.
+\item $\GL(n,\R)$ est un groupe pour la composition de matrices en tant que loi de composition. Ce n'est pas un groupe commutatif.
+\end{itemize}
+
+\section{Sous-groupe}
+
+\subsection{Sous-groupe}
+\definition{ 
+Soit $G$ un groupe (multiplicatif) et $H\dans G$ un sous-ensemble de $G$. $H$ est un sous-groupe de $G$ si c'est un groupe avec la loi de composition et d'inverse astreintes à $H$\footnotemark.
+}{Sous-groupe}
+\footnotetext{C'est-à-dire si $H$ est stable par l'application $(x,y) \donne xy^{-1}$.}
+
+\proposition{ 
+Soit $G$ un groupe.
+
+ Si $(H_i)_{i\in I}$ est une famille de sous-groupes de $G$ alors $\Inter_{i\in I}^{}H_i$ est un sous-groupe de $G$.
+}{}
+\definition{ 
+Pour tout $i\in I$, $H_i$ vérifie la propriété de sous-groupe et donc l'intersection aussi.
+}{}
+
+\paragraph{Remarque}Généralement la réunion de sous-groupes n'est pas un sous-groupe. En effet si $x\in H_1$ et $y\in H_2$ alors il n'y a aucune raison que $xy\in \Union H_i$.
+
+Pour une équivalence il faut rajouter une hypothèse. Si $H,K$ sont deux sous-groupes de $G$ alors $H\union K$ est un sous-groupe si, et seulement si, $H\dans K$ ou $K \dans H$.
+
+En effet supposons $H\not\dans K$ et que $H\union K$ est un sous-groupe. Si $K\not\dans H$ alors on peut choisir $x\in K-K\inter H$ et $y\in H-K\inter H$. On a $x,y\in K\union H$ et donc par hypothèse $xy\in H \union K$ et donc il existe des inverses respectifs $x^{-1},y^{-1}$. Supposons $xy\in H$ : $H\ni (xy)y^{-1}=  xe=x\in H$ absurde.
+
+
+\definition{ 
+Si $G$ est un groupe et $X$ une partie de $G$ alors on appelle sous-groupe de $G$ engendré par $X$ le plus petit sous-groupe de $G$ contenant $X$. On le notera ici $\langle X \rangle$.
+
+On a de plus si on note $\mathbb{G}$ l'ensemble des sous-groupes de $G$ : \[ \langle X \rangle  = \Inter_{H \in \mathbb{G} \et H \contient X} H.\]
+}{Groupe engendré}
+
+\paragraph{Exemple}Soit $G$ un groupe et $x \in G$. Alors : \[ \langle x \rangle = \enstq{x^{k}}{k\in \Z}.\]
+En effet c'est un sous-groupe de $\langle x \rangle$ et le plus petit.
+
+\subsection{Ordre d'un groupe et d'un élément}
+
+\definition{ 
+Si $G$ est un groupe fini, on appelle \textit{ordre de} $G$ son cardinal, on le note généralement $\abs{G}$ ou $\sharp G$.
+
+Si $G$ est un groupe et $x\in G$ alors on appelle \textit{ordre de} $x$ le cardinal de son sous-groupe engendré (s'il est fini).
+
+Dans le cas où le groupe en question ne serait pas fini, on dit que l'ordre est infini.
+}{Ordre d'un groupe}
+
+\paragraph{Exemples}
+\begin{itemize}
+\item Dans $\Z$, tous les éléments non nuls sont d'ordre infini.
+\item Dans $\Z/n\Z$ pour $n\in \N^{*}$, $\Z/n\Z$ est d'ordre $n$ puisque toute classe admet un représentant dans $\ens{0,\ldots, n-1}$.
+\item Ordre des éléments de $\Z/4\Z$ : 
+\[ \begin{matrix}
+x & \vline & \barre{0} & \vline & \barre{1} & \vline & \barre{2} & \vline & \barre{3} \\
+\abs{x} & \vline & 1 & \vline & 4 & \vline & 2 & \vline & 4
+\end{matrix}\]
+\end{itemize}
+
+
+\theoreme{ 
+Pour tout groupe $G$ et tout sous-groupe $H$ de $G$, l'ordre (i.e. le cardinal) de $H$ divise l'ordre de $G$ : \[\card H \div \card G. \]
+}{Théorème de \textsc{Lagrange}}
+\demonstration{
+Le cardinal de l'ensemble $G/H$ est appelé \textit{indice} de $H$ dans $G$ et est noté $[G:H]$. 
+De plus, ses classes forment une partition de $G$ et chacune d'entre elles a le même cardinal que $H$. On a alors : \[\card G = \card H \times [G:H]. \]
+}{Théorème de \textsc{Lagrange}}
+
+\section{Morphisme de groupes}
+
+\subsection{Morphisme de groupes}
+
+\definition{ 
+Soient $G,H$ deux groupes. Une application $f : G \vers H$ est un morphisme de groupes si : \[\forall x,y\in G, \; f(x\cdot y) = f(x)\cdot f(y). \]
+}{}
+
+\proposition{ 
+Soient $f:G \vers H$ un morphisme de groupes. Alors : 
+\begin{enumerate}
+\item $f(e_G) = e_H$ ;
+\item $\forall x\in G, \; f(x^{-1}) = f(x)^{-1}$
+\end{enumerate}
+}{}
+
+\subsection{Image et noyau}
+\definition{ 
+Soit $f : G \vers H$ un morphisme de groupes. On définit :
+\begin{enumerate}
+\item $\Ker(f) = \enstq{x\in G}{f(x) = e}$ ;
+\item $\im(f) = \enstq{f(x)}{x\in G}$.
+\end{enumerate}
+}{}
+
+\proposition{ 
+Soit $f: G\vers H$ un morphisme de groupes.
+\begin{enumerate}
+\item $\Ker(f)$ et $\im(f)$ sont des sous-groupes de $G$ et $H$ respectivement ;
+\item $f$ est injective si, et seulement si, $\Ker(f) = \ens{e}$ ;
+\item $f$ est surjective si, et seulement si, $\im(f) = H$.
+\end{enumerate}
+}{}
+\demonstration{ Point par point :
+
+\begin{enumerate}
+\item On a bien entendu $f(e) = e$ et $f(x)^{-1} = f(x^{-1})$ pour tout $x\in G$. Ainsi $\im(f) = f(G)$ est un sous-groupe de $H$.
+
+Soient $x,y \in G$, alors $f(xy^{-1}) = f(x)f(y^{-1}) = ee^{-1} = e$ donc $xy^{-1}\in G$. De plus $f(e) = e$ donc $\Ker(f)$ est un sous-groupe de $G$.
+\item Soient $x,y\in G$ : \[\left(f(x) = f(y) \ssi x = y \right)\ssi \left( f(xy^{-1}) = e \ssi xy^{-1} = e \right). \]
+\item Par définition, si $\im(f) = H$ alors $f$ est surjective et réciproquement.
+\end{enumerate}
+}{}
+
+\end{document}
+
+
+
+
+
+
