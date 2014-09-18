@@ -5,6 +5,10 @@
 \titre{Groupes et groupes symétriques}
 
 \begin{document}
+\begin{center}
+\href{mailto:eric.vasserot@imj-prg.fr}{eric.vasserot@imj-prg.fr}
+\end{center}
+
 
 \section{Introduction}
 
@@ -44,6 +48,8 @@ En général la loi de composition d'un tel groupe est notée comme un groupe ad
 \item $\GL(n,\R)$ est un groupe pour la composition de matrices en tant que loi de composition. Ce n'est pas un groupe commutatif.
 \end{itemize}
 
+
+\newpage
 \section{Sous-groupe}
 
 \subsection{Sous-groupe}
@@ -107,6 +113,8 @@ Le cardinal de l'ensemble $G/H$ est appelé \textit{indice} de $H$ dans $G$ et e
 De plus, ses classes forment une partition de $G$ et chacune d'entre elles a le même cardinal que $H$. On a alors : \[\card G = \card H \times [G:H]. \]
 }{Théorème de \textsc{Lagrange}}
 
+
+\newpage
 \section{Morphisme de groupes}
 
 \subsection{Morphisme de groupes}
@@ -151,7 +159,177 @@ Soient $x,y \in G$, alors $f(xy^{-1}) = f(x)f(y^{-1}) = ee^{-1} = e$ donc $xy^{-
 \end{enumerate}
 }{}
 
+
+\newpage
+\section{Groupe symétrique}
+\subsection{Groupe de permutations}
+\definition{ 
+Soit $E$ un ensemble. On définit : \[S_E = \ens{\text{bijections}\ E\vers E}. \]
+La loi étant la composition des applications. Elle est associative, admet un élément neutre (application identité) et toute application admet une application inverse par définition.
+}{}
+
+\proposition{ 
+Si $\card E = n$ alors $S_E$ est isomorphe (au sens de groupes) à $S_{\ens{1,2,\ldots,n}} := S_n$.
+}{}
+\demonstration{ 
+Puisque $\card E = n$ il existe une bijection $\phi = E \vers \ens{1,2,\ldots,n}$. On considère alors l'application de $\theta : S_E \vers S_n$ définie par : $\omega \donne \phi\rond\omega\rond \phi^{-1}$. Comme $\omega,\phi$ sont des bijections, l'application $\phi\rond\omega\rond \phi^{-1}$ est une bijection. L'application  $\theta$ est bien définie.
+
+On a :
+\begin{align*}
+\theta(\omega' \rond \omega) &= \phi\rond(\omega'\rond \omega)\rond \phi^{-1} \\
+\theta(\omega' \rond \omega) &= \phi \rond \omega' \rond \id \rond \ \omega \rond \phi^{-1} \\
+ \theta(\omega' \rond \omega) &= \theta(\omega')\rond \theta(\omega).
+\end{align*}
+$\theta$ est bien un morphisme de groupes.
+On a $\theta^{-1}(\omega) = \phi^{-1} \rond \omega \rond \phi$ qui fait de $\theta$ une bijection.
+}{}
+
+\definition{ 
+On appelle $S_n$ le \textit{groupe symétrique}.
+}{Groupe symétrique}
+\paragraph{Remarque}On omet la notation $\rond$. Si $\omega \in S_n$ on décrit son action sur $\ens{1,2,\ldots,n}$ par : \[ \matrice{1 & 2 & \ldots & n \\ \omega(1) & \omega(2) & \ldots & \omega(n)}.\]
+
+\paragraph{Exemple de composition}Dans $S_4$ : \[ \matrice{1 & 2 & 3 & 4 \\ 1 & 4 & 3 & 2} \matrice{1 & 2 & 3 & 4 \\ 2 & 1 & 4 & 3} = \matrice{1 & 2 & 3 & 4 \\ 4 & 1 & 2 & 3}.\]
+\subsection{Transpositions et cycles}
+\definition{ 
+Une \textit{transposition} de $S_n$ est une permutation qui échange deux éléments et laisse invariants les $n-2$ autres.
+}{Transposition}
+\paragraph{Notation}Pour tous $i,j \in \ens{1,2,\ldots,n}$ avec $i\neq j$ on note $(ij)$ la transposition : \[ (ij) : \systeme{i &\donne j \\ j &\donne i \\ k &\donne k, \; \forall k \neq i,j }. \]
+\paragraph{Remarque}Une transposition est une involution. C'est à dire que l'ordre d'une transposition est $2$.
+
+\proposition{ 
+$\card S_n = n!$.
+}{}
+\definition{ 
+On appelle \textit{cycle} de longueur $r>1$ (noté $r$-cycle) (dans $S_n$) une permutation $\omega$ telle qu'il existe $x_1,x_2,\ldots,x_r \in \ens{1,2,\ldots,n}$ vérifiant : 
+\begin{enumerate}
+\item $\omega(x_1) = x_2, \omega^{n}(x_1) = x_{1+n}$ avec $n < r$ ;
+\item $\omega(x_r) = x_1$ ;
+\item $\omega(x) = x$ si $x\not\in\ens{x_1,x_2,\ldots,x_r}$.
+\end{enumerate}
+}{Cycle}
+\paragraph{Notation}On  note un tel cycle : $\matrice{x_1 & x_2 & \ldots & x_r}$.
+\paragraph{Remarque}Les $2$-cycles sont exactement les transpositions.
+\paragraph{Exemple}Dans $S_3$ : \[ \matrice{1 & 2 & 3 \\ 2 & 3 & 1} = \matrice{1 & 2 & 3} = \systeme{1 \donne 2 \\ 2 \donne 3 \\ 3 \donne 1}.\]
+
+\subsection{Décomposition des cycles}
+
+\definition{ 
+On appelle \textit{support} du cycle $\omega$ le sous-ensemble : \[ \ens{x_1,x_2,\ldots,x_r} \dans \ens{1, 2 ,\ldots, n}. \]
+}{Support}
+
+\lemme{ 
+Deux cycles de supports disjoints commutent.
+}{}
+\demonstration{ 
+Soient : \[ \systeme{v = (x_1,x_2,\ldots,x_r) \\  w = (y_1,y_2,\ldots,y_s)}\] avec $\ens{x_1,x_2,\ldots,x_r}\inter \ens{y_1,y_2,\ldots,y_s} = \vide$.
+
+Sur un élément extérieur du support la permutation agit comme l'identité donc deux supports disjoints impliquent que les permutations associées permutent (puisque que l'identité permute).
+}{}
+
+\lemme{ 
+Un $r$-cycle est d'ordre $r$.
+}{}
+\demonstration{ 
+Soit $w = \matrice{x_1 & x_2 & \ldots & x_r}$ un $r$-cycle. Il est clair qu'un élément du support est d'ordre $r$. Les autres restent fixés par $w$ et donc $w$ est d'ordre $r$.
+}{}
+
+\proposition{ 
+Toute permutation de $S_n$ est décomposable en produit de cycles de supports disjoints. Cette décomposition est unique à l'ordre des facteurs près.
+}{}
+
+\paragraph{Exemples} Soit : \[S_5 \ni \matrice{1 & 2 & 3 & 4 & 5 \\ 3&  2 & 5 & 4 & 1} = w. \] On peut décomposer $w$ : \[ \matrice{1 & 3 & 5}\matrice{2}\matrice{4} = \matrice{1 & 3 & 5}.\] \[ S_8 \ni w = \matrice{1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ 5 & 6& 1 & 7 & 3 & 8 & 4 & 2} = \matrice{1 & 5 & 3} \matrice{2 & 6 & 8} \matrice{4 & 7}.\]
+
+\theoreme{ 
+Le groupe symétrique est engendré par les transpositions.
+}{}
+\demonstration{
+On procède par récurrence sur $n$.
+\begin{enumerate}
+\item $S_2 = \ens{1, \matrice{1 & 2}}$ est engendré par $\matrice{1 & 2}$.
+\item Soit $n>2$, supposons que $S_{n-1}$ est engendré par les transpositions de $S_{n-1}$. Soit $w \in S_n$ :
+\begin{enumerate}
+\item Soit $w(n) = n$ et alors on décompose $w$ en cycles de tailles inférieures ou égales à $S_{n-1}$ et c'est démontré.
+\item Soit $w(n) \neq n$. On pose $m = w(n)$ et soit $t = \matrice{n & m}$. On pose $v = tw$ et alors $v(n) = n$ et on lui applique le cas précédent. On a alors par unicité de la décomposition que $w$ est elle-même engendrée par des transpositions et c'est démontré.
+\end{enumerate}
+\end{enumerate}
+}{}
+
+\theoreme{ On a les propositions suivantes :
+\begin{enumerate}
+\item Si $w \in S_n$ est une permutation qui s'écrit de deux façons différentes comme produit de transpositions  : \[ w = \tau_1 \tau_2 \ldots \tau_r = \tau_1' \tau_2' \ldots \tau_{r'}',\] alors $(-1)^{r} = (-1)^{r'}$.
+
+On appelle $(-1)^{r}$ la \textit{signature} de $w$.
+\item La signature est un morphisme de groupes de $S_n \vers \ens{1,-1} \cong \Z/2\Z$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Soit $w\in S_n$. On pose : 
+\begin{align*}
+\eps(w)  &= \prod_{1 \leq i < j \leq n} \frac{w(i) - w(j)}{i-j} \\
+\eps(w) &= \frac{\prod_{1 \leq i < j \leq n} (w(i) - w(j))}{\prod_{1 \leq i < j \leq n}(i-j)}\\
+\eps(w) &= \frac{N}{D}.
+\end{align*}
+Avec
+\begin{align*}
+N = \prod_{1 \leq i,j \leq n \; ; \; w^{-1}(i) < w^{-1}(j)} (i-j) = \pm D.
+\end{align*}
+D'où : \[ \eps(w) = \pm 1.\]
+}{}
+\paragraph{Exemple}$w = \matrice{1 & 2 & 3}$. On a : \[\eps(w) = \frac{ (w(1) - w(2))(w(1) - w(3))(w(2)-w(3))}{(1-2)(1-3)(2-3)} =  \frac{(2-3)(2-1)(3-1)}{(1-2)(1-3)(2-3)} = 1.\]
+
+\lemme{ 
+On a :
+\begin{enumerate}
+\item $\eps : S_n \vers \ens{\pm 1}$ est un morphisme de groupes ;
+\item $\eps(ij) = -1$ pour tout $i\neq j$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Si \[ w = \tau_1 \tau_2 \ldots \tau_r = \tau_1' \tau_2' \ldots \tau_{r'}'\] alors par le lemme : \[\eps(w) = (-1)^{r} = (-1)^{r'}. \]
+}{Théorème}
+
+\demonstration{ 
+Soit $E = \enstq{(ij)}{1 \leq i < j \leq n}$. On pose : \[ f_w : \systeme{
+E &\vers E \\ 
+\matrice{i & j} &\donne \matrice{w(i) & w(j)} \text{ si } w(i) <w(j) \\
+\matrice{i & j}& \donne \matrice{w(j) & w(i)} \text{ si } w(i) > w(j)
+}.\]
+$f$ est une bijection car elle est injective et l'ensemble de départ et d'arrivée ont le même cardinal qui est fini.
+
+Donc on a : 
+\begin{align*}
+\eps(w) &= \frac{\prod_{1 \leq i < j \leq n}(w(i) - w(j))}{\prod_{(i,j)\in E} (w(i) - w(j))} \\
+\eps(w) &= \pm 1.
+\end{align*}
+Pour vérifier que $\eps$ est un morphisme, on calcul $\eps(wv)$ : 
+\begin{align*}
+\eps(wv) &=  \prod_{(i,j) \in E} \frac{wv(i) - wv(j)}{i-j} \\
+\eps(wv) &= \prod_{(i,j) \in E} \frac{wv(i) - wv(j)}{v(i) - v(j)} \prod_{(i,j) \in E} \frac{v(i) - v(j) }{i - j} \\
+\eps(wv) &=  \prod_{(i,j) \in E} \frac{wv(i) - wv(j)}{v(i) - v(j)} \eps(v).
+\end{align*}
+On calcule :
+\begin{align*}
+\eps(w) &\overset{?}{=} \prod_{(i,j) \in E} \frac{wv(i) - wv(j)}{v(i) - v(j)} \\
+\eps(w) &= \prod_{(i,j) \in E_1} \frac{wv(i) - wv(j)}{v(i) - v(j)}\prod_{(i,j) \in E_2} \frac{wv(i) - wv(j)}{v(i) - v(j)}
+\end{align*}
+Où $E_1 = \enstq{(i,j) \in E}{v(i) < v(j)}$ et $E_2 = \enstq{(i,j) \in E}{v(j) < v(i)}$ ; $E = E_1 \coprod E_2$.
+\begin{align*}
+\eps(w) &= \prod_{(i,j) \in E_2} \frac{wv(j) - wv(i)}{v(j) - v(i)}\prod_{(i,j) \in E_1} \frac{wv(i) - wv(j)}{v(i) - v(j)} \\
+\eps(w) &= \prod_{i < j  \; ; \; v^{-1}(j) < v^{-1}(i)} \frac{w(i) - w(j)}{i - j} \prod_{i < j \; ; \; v^{-1}(i) < v^{-1}(j)}\frac{w(i)- w(j)}{i-j} \\
+\eps(w) &= \prod_{i < j} \frac{w(i) - w(j)}{i - j}
+\end{align*}
+}{Lemme}
+
 \end{document}
+
+
+
+
+
+
+
+
 
 
 
