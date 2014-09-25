@@ -1,0 +1,189 @@
+\documentclass{mybourbaki}
+
+\titre{Déterminants, valeurs propres et diagonalisation}
+
+\begin{document}
+
+\section{Déterminants}
+
+\subsection{Différentes définitions}
+
+Soit $A \in M_n(\R)$ avec $A = (a_{i,j})_{1\leq i,j\leq n}$
+
+\definition{
+On définit en premier lieu : \[ \det A = \sum_{w \in S_n} \eps(w) a_{w(i),1}\cdot a_{w(2),2}\cdot \ldots \cdot a_{w(n),n}. \]
+C'est la formule de \textsc{Cramer}.
+}{Déterminant}
+
+\definition{ 
+Une seconde définition possible :
+
+Pour tous $i,j \in \ens{1,\ldots,n}$, soit $A_{i,j}\in M_{n-1}(\R)$ la matrice (extraite) obtenue en enlevant la $i$-ième ligne et la $j$-ième colonne de $A$.
+
+On a alors : \[ \det' A  =  a_{1,1}\cdot \det'(A_{1,1}) -a_{1,2}\cdot \det'(A_{1,2}) + \ldots + (-1)^{n-1}a_{1,n}\cdot \det'(A_{1,n}) = \sum_{i=1}^{n}(-1)^{i+1}a_{1,i}\cdot \det'(A_{1,i})\]
+}{}
+
+\paragraph{Exemple}Prenons : \[A = \matrice{2 & 1 & -1 \\ 0 & 2 & 1 \\ 4 & -1 & 0}. \] On a : \[ A_{1,1} = \matrice{2 & 1 \\ -1 & 0} \; ; \; A_{1,2} = \matrice{0 & 1 \\ 4 & 0}.\]Ce qui donne avec la seconde définition : \[ \det A = 2 \det \matrice{2 & 1 \\ -1 & 0} - \det \matrice{0 & 1  \\ 4 & 0} - \det \matrice{0 & 2 \\ 4 & -1}.\]
+\paragraph{Exemple 2}On vérifie que les deux définitions coïncident : \[ \det \matrice{a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2}} = a_{1,1}a_{2,2} - a_{2,1}a_{1,2}.\] \[\det \matrice{a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2}} = a_{1,1}\det(a_{2,2}) - a_{1,2}\det(a_{2,1}) = a_{1,1}a_{2,2} - a_{2,1}a_{1,2}.\]
+
+\paragraph{Remarque}Soient $E$ un $\R$-espace vectoriel de dimension $n$ et $B = (e_1,\ldots,e_n)$  une base de $E$. Soit $(u_1,u_2,\ldots,u_n) \in E^{n}$ un $n$-uplet  de vecteurs de $E$. Pour tout $j$, on pose : \[ u_j = \sum_{i=1}^{n}a_{i,j}\cdot e_{i}  \; \; a_{i,j}\in \R.\]On appelle \textit{déterminant} dans la base $B$ de $(u_1,\ldots,u_n)$ le réel : \[ \det_B(u_1,u_2,\ldots,u_n) = \det(a_{i,j}).\]
+
+\paragraph{Exemple}Pour $n=2$. On prend :
+\begin{align*}
+u_1 &= 2e_1 + 3e_2, \\
+u_2 &= -e_1 + 6e_2.
+\end{align*}
+On a alors : \[ \det_B(u_1,u_2) = \det \matrice{2 & -1 \\ 3 & 6} = 15.\]
+
+\paragraph{Remarque}Si $u_j = e_j$ pour tout $j \in \ens{1,\ldots,n}$ alors $\det_B(e_1,\ldots,e_n) = \det(I_d) = 1$. 
+
+\proposition{ On a les énoncés :
+\begin{enumerate}
+\item pour tout $w \in S_n$ : \[ \det_B(u_{w(1)},u_{w(2)},\ldots,u_{w(n)}) = \eps(w) \det_B(u_1,u_2,\ldots,u_n) ;\]
+\item on en déduit que le déterminant change de signe si on échange deux colonnes ;
+\item si pour $i\neq j$ on a $u_i = u_j$ alors le déterminant est nul (puisque négatif et positif simultanément).
+\end{enumerate}
+}{}
+\demonstration{ 
+Il suffit de montrer le premier point.
+
+On sait que $S_n$ est engendré par les transpositions. On suppose donc que $w\in S_n$ est une transposition. 
+
+En fait, $S_n$ est engendré par les transpositions simples, i.e. les transpositions de la forme $(k,k+1)$ avec $1\leq k < n$.\footnotemark
+
+On suppose donc que $w$ est de la forme $(k,k+1)$. Soit $A$ la matrice $(u_1,u_2,\ldots,u_n)$ de ces $n$ vecteurs dans les coordonnées de la base $B$. Soit $A'$ la matrice obtenue en permutant les colonnes $k$ et $k+1$ de $A$. Il faut donc vérifier que : \[ \det A' = \eps(w) \det A = -\det A.\]On calcule à gauche et à droite :
+\begin{align*}
+\det A &= \sum_{j=1}^{n}(-1)^{j+1}a_{1,j}\det(A_{1,j}), \\
+\det A'&= \sum_{j=1}^{n}(-1)^{j+1}a_{1,j}'\det(A_{1,j}').
+\end{align*}
+\begin{itemize}
+\item Pour $j\neq k,k+1$ on a $a_{1,j}' = a_{1,j}$ et $A_{1,j}'$ est obtenue en échangeant les colonnes $k$ et $k+1$ de $A_{1,j}$
+\item Pour $j=k$ on a $a_{1,k}' = a_{1,k+1}$ et donc $A_{1,k}' = A_{1,k+1}$.
+\item Pour $j=k+1$ on a $a_{1,k+1}' = a_{1,k}$ et donc $A_{1,k+1}' = A_{1,k}$.
+\end{itemize}
+On en déduit :
+\begin{align*}
+\det A' &= \sum_{j\neq k,k+1}(-1)^{j+1}\det(A_{i,j}')\footnotemark + (-1)^{k+1}a_{1,k}'\det(A_{1,k}') + (-1)^{k}a_{1,k+1}'\det(A_{1,k+1}'),\\
+\det A' &= \sum_{j\neq k,k+1}(-1)^{j+1}(-\det(A_{i,j}))+ (-1)^{k+1}a_{1,k+1}(-\det(A_{1,k+1}))+ (-1)^{k}a_{1,k}(-\det(A_{1,k})),\\
+\det A' &= -\det A.
+\end{align*}
+}{}
+\footnotetext[1]{
+En effet, toute transposition est un produit de transpositions simples par une conjugaison adaptée : on \og renomme\fg{} les éléments.}
+\footnotetext[2]{Par récurrence sur $n$ on a $\det(A_{i,j}') = - \det(A_{i,j})$.}
+
+\subsection{Formes $n$-linéaires alternées}
+
+\definition{ 
+Soit $E$ un $\R$-espace vectoriel de dimension $n\geq 1$. Une forme $n$-linéaire sur $E$ est une application $\varphi : E^{n}\vers \R$ qui est linéaire sur chaque composante.
+}{Forme $n$-linéaire}
+
+\proposition{ 
+Soit $B$ une base de $E$ avec $\dim E = n$.\[\fonc{\det_B}{E^{n}}{\R}{(u_1,\ldots,u_n)}{\det_B(u_1,\ldots,u_n)}\] est une forme $n$-linéaire.
+}{}
+\demonstration{ 
+On pose : 
+\[A = \matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & aa_{1,k}' + ba_{1,k}'' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & aa_{2,k}' + ba_{2,k}'' & a_{2,k+1} & \ldots & a_{2,n} \\
+\vdots & & \vdots & \vdots & \vdots & & \vdots 
+}\]
+\[ A' =\matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & a_{1,k}' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & a_{2,k}' & a_{2,k+1} & \ldots & a_{2,n}\\
+\vdots & & \vdots & \vdots & \vdots & &\vdots
+}\]
+\[ A'' =\matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & a_{1,k}'' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & a_{2,k}'' & a_{2,k+1} & \ldots & a_{2,n}\\
+\vdots & & \vdots & \vdots & \vdots & &\vdots
+}\]
+On veut montrer : \[\det A  = a \det A' + b\det A''. \]
+On calcule :
+\begin{align*}
+\det A &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}) + (-1)^{k+1}(aa_{1,k}'+ba_{1,k}'')\det(A_{1,k}), \\
+\det A' &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}') + (-1)^{k+1}a_{1,k}'\det(A_{1,k}), \\
+\det A'' &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}'') + (-1)^{k+1}a_{1,k}''\det(A_{1,k}) 
+\end{align*}
+On doit alors montrer : \[\forall j \neq k, \; \det A_{i,j} = a \det (A_{i,j}') + b\det(A_{i,j}'') \]ce qui est démontré par hypothèse de récurrence.
+}{}
+
+\definition{ 
+Soit $\varphi : E^{n}\vers \R$ une forme $n$-linéaire alternée avec $E$ un $\R$-espace vectoriel.
+
+$\varphi$ est une forme $n$-linéaire alternée si on a : \[ \varphi(u_1,u_2,\ldots,u_n) = 0 \] dès que deux composantes $u_i,u_j$ avec $i\neq j$ coïncident.
+}{Forme $n$-linéaire alternée}
+\paragraph{Remarque}On en déduit que le déterminant dans une base donnée est une forme $n$-linéaire alternée.
+
+\proposition{ 
+Soit $\varphi$ une forme $n$-linéaire alternée. Alors pour tout $w\in S_n$, $\varphi(u_{w(1)},\ldots,u_{w(n)}) = \eps(w) \varphi(u_1,\ldots,u_n)$.
+}{}
+\demonstration{ 
+On peut supposer que $w$ est une transposition simple : $w = (k,k+1)$ avec $1\leq k < n$.
+
+On veut montrer : \[ \varphi(u_1,\ldots,u_{k-1},u_{k+1},u_k,u_{k+2},\ldots,u_n) = - \varphi(u_1,\ldots,u_n).\]Pour simplifier les notations, on oublie les indices $u_i$ avec $i\neq k,k+1$. On a : \[ \varphi(u_k + u_{k+1}, u_k + u_{k+1}) = 0\] et donc par linéarité : \[\varphi(u_k,u_k) + \varphi(u_k,u_{k+1}) + \varphi(u_{k+1},u_k) + \varphi(u_{k+1},u_{k+1}) = 0 \ssi \varphi(u_k,u_{k+1}) = - \varphi(u_{k+1},u_k).\]
+}{}
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$ et $B=(e_1,\ldots,e_n)$ une base de $E$.
+
+Soit $\varphi : E^{n}\vers \R$ une forme $n$-linéaire alternée. Alors : \[ \varphi(u_1,\ldots,u_n) = \det_B(u_1,\ldots,u_n)\varphi(e_1,\ldots,e_n)\]où les $u_i$ sont exprimés dans la base $B$.
+}{}
+\paragraph{Remarque}Toutes les formes $n$-linéaires alternées sont proportionnelles au déterminant.
+\demonstration{ 
+Soit $u_j = \sum_{i=1}^{n}a_{i,j}e_i$, les $a_{i,j}$ sont les coordonnées des $u_j$ dans la base $B$.
+
+On a : \[ \varphi(u_1,\ldots,u_n) = \varphi\left( \sum_{i=1}^{n}a_{i,1}e_i, \ldots, \sum_{i=1}^{n}a_{i,n}e_i \right).\]Comme $\varphi$ est $n$-linéaire alternée :
+\begin{align*}
+\varphi(u_1,\ldots,u_n) &= \sum_{w \in S_n}a_{w(1),1}a_{w(2),2}\ldots a_{w(n),n}\varphi(e_{w(1)},\ldots,e_{w(n)}) \\
+\varphi(u_1,\ldots,u_n) &= \sum_{w \in S_n}a_{w(1),1}a_{w(2),2}\ldots a_{w(n),n}\eps(w)\varphi(e_1,\ldots,e_n) \\
+\varphi(u_1,\ldots,u_n) &=\det_B(u_1,\ldots,u_n)\varphi(e_1,\ldots,e_n)
+\end{align*}
+}{}
+\paragraph{Remarques}On a démontré :
+\begin{enumerate}
+\item Pour une base $B$ choisie, le déterminant $\det_B$ est une forme $n$-linéaire alternée ;
+\item pour toute forme $n$-linéaire alternée, $\varphi$, on a : $\varphi (\cdot) = \det_B(\cdot)\varphi(B)$ ;
+\item en particulier, les deux déterminants coïncident.
+\end{enumerate}
+
+\proposition{ 
+Pour tout $A \in M_n(\R)$ on a : \[ \det(A) = \det(A^{t}).\]
+}{}
+\demonstration{ 
+On a :
+\begin{align*}
+A &= (a_{i,j}) \\
+A^{t} &= (b_{i,j}), \; b_{i,j} = a_{j,i}
+\end{align*}
+On calcule par la formule de \textsc{Cramer} : 
+\begin{align*}
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{i=1}^n b_{w(i),i}, \\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{i=1}^n a_{i,w(i)}.
+\end{align*}
+Pour $w$ fixé, dans $i$ décrit $1$ à $n$ alors $w(i)$ décrit également $1$ à $n$. On effectue un changement de variable $j = w(i)$ et alors $i = w^{-1}(j)$ et on a :
+\begin{align*}
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{j=1}^na_{w^{-1}(j),j},\\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w^{-1})\prod_{j=1}^na_{w(j),j}, \\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{j=1}^na_{w(j),j}, \\
+\det(A^{t}) &= \det(A).
+\end{align*}
+}{}
+\paragraph{Remarque}On peut calculer $\det(A)$ en développant par rapport à la première ligne ou la première colonne (au choix). On a alors : 
+\[\det(A) = \sum_{i=1}^{n}(-1)^{n}a_{i,1}\det(A_{i,1}).\]
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
