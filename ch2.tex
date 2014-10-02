@@ -292,7 +292,7 @@ On appelle polynôme caractéristique de $f$ (ou de $A$) le polynôme : \[ \chi_
 \paragraph{Exemple}En dimension $2$ : $A = \matrice{a & b \\ c & d}$ on a \[\chi_A(t) = t^2 -(a+d)t +ad-bc = t^2 - \tr(A)t + \det(A). \]
 
 \paragraph{Remarque}$\chi_A(t)$ est un polynôme de degré $n$ de coefficient dominant $(-1)^{n}$ et de terme constant $\chi_A(0) = \det(A)$.
-
+\subsection{Sous-espaces propres}
 \definition{ 
 Soit $f$ un endomorphisme de $E$ et de matrice $A$. Soit $\lambda\in \R$. On appelle \textit{sous-espace propre} de $f$ (ou de $A$) de valeur propre $\lambda$ le sous-espace vectoriel $\ker(f-\lambda I_d)$.
 }{}
@@ -316,17 +316,194 @@ Si on fait la réunion : \[ B = \Union_{i=1}^{k}B_i,\]où $B_i$ est une base de 
 
 Donc pour diagonaliser $A$ il faut vérifier si $E = \bigoplus_{i=1}^{k}E_i$ où les $E_i$ sous les sous-espaces propres.
 
-\paragraph{Exemple}Soit : \[ A = \matrice{1 & 2 & -3 \\ 1 & 4 & -5 \\ 0 & 2 & -2}.\]
+\paragraph{Exemple}Soit :
 \begin{align*}
+A &= \matrice{1 & 2 & -3 \\ 1 & 4 & -5 \\ 0 & 2 & -2}.\\
 \chi_A(\lambda) &= \det\matrice{1-\lambda & 2 & -3 \\ 1 & 4-\lambda & -5 \\ 0 & 2 & -2-\lambda},\\
 \chi_A(\lambda) &= (1-\lambda)((4-\lambda)(-2-\lambda)+10) - (2(-2-\lambda)+6),\\
 \chi_A(t) &= -\lambda(\lambda-1)(\lambda-2).
 \end{align*}
 Les trois valeurs propres sont $0,1,2$ et sont de multiplicité $1$.
 
+\begin{align*}
+E_0 = \ker (A) &= \enstq{x\in \R^{3}}{Ax = 0} = \left\langle \matrice{1 \\ 1 \\ 1}\right\rangle,\\
+E_1 = \ker (A-I_d) &= \enstq{x\in \R^{3}}{\matrice{0 & 2 & -3 \\ 1 & 3 & -5 \\ 0 & 2 & -1}x = 0} =\left\langle\matrice{1 \\ 3 \\ 2} \right\rangle,\\
+E_2 = \ker(A-2I_d) &= \enstq{x\in \R^{3}}{\matrice{-1 & 2 & -3 \\ 1 & 2 & -5 \\ 0 & 2 & -4}x = 0} = \left\langle \matrice{1 \\ 2 \\ 1}\right\rangle.
+\end{align*}
+On a l'égalité : \[ E_0 \oplus E_1 \oplus E_2 = \R^{3}.\]
+On en déduit les matrices de passage : 
+\begin{align*}
+P &= \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}, \\
+P^{-1}AP &= \matrice{0 & 0& 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2}.
+\end{align*}
+\subsection{Conditions de diagonalisabilité}
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$, $\chi_f(t) \in \R[t]$, $\deg \chi_f = n$.
+
+Si $\chi_f$ admet $n$ racines distinctes alors $f$ est diagonalisable.
+}{}
+\demonstration{ 
+Si : \[ \chi_f(t)  = \prod_{i=1}^{n}(\lambda_i - t)\]avec $\lambda_1,\lambda_2,\ldots,\lambda_n$ racines distinctes.
+On a alors que pour tout $i$ : \[ E_i = \ker(f-\lambda_i \id) \neq \ens{0}\] et donc $\dim E_i\geq 1$. On a alors que \[ \sum_{i=1}^{n}E_i = \bigoplus_{i=1}^{n}E_i\] est de dimension supérieure à $n$ ce qui implique $\bigoplus E_i = \R^{n}$.
+}{}
+\paragraph{Remarque}La condition donnée est nécessaire mais non suffisante. On cherche donc une condition nécessaire et suffisante.
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$, $\lambda$ une valeur propre de $f$, $m_\lambda$ la multiplicité de $\lambda$ en tant que racine de $\chi_f(t)$ et $E_\lambda$ le sous-espace propre associé à $\lambda$.
+
+Alors $\dim E_\lambda \leq m_\lambda$.
+}{}
+\demonstration{ 
+Soit $k = \dim E_\lambda$ et $(e_1,e_2,\ldots,e_k)$ une base de $E_\lambda$. On peut compléter $(e_1,\ldots,e_k)$ en une base $(e_1,\ldots,e_n)=B$ de $E$. \[ {\rm Mat}_B(f) = \matrice{\lambda I_d& \vline &X \\ \hline 0 & \vline&  A}.\]
+
+Or le déterminant d'une matrice triangulaire par blocs est le produit des déterminants des matrices diagonales.\footnotemark
+
+Ainsi : \[ \chi_f(t) = \det\matrice{(\lambda - t)I_d & \vline & X \\ \hline 0 & \vline & A-t I_d} = (\lambda -t)^{k}\chi_A(t)\] et donc $m_\lambda \geq k$.
+}{}
+\footnotetext{En effet, en utilisant la règle de \textsc{Cramer} la preuve est assez aisée.}
+
+\corollaire{ 
+On a les propositions suivantes :
+\begin{enumerate}
+\item Si $\chi_f(t)$ n'est pas scindé sur $\R$ alors $f$ n'est pas diagonalisable.
+\item S'il existe une valeur propre $\lambda$ de $f$ telle que $\dim E_\lambda < m_\lambda$ alors $f$ n'est pas diagonalisable.
+\end{enumerate}
+}{}
+\demonstration{ 
+On démontre :
+\begin{enumerate}
+\item[2.] Soient $\lambda_1,\ldots,\lambda_k$ les valeurs propres de $\chi_f(t)$, $m_i$ la multiplicité de $\lambda_i$ et $E_i$ l'espace propre associé à $\lambda_i$. Alors la proposition nous dit que $\dim E_i \leq m_i$.
+
+Or $\deg \chi_f(t) = $n et donc 
+\begin{align*}
+\sum_{i=1}^{k} m_i &\leq n \\
+\sum_{i=1}^{k}\dim E_i &\leq \sum_{i=1}^{k}m_i \leq n
+\end{align*}
+S'il existe $i_0$ tel que $\dim E_{i_0} < m_{i_0}$ alors cela implique \[\sum_{i=1}^{k}\dim E_i < \sum_{i=1}^{k}m_i \leq n.\] Et donc \[ \bigoplus_{i=1}^{n}E_i < n.\]
+\item[1.] Idem.
+\end{enumerate}
+}{}
+
+\theoreme{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$.
+
+$f$ est diagonalisable si, et seulement si, on a les conditions suivantes :
+\begin{enumerate}
+\item $\chi_f(t)$ est scindé sur $\R$ ;
+\item pour tout $\lambda \in \chi_f^{-1}(0)$, la dimension du $\ker (f-\lambda \id)$ est égal à la multiplicité de $\lambda$ dans $\chi_f(t)$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Le corollaire nous dit que ces conditions sont nécessaires.
+
+Remarquons que : \[ \sum_{i=1}^{r}E_i = \bigoplus_{i=1}^{r} E_i\] où $E_i$ est le sous-espace propre de $\lambda_i$ et $r$ le nombre de racines deux à deux distinctes. Or la dimension de la somme est la somme des dimensions, c'est-à-dire la somme des multiplicité qui est égale à $n$. Donc $f$ est diagonalisable.
+}{}
+
+\paragraph{Exemple}On prend
+\begin{align*}
+A &= \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1 & 0}.\\
+\chi_A(t) &= \det\matrice{-t & 1 & -1 \\ -1 & 2-t & -1 \\ -1 & 1 & -t },\\
+ \chi_A(t) &= -t(t-1)^{2}.
+\end{align*}
+Les racines sont $0,1$ de multiplicités respectives $1$ et $2$.
+On a : 
+\begin{align*}
+E_0 = \ker A &= \left\langle \matrice{1 \\ 1 \\ 1}\right\rangle,\\
+E_1 &= \ker A - \id &= \left\langle\matrice{1\\1\\0},\matrice{0\\1\\1}\right\rangle.
+\end{align*}
+On a \[ \dim E_0 = 1 \et \dim E_1 = 2\] et donc $f$ est diagonalisable.
+
+\paragraph{Contre-exemple de minimalité}On a que \[A = \matrice{0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0} \]n'a comme valeurs propres que $0$, elle n'est pas diagonalisable parce que si elle est nulle dans une base elle l'est dans toutes.
+
+\section{Polynômes en un endomorphisme de $E$}
+
+\subsection{Polynômes évalué en un endomorphisme}
+
+\definition{ 
+Soit $P\in \R[t]$ un polynôme : \[ P(t) = \sum_{k=0}^{d}a_kt^{k}.\]On note pour $f$ un endomorphisme de $E$ : \[ P(f) = \sum_{k=0}^{d}a_kf^{k}\in {\rm End}_\R(E).\]
+
+Avec la convention $f^{0} = \id$ et la notation $f^{k+1} = f\rond f^{k}$.
+}{}
+\definition{ 
+On dit qu'un polynôme $P\in \R[t]$ annule $f$ si $P(f) = 0_{{\rm End}_\R}$.
+}{}
+
+\proposition{
+On a que : \[ \fonc{\phi}{\R[t]}{{\rm End}_{\R}(E)}{P(t)}{P(f)}\] est un morphisme d'anneaux.
+
+C'est-à-dire : \[\forall P,Q \in \R[t], \; \phi(P+Q) = \phi(P) + \phi(Q) \; ; \; \phi(PQ) = \phi(P)\phi(Q). \]
+}{}
+\paragraph{Remarque}Ainsi l'ensemble des polynômes annulateurs de $f$ est un idéal de $\R[t]$. Or $\R[t]$ est un anneau principal donc l'ensemble des polynômes annulateurs de $f$ est principal. Il existe donc un polynôme $Q\in \R[t]$ tel que tout polynôme annulateur de $f$ s'écrit $RQ$ avec $R\in \R[t]$.
+
+\definition{ 
+On appelle polynôme minimal de $f$ le polynôme unitaire de plus petit degré, $m_f$ annulant $f$.
+}{}
+On a évidemment que tout polynôme annulateur de $f$ est de la forme $P\cdot m_f, P \in \R[t]$.
+
+\paragraph{Exemple}Avec \[A = \matrice{0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0} \] qui est une matrice nilpotente, c'est-à-dire $A^{3} = 0$. On a \[m_A(t) \mid t^{3} \implique m_A = 1,t,t^{2} \ou t^{3}.\] Or $(t\donne 1)(A) = \id \neq 0$, $(t\donne t)(A) = A \neq 0$ et $(t\donne t^{2})(A) = A^{2} = \matrice{0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 }\neq 0$ et donc $m_A(t) = t^{3}$. 
+
+\proposition{ 
+Soit $f\in {\rm End}_\R(E)$. Alors :
+\begin{enumerate}
+\item si $f$ est diagonalisable, alors il existe un polynôme scindé $P\in \R[t]$ annulant $f$ ayant que des racines simples ;
+\item si $P \in \R[t]$ annule $f$ alors toute valeur propre de $f$ est racine de $P$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item Soit $B = (e_1,\ldots,e_n)$ une base de vecteurs propres. Soient $\mu_1,\ldots,\mu_r$ des scalaires deux à deux distinctes tels que \[ \ens{\mu_1,\mu_2,\ldots,\mu_r} = \ens{\lambda_1,\lambda_2,\ldots,\lambda_n}\]avec $r\leq n$.
+
+On pose : \[ P(t) = \prod_{i=1}^{r}(t-\mu_i).\] On cherche à savoir si $P(f) = 0$.
+\begin{align*}
+P(f) = 0 &\ssi P(f)(e_j) = 0, \; \forall j, \\
+P(f)(e_j) &= \left( \prod_{i=1}^{r}(f-\mu_i \id) \right)(e_j), \\
+f(e_j) = \lambda_j e_j & \implique \exists i, \mu_i = \lambda_i.
+\end{align*}
+Or pour tous $k,l$ : \[ (f-\mu_k \id)(f - \mu_l \id) =(f - \mu_l \id)(f - \mu_ k\id)    \]et donc :
+\begin{align*}
+P(f)(e_j) &= \left( \prod_{k\neq i} (f-\mu_k \id)\right)(f-\mu_i \id)(e_j), \\
+P(f)(e_j) &= \left( \prod_{k\neq i} (f-\mu_k \id)\right)(f(e_j) - \mu_i e_j) = 0.
+\end{align*} 
+\item On suppose que $P(f) = 0$ et $\chi_f(\lambda) = 0$ avec $P \in \R[t]$ et $\lambda\in \R$. 
+
+Soit $v\in \ker(f-\lambda \id), v\neq 0$, alors :
+\begin{align*}
+P(f)(v) &= \sum_{k=1}^{d}a_{k}f^{k}(v), \\
+P(f)(v) &= \sum_{k=1}^{d}a_k\lambda^{k}v.
+\end{align*}
+Donc $P(\lambda)\cdot v = 0$ et comme $v\neq 0$ : $P(\lambda) = 0$.
+\end{enumerate}
+}{}
+
+\subsection{Lemme des noyaux}
+
+\proposition{ 
+Soit $f\in {\rm End}_\R(E)$.
+\begin{enumerate}
+\item Soit $P \in \R[t]$ de la forme $P = ST$ avec $S,T \in \R[t]$ avec $S$ et $T$ premiers entre eux.
+
+Alors si $P(f) = 0$ alors $$E = \ker(S(f))\oplus \ker(T(f)).$$
+\item Soit $P\in \R[t]$, $P = P_1P_2\ldots P_k$ avec $P_i \in \R[t]$ premiers entre eux deux à deux.
+
+Alors si $P(f) = 0$ alors $$E = \bigoplus_{i=1}^{k}\ker P_i(f).$$
+\end{enumerate}
+}{Théorème des noyaux}
+
+\theoreme{ 
+$f \in {\rm End}_\R(E)$ avec $\dim E = n$.
+
+$f$ est diagonalisable si, et seulement s'il existe un polynôme scindé avec des racines  simples qui annulent $f$.
+}{}
+\paragraph{Remarque}C'est équivalent à $m_f(t)$ scindé avec des racines simples. En effet si $P$ est scindé avec des racines simples et qui annulent $f$ alors $m_f$ divise $P$ et donc $m_f$ est scindé avec des racines simples.
 
 
 \end{document}
+
+
+
+
+
 
 
 
