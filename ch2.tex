@@ -3,7 +3,7 @@
 \titre{Déterminants, valeurs propres et diagonalisation}
 
 \begin{document}
-
+\tableofcontents
 \section{Déterminants}
 
 \subsection{Différentes définitions}
@@ -493,11 +493,125 @@ Alors si $P(f) = 0$ alors $$E = \bigoplus_{i=1}^{k}\ker P_i(f).$$
 \theoreme{ 
 $f \in {\rm End}_\R(E)$ avec $\dim E = n$.
 
-$f$ est diagonalisable si, et seulement s'il existe un polynôme scindé avec des racines  simples qui annulent $f$.
+Supposons qu'il existe $P\in \R[X]$ est un polynôme scindé avec des racines simples. Alors $P(f) = 0$ implique que $f$ est diagonalisable.
 }{}
 \paragraph{Remarque}C'est équivalent à $m_f(t)$ scindé avec des racines simples. En effet si $P$ est scindé avec des racines simples et qui annulent $f$ alors $m_f$ divise $P$ et donc $m_f$ est scindé avec des racines simples.
 
+\demonstration{ 
+Soit : \[ P(X) = (X-\lambda_1)\ldots(X - \lambda_k)\]
+avec $\lambda_1,\lambda_2,\ldots,\lambda_k$ réels distincts. Ainsi $X-\lambda_i$ et $X-\lambda_j$ sont premiers entre eux pour tous $i\neq j$.
 
+Ainsi d'après le théorème des noyaux : \[ E = \bigoplus_{i=1}^{k}\ker(f-\lambda_i \id). \] Donc $f$ est diagonalisable.
+}{}
+
+\corollaire{ 
+Soit $f\in {\rm End}(E)$. $f$ est diagonalisable si, et seulement si, son polynôme minimal $m_f$ est scindé avec des racines simples.
+}{}
+\demonstration{ 
+Le sens d'implication a déjà été fait, l'autre sens est donné par le théorème précédent.
+}{}
+
+\subsection{Trigonalisation}
+\definition{ 
+On dit que $f\in {\rm End}(E)$ est \textit{trigonalisable} s'il existe une base $B$ de $E$ telle que la matrice en base $B$ de $f$ est triangulaire supérieure.
+
+De même, une matrice $A\in M_n(\R)$ est trigonalisable si elle est conjuguée à une matrice triangulaire supérieure, i.e. s'il existe $P\in \GL_n(\R)$ telle que $P^{-1}AP$ est trigonalisable.
+}{}
+
+\proposition{ 
+Soit $f\in {\rm End}(E)$.
+
+ $\chi_f$ est scindé dans $\R[X]$ si, et seulement si, $f$ trigonalisable.
+}{}
+\paragraph{Remarque}On peut remplacer partout $\R$ par $\K = \C,\R,\Q$ et $E$ par un $\K$-espace vectoriel. Si $E$ est un $\C$-espace vectoriel de dimension finie et si $f\in {\rm End}_\C(E)$ alors la proposition assure la trigonalisation de $f$ (et ainsi de tout endomorphisme).
+
+\demonstration{ 
+Si $f$ est trigonalisable, alors il existe une base $B$ telle que la matrice, $(a_{i,j})$ de  $f$ soit trigonale supérieure dans cette base. Alors le polynôme caractéristique (qui est indépendant de la base) est exactement : $\chi_f(t) = \prod_{i=1}^{n} (a_{ii}-t)$. Ce polynôme est bien scindé. 
+
+Pour la réciproque on effectue une récurrence sur $n=\dim E$. On suppose que c'est vrai pour tout espace vectoriel de dimension strictement inférieure à $n$ : \[ \chi_f(t) = (\lambda_1 - t)(\lambda_2 - t)\ldots(\lambda_n-t)\]avec $\lambda_1,\ldots,\lambda_n \in \R$.
+
+$\lambda_1$ est une valeur propre.
+Il existe par hypothèse $v_1\in E$ un vecteur propre tel que $v_1\neq 0$ et $f(v_1) = \lambda_1 v_1$. Par le théorème de la base incomplète, il existe une base $B$ de la forme $B = (v_1,e_2,e_3,\ldots,e_n)$. Soit $A$ la matrice de $f$ dans la base $B$. On a : \[ A =\matrice{ 
+\lambda_1 & \vline & \star & \vline & \star & \vline & \ldots \\
+\hline
+0 &\vline \\
+0 & \vline &  & & B\\
+0 & \vline
+}\]
+Avec $B\in M_{n-1}(\R)$ qui peut être la matrice d'un endomorphisme de $\R^{n-1}$.
+\begin{align*}
+\chi_A(t) &= \det \matrice{\lambda_1 - t &\vline & \star \\ \hline 0 & \vline & B - t I_d}, \\
+\chi_A(t) &= (\lambda_1 - t)\chi_B(t), \\
+\chi_A(t) &= (\lambda_1 - t)(\lambda_2 - t)\ldots (\lambda_n - t).
+\end{align*}
+et donc $\chi_B(t) = (\lambda_2 - t)\ldots(\lambda_n -t)$ est scindé.
+
+Par récurrence, il existe $Q\in \GL_{n-1}(\R)$ tel que $Q^{-1}BQ$ soit triangulaire supérieure. Posons : 
+\[ P = \matrice{ 1 & \vline & 0 \\ \hline 0 & \vline & Q}, \;  P^{-1} = \matrice{ 1 & \vline & 0 \\ \hline 0 & \vline & Q^{-1}}.\]
+On a alors que $P^{-1}AP$ est triangulaire.
+}{}
+
+\subsection{Comment calculer $m_f$ ? (\textsc{Cayley-Hamilton})}
+\theoreme{ 
+Soit $f \in {\rm End}_\R(E)$. On a que $m_f$ divise $\chi_f$, c'est-à-dire : $\chi_f(f) = 0$.
+}{\textsc{Cayley-Hamilton}}
+\demonstration{ 
+On veut montrer que $\chi_A(A) = 0$ où $A\in M_n(\R)$. Puisque $M_n(\R)\dans M_n(\C)$ on peut se placer dans se dernier.
+
+On sait alors que $A$ est trigonalisable dans $M_n(\C)$, c'est-à-dire qu'il existe $P \in \GL_n(\C)$ tel que $P^{-1}AP$ est triangulaire supérieure.
+
+Or pour tout $k$ : $(P^{-1}AP)^{k} = P^{-1}A^{k}P$. Donc : \[\chi_A(P^{-1}AP) = P^{-1}\chi_A(A) P.\]Comme $P$ est inversible, $\chi_A(0)$ si, et seulement si, $\chi_A(P^{-1}AP) = 0$. Posons $A' = P^{-1}AP$. On a $\chi_{A'} = \chi_A$.
+\begin{align*}
+T &= (\lambda_n I_d - A')(\lambda_{n-1} I_d - A')\ldots(\lambda_1 I_d - A') \\
+T(v_1) &= \left( \prod_{i=2}^{n} (\lambda_i I_d - A') \right)(\lambda_1 I_d - A')(v_1) = 0 \\
+T(v_2) &= \left( \prod_{i=3}^{n} (\lambda_i I_d - A') \right)(\lambda_2 I_d - A')(\lambda_1 I_d - A')(v_2) \\
+(\lambda_2 I_d - A')(\lambda_1 I_d - A')(v_2) &= (\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2)\\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= (\lambda_1 I_d - A')(-a_{1,2}'v_1) \\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= -a_{1,2}'(\lambda_1 I_d - A')(v_1) \\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= -a_{1,2}'(\lambda_1 v_1 - \lambda_1 v_1) = 0
+\end{align*}
+Par récurrence on trouve $T(v_i) = 0$ pour tout $i$.
+}{}
+\paragraph{Exercice}Calculer $T(v_3)$.
+
+\paragraph{Remarque}À noter :
+\begin{enumerate}
+\item \'Etant donné $f\in {\rm End}(E)$, pour calculer $m_f$ on cherche le plus petit diviseur de $\chi_f$ qui annule $f$.
+\item Soit $f\in {\rm End}(E)$. Supposons que $f$ est inversible, alors $\det(f)\neq 0$, i.e. $\chi_f(0) \neq 0$. Soit $\chi_f(t) = (-1)^{n}t^{n} + a_{n-1}t^{n-1}+\ldots + a_1t + a_0$, $a_0$ est donc non nul. On a :
+\[ 0 = a_0^{-1}\chi_f(f) = (-1)^{n}a_0^{-1}f^{n} + \ldots +a_1a_0^{-1}f + I_d\]ce qui donne : \[I_d = f\left( (-1)^{n+1}a_0^{-1}f^{n-1} + \ldots + (-1)a_1a_0^{-1}I_d  \right).\]
+\end{enumerate}
+
+\paragraph{Exemple}Soit : \[ A = \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1 & 0}.\]On a : \[ \chi_A(t) = -t(t-1)^{2}\] on en déduit : \[ t(t-1) \mid m_A(t) \mid t(t-1)^{2}.\] Donc soit $m_A(t) = t(t-1)$ soit $m_A(t) = t(t-1)^{2}$. Dans le premier cas si $m_A(A) = 0$ alors $A$ est diagonalisable. Dans le second, $A$ est non diagonalisable.
+\[ A(A-I_d) = \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1&0}\matrice{-1 & 1 & -1 \\ -1 & 1 & -1 \\ -1 & 1 & -1} = \matrice{0 & 0 & 0\\0 & 0 & 0\\0 & 0 & 0}.\]
+
+\section{Applications}
+\subsection{Calculs de puissances}
+Soit $A\in M_n(\R)$, si $A$ est diagonalisable alors : \[ A = P A'P^{-1}\]où $P$ est inversible et $A'$ diagonale. Et donc pour tout $k$ : \[ A^{k} = P \matrice{\lambda_1^{k} \\ & \lambda_2^{k} \\
+ & &\ddots \\ && & \lambda_n^{k}}P^{-1}.\]
+
+De même, si \[ \exp(A) = \sum_{k=0}^{\infty} \frac{1}{k!}A^{k}\] alors \[ \exp(A) = P \matrice{e^{\lambda_1} \\ & e{\lambda_2} \\ && \ddots \\ &&& e{\lambda_n}}P^{-1}.\]
+
+\subsection{Systèmes différentiels}
+Soient $x_1,x_2,x_3 : \R \vers \R$ et le système différentiel : \[ \systeme{ 
+x_1' &= x_1 + 2x_2 - 3x_3 \\
+x_2' &= x_1 + 4x_2 - 5x_3 \\
+x_3' &= 2x_2 - 2x_3
+}.\] 
+On pose $X = \matrice{x_1\\x_2\\x_3} : \R \vers \R^{3}$ et $A = \matrice{ 1  & 2 & -3 \\ 1 & 4 & -5 \\ 0 & 2 & -2}$. On a : \[ X' = AX. \]
+$A$ a pour vecteurs propres : \[ v_1 = \matrice{1 \\ 1 \\ 1}, \; v_2 = \matrice{1 \\ 3 \\ 2}, \; v_3 = \matrice{1 \\ 2 \\1}\] de valeurs propres respectives : \[\lambda_1 = 0, \; \lambda_2 = 1 , \; \lambda_3 = 2. \]De matrice de passage : \[ P = \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}. \] \[A' = P^{-1}AP = \matrice{0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2}. \] On pose $Y = P^{-1}X = \matrice{y_1 \\ y_2 \\ y_3}.$ Ainsi :\[ X' = AX \ssi P^{-1}X' = P^{-1}APP^{-1}X \ssi Y' = BY\] \[ Y' = BY \ssi \systeme{y_1' &= 0 \\ y_2' &= y_2 \\ y_3' &= 2y_3} \ssi \systeme{y_1 &= c_1 \\ y_2 &= c_2 e^{t} \\y_3 &= c_3 e^{2t} }, \; c_1,c_2,c_3 \in \R.\]On a alors : 
+\begin{align*}
+X &= PY, \\
+\matrice{x_1 \\ x_2 \\ x_3} &= X = PY = \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}\matrice{c_1 \\ c_2 e^{t} \\ c_3 e^{2t}}, \\
+\matrice{x_1 \\ x_2 \\ x_3} &= \matrice{c_1 + c_2e^{t} + c_3e^{2t} \\ c_1 + 3c_2e^{t} + 2c_3e^{2t} \\ c_1 + 2c_2e^{t} + c_3 e^{2t}}.
+\end{align*}
+
+\subsection{Application aux suites récurrentes}Soit $(u_n)_{n\in \N}$ une suite de réels telle que \[ \forall n\in \N, \; u_{n+2} = u_{n+1} + u_n. \]
+On introduit une seconde suite $v_n$ telle que $v_n = u_{n+1}$ pour tout $n$.
+La relation de récurrence s'écrit alors : 
+\[ \systeme{ u_{n+1} &= v_n \\ v_{n+1} = u_n + v_n }\]si on pose $X_n = \matrice{u_n \\ v_n}$ et $A = \matrice{0 & 1 \\ 1 & 1}$ on a alors que la relation de récurrence est \[X_{n+1} = A X_n.\]
+On diagonalise $A$ : \[ \chi_A(t) = t^2 - t -1 \ssi  t \in \ens{r_1 = \frac{1+\sqrt{5}}{2},r_2=\frac{1-\sqrt{5}}{2}}.\]On a : \[ A' = P^{-1}AP = \matrice{r_1 & 0 \\ 0 & r_2}\] avec $P = \matrice{1 & 1 \\ r_1 & r_2}$.
+On pose $Y_n = P_1X_n = \matrice{a_n \\b_n}$ : \[ X_{n+1} = AX_n \ssi Y_{n+1} = A' Y_n.\]
+On en déduit : \[ Y_n = \matrice{c_1 r_1^{n} \\ c_2 r_2^{n}} \implique \matrice{u_n \\ v_n} = P\matrice{c_1 r_1^{n} \\ c_2 r_2^{n}} = \matrice{1 & 1 \\ r_1 & r_2}\matrice{c_1 r_1^{n} \\ c_2 r_2^{n}}  = \matrice{c_1r_1^{n} + c_2r_2^{n} \\ c_1r_1^{n+1} + c_2r_2^{n+1}}.\]Ainsi $u_n$ est de la forme : \[ u_n = c_1r_1^{n} + c_2r_2^{n}, \; c_1,c_2 \in \R.\]
 \end{document}
 
 
