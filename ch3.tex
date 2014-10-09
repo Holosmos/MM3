@@ -1,0 +1,184 @@
+\documentclass{mybourbaki}
+\titre{Développements limités}
+\newcommand{\iR}{\barre{\R}}
+\begin{document}
+
+\section{Fonctions négligeables et équivalentes}
+
+On considère des fonctions $f,g$ de $V$ dans $\R$ où $V$ est un voisinage épointé dans $\barre{\R} = \R \union \ens{\infty}$. C'est-à-dire que $V$ est de la forme $U - \ens{a}$ où $U$ est un voisinage de $a$ dans $\barre{\R}$ et $a\in \iR$.
+\begin{itemize}
+\item si $a = \infty$ alors $V \contient \ens{k,\infty}$ ;
+\item si $a\in \R$ alors $V \contient ]k,a[ \union ]a,l[$ avec $k < a < l$ et $k,l\in \R$.
+\end{itemize}
+
+$f,g$ sont définies au voisinage de $a\in \iR$.
+
+\subsection{Négligeable}
+
+\definition{ 
+On dit que $f$ est \textit{négligeable} devant $g$ au voisinage de $a$ s'il existe un voisinage $V$ tel qu'il existe une fonction $\eps : V \vers \R$ telle que : 
+\begin{itemize}
+\item $f = \eps \cdot g$  ;
+\item $\lim_a \eps = 0$.
+\end{itemize}
+On note $f \underset{(a)}{=}\oo(g)$.
+}{}
+\paragraph{Remarque}On note :\[\fonc{\eps f}{V}{\R}{t}{\eps(t)f(t)}. \]
+\paragraph{Exemples}Par exemple :
+\begin{enumerate}
+\item Si $g=1$ alors $f = \oo(1)$ si, et seulement si, $\lim_a f =0$.
+\item Si $f=0$ au voisinage de $a$ alors pour toute fonction $g$ : $f = \oo(g)$.
+\item Si $f$ est bornée et $\lim_a(g) = \infty$ alors $f = \oo(g)$ (on prend alors $\eps = f/g$).
+\item On a $x^m \underset{(\infty)}{=}\oo(x^n)$ si, et seulement si, $m < n$.
+\item Pour tous $\alpha,\beta >0$ : \[\systeme{ x^{\alpha} &\underset{\infty}{=} \oo(e^{\beta x}) \\ (\ln x)^{\alpha} &\underset{(\infty)}{=} \oo(x^{\beta})},\]car $\lim_\infty x^{\alpha}e^{-\beta x} = 0$.
+\end{enumerate}
+
+\proposition{ 
+Si $f/g$ est définie dans un voisinage de $a$, alors : \[ f\underset{(a)}{=}\oo(g) \ssi \lim_a (f/g) = 0.\]
+}{}
+\demonstration{ 
+On prend $\eps = f/g$.
+}{}
+\paragraph{Remarque}Il peut arriver que $f/g$ n'est pas défini dans aucun voisinage de $a$.
+\paragraph{Exemples}Contre-exemples :
+\begin{enumerate}
+\item Avec $g(t) = \sin(1/[t-a])$, pour tout voisinage de $V$ de $a$, $g(t)$ s'annule en un point de $V$.
+\item Même si le quotient n'est pas définit : $t \underset{(0)}{=} \oo(\sin(1/t))$.
+\end{enumerate}
+
+\proposition{ 
+On a au voisinage de $a$ :
+\begin{enumerate}
+\item la propriété $\oo$ est transitive ;
+\item la propriété $\oo$ est compatible avec la multiplication, i.e. : si $f =\oo(g)$ alors $fh = \oo(gh)$ ;
+\item si $f = \oo(g)$ et si $h = \oo(k)$ alors $fh = \oo(gk)$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item Pour $f = \eps_1 g$ et $g = \eps_2 h$ avec $\lim_a \eps_i = 0$ alors : $f = \eps_1\eps_2 h$ et $\lim_a \eps_1\eps_2 = 0$.
+\item Si $f = \eps g$, $\lim_a \eps =0$, alors $fh = \eps gh$.
+\item De même.
+\end{enumerate}
+}{}
+\paragraph{Contre-exemple}$\oo$ n'est pas compatible avec l'addition. Par exemple : $x \underset{(\infty)}{=} \oo(x^{3})$ et $x^2 \underset{(\infty)}{=} \oo(-x^3)$ n'entraine pas $x+x^2 \underset{(\infty)}{=} \oo(0)$.
+
+\subsection{\'Equivalence}
+
+\definition{ 
+On dit que $f$ est \textit{équivalence} à $g$ au voisinage de $a$ si : $f-g \underset{(a)}{=} \oo(g)$. On note $f\underset{(a)}{\sim} g$.
+}{}
+
+\proposition{ 
+Si $f/g$ est définie dans un voisinage de $a$ alors : \[f \underset{(a)}{\sim} g \ssi \lim_a f/g = 1.\]
+}{}
+\proposition{ 
+$\underset{(a)}{\sim}$ est une relation d'équivalence.
+}{}
+\demonstration{ 
+Par définition :
+\begin{enumerate}
+\item elle est réflexive : $f \underset{(a)}{\sim} f$ puisque $0 \underset{(a)}{=}\oo(f)$ ;
+\item elle est symétrique si $f\underset{(a)}{\sim}g$ alors il existe $\eps$ telle que $\lim_a \eps = 0$ et $f = (1+\eps)g$, or $1/(1+\eps)$ est aussi définie au voisinage de $a$ et puisque $g = (1/[1+\eps])f$ on a \[g = (1+(1/[1+\eps] -1))f \] or en posant $\eps' = [1+\eps] -1$ on a $\lim_a \eps' = 0$ ;
+\item elle est transitive : $f \underset{(a)}{\sim} g \et g \underset{(a)}{\sim} h $ implique qu'il existe $\eps_1,\eps_2$ telles que $f = (1+\eps_1)g$, $g = (1+\eps_2)h$ et donc $f = (1+\eps)h$ avec $\eps = \eps_1 + \eps_2 + \eps_1\eps_2$ et $\lim_a \eps = 0$.
+\end{enumerate}
+}{}
+
+\proposition{
+Si $f \underset{(a)}{\sim} g$ et si $\lim_a f$ existe alors $\lim_a g$ existe et $\lim_a g = \lim_a f$.
+}{}
+\demonstration{ 
+Soit $\eps$ telle que $\lim_a \eps = 0$ alors puisque $f = (1+\eps)g$ on a \[\lim_a f = \lim_a(1+\eps)g = \lim_a g. \]
+}{}
+
+\proposition{ 
+Le produit et le quotient (quand il est défini) d'équivalences est une équivalence.
+
+Une puissance entière d'équivalences est une équivalence.
+}{}
+\demonstration{ 
+Si $f =(1+\eps_1)g $et $h = (1+\eps_2)k$ alors $fh = (1+\eps)gk$ avec $\eps = \eps_1+\eps_2 +\eps_1\eps_2$.
+}{}
+
+\proposition{ 
+Si $f\underset{(a)}{\sim}g$ et si $\varphi : I \vers \R$ telle que $\lim_b \varphi = a$, $b\in I$. Alors \[ f\rond \varphi \underset{(a)}{\sim} g \rond \varphi.\]
+}{}
+\demonstration{ 
+Si $f = (1+\eps)g$ avec $\lim_a \eps = 0$. Alors \[ f\rond \varphi =(1+\eps') \cdot g\rond \varphi\]avec $\eps' = \eps\rond\varphi$ et $\lim_a \eps' = 0$.
+}{}
+
+\proposition{ 
+On a :
+\begin{enumerate}
+\item Si $f$ est dérivable en $a$ alors si $f'(a) \neq 0$ on a $f(x) -f(a) \sim f'(a)(x-a)$.
+\item Si $g$ est continue dans un voisinage épointé de $a$, alors si $f\underset{(a)}{\sim}g>0$ alors \[\int_{a}^{x}f(t)\dt \underset{(a)}{\sim} \int_{a}^{x}g(t)\dt. \]
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item Si $f$ est dérivable en $a$ alors : \[ \frac{f(x) - f(a)}{x-a} \underset{(a)}{\sim} f'(a)\]puisque si $\lim_a g =b\in \R^{*}$ alors $g \underset{(a)}{\sim}b$.
+\item On sait que $f-g \underset{(a)}{=} \oo(g)$ et on veut : \[ \int_{x}^{a}(f-g)(t)\dt \underset{(a)}{=} \oo \left( \int_{x}^{a}g(t)\dt \right).\]
+
+En posant $h = f-g$ on se ramène au problème : \[ h = \oo(g) \implique \int_{a}^{x}h = \oo \int_{a}^{x}g.\]
+Si $h= \eps g$ et $\lim_a\eps = 0$ alors 
+\begin{align*}
+\int_{a}^{x}g &= \int_{a}^{x}\eps g 
+\end{align*}
+Or \[ \frac{\abs{\int_{x}^{a}\eps g}}{\int_{a}^{x}g} \leq \max_{[a,x]}\abs{\eps}\frac{\int_{a}^{x}g}{\int_{a}^{x}g} \underset{x\to a}{\longrightarrow} 0.\]
+Donc \[\frac{\abs{\int_{a}^{x}\eps g =h}}{\abs{\int_{a}^{x}g}} \underset{x\to a}{\longrightarrow} 0.\]
+\end{enumerate}
+}{}
+
+\section{Dérivées successives et formules de \textsc{Taylor}}
+
+Soit $p\geq 0$ un entier.
+\definition{ 
+Soit $I$ un intervalle de $\R$ et $f:I\vers \R$.
+\begin{enumerate}
+\item $f\in C^{0}$ si $f$ est continue ;
+\item $f \in C^{p}$ ($p\geq 1$) si $f$ est dérivable et $f' \in C^{p-1}$.
+\end{enumerate}
+}{}
+\paragraph{Remarque}Si $f\in C^{p}$ alors les $p$-ièmes dérivées successives et $f$ sont toutes continues sur $I$. $f\in C^{\infty}$ si $f^{(p)}$ existe et est continue pour tout $p\geq 1$.
+
+\proposition{ 
+Si $f,g \in C^{p}$ alors $f+g$, $fg$, $f/g$ et $f\rond g$ (si définie) sont $C^{p}$.
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item $(f+g)^{(p)} = f^{(p)} + g^{(p)}$ par récurrence sur $p$ ;
+\item $(fg)^{(p)} = \sum_{k=0}^{p}\kpn{k}{p}f^{(k)}g^{(p-k)}$ ;
+\item par récurrence sur $p$ pour $(f\rond g)^{(p)}$ en utilisant : $(f\rond g)' = (f'\rond g)g'$.
+\end{enumerate}
+}{}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
