@@ -155,6 +155,164 @@ Dans l'ordre :
 \end{enumerate}
 }{}
 
+\paragraph{Rappels sur les primitives}Si $f:I\vers \R$ est de classe $C^1$ avec $I\dans \R$ un intervalle ouvert. Alors si $f'$ est continue $f(x) -f(a) = \int_{a}^{x}f'(t)\dt$.
+
+\subsection{Formules de \textsc{Taylor}}
+
+Soit $I\dans \R$ un intervalle ouvert.
+
+\theoreme{ 
+Soit $f:I\vers \R$ de classe $C^k$. Alors pour tous $a,b\in I$ on a : \[ f(b) = \sum_{i=0}^{n-1}\frac{(b-a)^{i}}{i!}f^{(i)}(a) + \int_{a}^{b}\frac{(b-t)^{n-1}}{(n-1)!}f^{(n)}(t)\dt.\]
+}{Formule de \textsc{Taylor} avec reste intégral}
+\demonstration{ 
+Par récurrence sur $n$, on note \[ (T_n) : f(b) = \sum_{i=0}^{n-1}\frac{(b-a)^{i}}{i!}f^{(i)}(a) + \int_{a}^{b}\frac{(b-t)^{n-1}}{(n-1)!}f^{(n)}(t)\dt.\]Supposons que $(T_k)$ soit vraie pour tout $k<n$. Alors par intégration par parties : 
+\begin{align*}
+u(t) &= -\frac{(b-t)^{k}}{k!}, \\
+v(t) &= f^{(k)}(t),\\
+R_k &= \int_{a}^{b}\frac{(b-s)^{k-1}}{(k-1)!}f^{(k)}(s)\dd s,
+\end{align*}
+on a :
+\begin{align*}
+R_k &= \int_{a}^{b}u'(s)v(s)\dd s\\
+R_k &= [u(s)v(s)]^{b}_{a} - \int_{a}^{b}u(s)v'(s)\dd s\\
+R_k &= u(b)v(b) - u(a)v(a)  + \int_{a}^{b}\frac{(b-s)^{k}}{k!}f^{(k+1)}(s)\dd s\\
+R_k &= \frac{(b-a)^{k}}{k!}f^{(k)}(a) + \int_{a}^{b}\frac{(b-s)^{k}}{k!}f^{(k+1)}(s)\dd s\\
+\end{align*}
+On applique $(T_{n-1})$ : 
+\begin{align*} 
+f(b) &=f(a) + \sum_{i=0}^{n-2}\frac{(b-a)^{i}}{i!}f^{(i)}(a) + R_{n-1}  \\
+f(b) &= f(a) + \sum_{i=1}^{n-2}\frac{(b-a)^{i}}{i!} + \frac{(b-a)^{n-1}}{(n-1)!}f^{(n-1)}(a) + R_n
+\end{align*}
+donc $(T_n)$ vraie.
+}{}
+
+\theoreme{ 
+Soit $n>0$, $f:I\vers \R$ de classe $C^{n+1}$. Pour tous $a,b\in I$ avec $a\neq b$, il existe $\theta$ strictement compris en $a$ et $b$ tel que : 
+\[ f(b) = \sum_{i=0}^{n}\frac{(b-a)^{i}}{i!}f^{(i)}(a) + \frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(\theta). \]
+}{Formule de \textsc{Taylor} avec reste en $f^{(n+1)}(\theta)$}
+\demonstration{
+On pose $A$ telle que \[ \frac{(b-a)^{n+1}}{(n+1)!}\cdot A = \int_{a}^{b}\frac{(b-s)^{n+1}}{(n+1)!}f^{(n)}(s)\dd s - \frac{(b-a)^{n}}{n!}f^{(n)}(a).\]
+Soit $F:I\vers \R$ telle que :
+\[ F(x) = \int_{x}^{b}\frac{(b-t)^{n-1}}{(n-1)!}f^{(n)}(t)\dt - \frac{(b-x)^{n}}{n!}f^{(n)}(x) - \frac{(b-x)^{n+1}}{(n+1)!}A. \]
+On calcule $F'(x)$ :
+\begin{align*}
+F'(x) &= -\frac{(b-x)^{n-1}}{(n-1)!}f^{(n)}(x) -\frac{(b-x)^{n}}{n!}f^{(n+1)}(x) +\frac{(b-x)^{n-1}}{(n-1)!}f^{(n)}(x) + \frac{(b-x)^{n}}{n!}A \\
+F'(x) &= \frac{(b-x)^{n}}{n!}\left(A-f^{(n+1)}(x)\right).
+\end{align*}
+$F$ est dérivable donc continue sur $I$ :
+\begin{align*}
+F(a) &= \int_{a}^{b}\frac{(b-t)^{n-1}}{(n-1)!}f^{(n)}(t)\dt - \frac{(b-a)^{n}}{n!}f^{(n)}(a) - \frac{(b-a)^{n+1}}{(n+1)!}A =0,\\
+F(b) &= 0.
+\end{align*}
+Par le théorème de \textsc{Rolle}, il existe $\theta$ strictement entre $a$ et $b$ tel que $F'(\theta) = 0$. C'est-à-dire :
+\begin{align*}
+\frac{(b-\theta)^{n}}{n!}\left(A-f^{(n+1)}(\theta)\right) = 0 \\
+A &= f^{(n+1)}(\theta).
+\end{align*}
+On en déduit :
+\[ \frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(\theta) = \int_{a}^{b}\frac{(b-s)^{n-1}}{(n-1)!}f^{(n)}(s)\dd s - \frac{(b-a)^{n}}{n!}f^{(n)}(a). \]
+On a alors le résultat en remplaçant dans $(T_n)$.
+}{}
+\paragraph{Remarque}Si $\abs{f^{(n+1)}(s)}\leq M$ pour tout $s\in I$ alors \[\abs{f(b) - \sum_{i=0}^{n}\frac{(b-a)^{i}}{i!}f^{(i)}(a) }\leq M \frac{\abs{b-a}^{n+1}}{(n+1)!}. \]
+
+\subsection{Fonctions usuelles}
+\proposition{ 
+Soit $n\in \N$, on regarde le développement de \textsc{Taylor} en $0$ à l'ordre $n+1$, $\forall i, \; \exp^{(i)}(0) = 1$. On prend $b=x,a=0$ :
+\begin{align*}
+\exp(x) &= \sum_{i=0}^{n}\frac{x^{n}}{n!}+\frac{x^{n+1}}{(n+1)!}\exp(\theta)\\
+\theta &\in ]0,x[.
+\end{align*}
+}{Exponentielle}
+\proposition{ 
+La dérivée $n$-ième de $\cos(t)$ est $\cos(t+n\pi/2)$.
+\[\abs{\cos(x) -\sum_{i=0}^{n}(-1)^{i+1}\frac{x^{2i}}{(2i)!}}\leq \frac{x^{2n+2}}{(2n+2)!}\]
+car $\abs{\cos\theta}\leq 1$.
+}{Cosinus, sinus}
+
+\section{Développements limités}
+\definition{ 
+Soit $I\dans \R$ un intervalle ouvert tel que $0\in I, n\in \N$. On dit qu'une fonction $f : I\vers \R$ admet un \textit{développement limité} à l'ordre $n$ en $0$ si, et seulement s'il existe un polynôme $P$ de degré $n$ à coefficients réels tel que 
+\[\lim_{x\to 0} \frac{f(x)-P(x)}{x^{n}} = 0. \]
+Notons $$\eps(x) = \frac{f(x) - P(x)}{x^{n}}$$ alors \[\systeme{ f(x) &= P(x) + x^{n}\eps(x)\footnotemark, \\ \lim_{x\to 0}\eps(x) &= 0. } \]
+}{}
+\footnotetext{C'est-à-dire, $f(x) - P(x) = \oo(x^{n})$.}
+
+\definition{ 
+Soit $I\dans \R$ un intervalle ouvert et soit $n\in \N$. On dit qu'une fonction $f : I\vers \R$ admet un \textit{développement limité} à l'ordre $n$ en $a$ si, et seulement si, la fonction $t\donne f(t+a)$ admet un développement limité à l'ordre $n$ en $0$. C'est-à-dire si, et seulement s'il existe un polynôme de degré $n$, $P$ à coefficients réels tel que :
+\[f(x) = P(x-a)+ \oo((x-a)^{n}) \]au voisinage de $a$.
+}{}
+
+\theoreme{ 
+Si $f$ admet  un développement limité à l'ordre $n$ en un point $a$, alors ce développement limité est unique.
+}{}
+\demonstration{ On peut supposer $a=0$.
+Supposons que $$f(x) = P_1(x) + x^{n}\eps_1(x) = P_2(x) + x^{n}\eps_2(x)$$ où $\lim_0 \eps_i = 0$ pour $i\in \ens{1,2}$. On a que \[ (P_1-P_2)(x) = x^{n}(\eps_1 - \eps_2)(x)\]et $(P_1-P_2)(x)$ est de la forme $r_0 + r_1x+\ldots + r_{n}x^{n}$ avec $r_0,r_1,\ldots,r_n\in \R$.
+
+On montre par récurrence que les $r_k$ sont tous nuls.
+Quand $x\to 0$ on trouve : \[r_0= 0\] et donc \[r_1x + \ldots + r_nx^{n} = x^{n}(\eps_1-\eps_2)(x). \]
+
+Supposons que $r_0 =r_1 = r_{k-1}=0$, $k>0$. Alors 
+\begin{align*}
+r_k x^{k} + \ldots + r_nx^{n} &=x^{n}(\eps_1-\eps_2)(x),\\
+r_k + r_{k+1}x + \ldots + r_nx^{n-k} &= x^{n-k}(\eps_1 - \eps_2)(x),
+\end{align*}
+$n-k\geq 0$ et donc $r_k = 0$ en passant à la limite.
+}{}
+\corollaire{ 
+Soit $f(x) = P(x) + x^{n}\eps(x)$ le développement limité d'une fonction $f$ à l'ordre $n$ en $0$. Alors :
+\begin{enumerate}
+\item si $f$ est paire alors $P$ est pair ;
+\item si $f$ est impaire alors $P$ est impaire.
+\end{enumerate}
+}{}
+\demonstration{ 
+\begin{align*}
+f(x) &= P(x) + x^{n}\eps(x), \\
+f(-x) &= P(-x) + x^{n}(-1)^{n}\eps(-x) = P(-x) + x^{n}\eps_1(x),
+\end{align*}
+Or comme $\eps(x) \to 0$ quand $x\to 0$ alors $\eps_1\to 0$ aussi.
+\begin{enumerate}
+\item si $f$ est impaire alors on a : \[f(x) = -P(-x) - x^{n}\eps_1(x) \] et comme la première et cette expression sont des développements limits de $f$ à l'ordre $n$ en $0$, par unicité on a $-P(-x) = P(x)$, c'est-à-dire $P$ impaire ;
+\item si $f$ est paire, on a : \[ f(x) = P(-x) + x^{n}\eps_1(x)\] alors de même, l'unicité nous dit que $P$ est alors paire.
+\end{enumerate}
+}{}
+
+\proposition{ 
+Soit $f:I\vers \R$ une fonction continue en $a\in I$.
+\begin{enumerate}
+\item le développement limité de $f$ en $a$ à l'ordre $0$ est \[ f(x) = f(a) + \eps(x), \; \lim_{x\to a}\eps(x) = 0 \ ; \]
+\item la fonction $f$ est dérivable en $a$ si, et seulement si, elle possède un développement limité à l'ordre $1$ en $a$, alors dans ce cas le développement limité est donné par : \[ f(x) = f(a) + f'(a)(x-a) + \eps(x)(x-a), \; \lim_{x\to a}\eps(x) = 0.\]
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item On pose $\eps(x) = f(x) - f(a)$. Comme $f$ est continue en $0$, $\eps(x)$ aussi et $\lim_{x\to a}\eps(x) = 0$.
+\item Supposons que $f$ soit dérivable en $a$, c'est-à-dire : \[ \lim_{x\to a}\frac{f(x) - f(a)}{x-a} = f'(a).\]On pose \[\eps(x) = \frac{f(x)-f(a)}{x-a}-f'(a).\]On a bien $\lim_{x\to a}\eps(x) = 0$ et \[ f(x)  = f(a) + (x-a)f'(a) + (x-a)\eps(x).\]
+
+Réciproquement, supposons que $f$ admette un développement limité : \[ f(x) = a_0 + (x-a)a_1 + (x-a)\eps(x),\]avec $\lim_{x\to a}\eps(x) = 0$. Alors, par continuité $a_0 = f(a)$ et \[\lim_{x\to a}\frac{f(x) - f(a)}{x-a} = \lim_{x\to a}a_1 + \eps(x) = a_1 =  f'(a). \]
+\end{enumerate}
+}{}
+
+\section{Développement limité à l'ordre $n$ d'une fonction de classe $C^n$}
+\subsection{Développements limités et primitives}
+\theoreme{ 
+Soit $f: I \vers \R$ une application continue. Soit $F$ une primitive de $f$. Soit $a\in I$ et supposons que $f$ admette un développement limité en $a$ à l'ordre $n$ : \[ f(x) = a_0 + a_1(x-a) + \frac{a_2}{2}(x-a)^{2} + \ldots + \frac{a_n}{n!}(x-a)^{n} + (x-a)^{n}\eps(x), \; \lim_{x\to a}\eps(x) = 0. \]
+Alors $F$ admet le développement limité suivant à l'ordre $n+1$ en $a$ : \[ F(x) = F(a) + a_0(x-a) + \frac{a_1}{2}(x-a)^{2} + \ldots + \frac{a_n}{(n+1)!}x^{n+1} + (x-a)^{n+1}\eps_1(x), \; \lim_{x\to a}\eps_1(x) = 0.\]
+}{}
+\demonstration{ 
+Soit \[ P(t) = \sum_{k=0}^{n}\frac{a_k}{k!}(t-a)^{k}.\]
+Pour tout $x\neq a$ : \[ \eps(x) = \frac{f(x) -P(x)}{(x-a)^{n}}.\]Par hypothèse, $\lim_{x\to a}\eps(x)= 0$. En posant $\eps(a) = 0$, on obtient que $\eps$ est continue sur $I$. Donc $\eps$ admet une primitive et dans l'identité \[ f(x) = a_0 + a_1(x-a) + \frac{a_2}{2}(x-a)^{2} + \ldots + \frac{a_n}{n!}(x-a)^{n} + (x-a)^{n}\eps(x), \; \lim_{x\to a}\eps(x) = 0 \] tous les termes admettent des primitives. Donc
+\begin{align*}
+F(x) - F(a) &= \int_{a}^{x}f(t)\dt \\
+ F(x) - F(a) &= \int_{a}^{x}\left( \sum_{k=0}^{n}\frac{a_k}{k!}(t-a)^{k} + (t-a)^{n}\eps(t)\right)  \dt \\
+ F(x) - F(a)  &= \sum_{k=0}^{n}\frac{a_k}{(k+1)!}(x-a)^{k+1} + u(x),\\
+ u(x) &= \int_{a}^{x} (t-a)^{n}\eps(t)\dt.
+\end{align*}
+Par le théorème de \textsc{Rolle} : \[ u(x) = (x-a)(\theta - a)^{n}\eps(\theta)\]pour un $\theta$ compris entre $a$ et $x$. Donc \[ \abs{u(x)} = \abs{x-a}\abs{\theta-a}^{n}\abs{\eps(\theta)} \leq \abs{x-a}^{n+1}\abs{\eps(\theta)}\]
+et $\eps(\theta)$ tend vers $0$ quand $x$ tend vers $a$ puisque $\theta$ est compris entre $a$ et $x$.
+Donc : \[F(x) = \sum_{k=0}^{n}\frac{a_k}{(k+1)!}(x-a)^{k+1}+(x-a)^{n+1}\eps_1(x) \]où \[\eps_1(x) = \frac{u(x)}{(x-a)^{n+1}} \to 0. \]
+}{}
 \end{document}
 
 
