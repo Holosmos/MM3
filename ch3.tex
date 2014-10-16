@@ -2,7 +2,7 @@
 \titre{Développements limités}
 \newcommand{\iR}{\barre{\R}}
 \begin{document}
-
+\tableofcontents
 \section{Fonctions négligeables et équivalentes}
 
 On considère des fonctions $f,g$ de $V$ dans $\R$ où $V$ est un voisinage épointé dans $\barre{\R} = \R \union \ens{\infty}$. C'est-à-dire que $V$ est de la forme $U - \ens{a}$ où $U$ est un voisinage de $a$ dans $\barre{\R}$ et $a\in \iR$.
@@ -229,7 +229,8 @@ La dérivée $n$-ième de $\cos(t)$ est $\cos(t+n\pi/2)$.
 car $\abs{\cos\theta}\leq 1$.
 }{Cosinus, sinus}
 
-\section{Développements limités}
+\section{Développement limité à l'ordre $n$ d'une fonction de classe $C^n$}
+\subsection{Développements limités}
 \definition{ 
 Soit $I\dans \R$ un intervalle ouvert tel que $0\in I, n\in \N$. On dit qu'une fonction $f : I\vers \R$ admet un \textit{développement limité} à l'ordre $n$ en $0$ si, et seulement s'il existe un polynôme $P$ de degré $n$ à coefficients réels tel que 
 \[\lim_{x\to 0} \frac{f(x)-P(x)}{x^{n}} = 0. \]
@@ -294,7 +295,7 @@ Réciproquement, supposons que $f$ admette un développement limité : \[ f(x) =
 \end{enumerate}
 }{}
 
-\section{Développement limité à l'ordre $n$ d'une fonction de classe $C^n$}
+
 \subsection{Développements limités et primitives}
 \theoreme{ 
 Soit $f: I \vers \R$ une application continue. Soit $F$ une primitive de $f$. Soit $a\in I$ et supposons que $f$ admette un développement limité en $a$ à l'ordre $n$ : \[ f(x) = a_0 + a_1(x-a) + \frac{a_2}{2}(x-a)^{2} + \ldots + \frac{a_n}{n!}(x-a)^{n} + (x-a)^{n}\eps(x), \; \lim_{x\to a}\eps(x) = 0. \]
@@ -313,6 +314,157 @@ Par le théorème de \textsc{Rolle} : \[ u(x) = (x-a)(\theta - a)^{n}\eps(\theta
 et $\eps(\theta)$ tend vers $0$ quand $x$ tend vers $a$ puisque $\theta$ est compris entre $a$ et $x$.
 Donc : \[F(x) = \sum_{k=0}^{n}\frac{a_k}{(k+1)!}(x-a)^{k+1}+(x-a)^{n+1}\eps_1(x) \]où \[\eps_1(x) = \frac{u(x)}{(x-a)^{n+1}} \to 0. \]
 }{}
+
+\theoreme{ 
+Soit $f:I\vers \R$ de classe $C^n$, $a\in I$. Alors $f$ admet pour développement limité à  l'ordre $n$ en $a$ : \[ f(x) + \sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k} + (x-a)^{n}\eps(x), \; \lim_{x\to a}\eps(x) = 0.\]
+}{}
+\demonstration{ 
+Pour $n=0,1$ ça a été déjà vu. Supposons alors $n\geq 2$. Soit $f\in C^n$, posons $g=f'$ avec $g\in C^{n-1}(I)$.
+
+Par récurrence : \[ g(x) = \sum_{k=0}^{n-1}\frac{g^{(k)}(a)}{k!} (x-a)^{k} + (x-a)^{n-1}\eps(x), \; \lim_{x\to a}\eps(x) = 0.\]
+$f$ est une primitive de $g$ : 
+\begin{align*}
+f(x) &= f(a) + \sum_{k=0}^{n-1}\frac{g^{(k)}(a)}{(k+1)!}(x-a)^{k+1} + (x-a)^{n}\eps_1(x), \; \lim_{x\to a}\eps_1(x) = 0 \\
+f(x) &= f(a) + \sum_{k=0}^{n-1}\frac{f^{(k+1)}(a)}{(k+1)!}(x-a)^{k+1} + (x-a)^{n}\eps_1(x) \\
+f(x) &= f(a) + \sum_{k=1}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k} + (x-a)^{n}\eps_1(x).
+\end{align*}
+}{}
+\paragraph{Exemple}Soit : \[ f(x) = \systeme{\exp(-1/x^2), &\; \text{si} \ x>0 \\ 0,, &\; \text{si}\ x\leq 0 }\]son développement limité en $0$ d'ordre $n$ est : \[ f(x) =x^{n}\eps(x),\; \lim_{x\to 0}\eps(x) = 0.\]
+
+\subsection{Développement limités usuels}
+Développements limités en $0$ :
+\begin{align*}
+\exp(x) = &\sum_{i=0}^{n}\frac{x^{i}}{i!} + x^{n}\eps(x) \\
+\ch(x) = &\sum_{i=0}^{n}\frac{x^{2i}}{(2i)!}+ x^{2n+1}\eps(x) \\
+\sh(x) = &\sum_{i=0}^{n}\frac{x^{2i+1}}{(2i+1)!} + x^{2n+2}\eps(x) \\
+\cos(x) =& \sum_{i=0}^{n}(-1)^{i}\frac{x^{2i}}{(2i)!} + x^{2n+1}\eps(x) \\
+\sin(x) =& \sum_{i=0}^{n}(-1)^{i} \frac{x^{2i+1}}{(2i+1)!} + x^{2n+2}\eps(x) \\
+\alpha\in \R : \;(1+x)^{\alpha} =& 1 +\sum_{i=0}^{n}\frac{\alpha(\alpha-1)\ldots(\alpha-i)}{(i+1)!}x^{i+1} + x^{n+1}\eps(x) \\
+\frac{1}{1-x} =& \sum_{i=0}^{n}x^{i} + x^{n+1}\eps(x) \\
+\frac{1}{1+x} =& \sum_{i=0}^{n}(-1)^{i}x^{i} + x^{n+1}\eps(x) \\
+\log(1-x) =& -\sum_{i=1}^{n}\frac{x^{i}}{i!}+x^{n}\eps(x) \\
+\log(1+x) =& \sum_{i=1}^{n}(-1)^{i+1}\frac{x^{i}}{i}x^{n}\eps(x)\\
+\Arctan(x) =& \sum_{i=1}^{n}(-1)^{i+1}\frac{x^{2i-1}}{2i-1} +x^{2n}\eps(x)
+\end{align*}
+
+\demonstration{ 
+\begin{align*}
+\ch(x) &= \frac{e^{x} + e^{-x}}{2} \\
+\ch'(x) &= \frac{e^{x} - e^{-x}}{2} (=\sh(x))\\
+\ch''(x) &= \ch(x)\\
+\ch^{(2i)}(0) &= 1 \\
+\sh^{(2i)}(0) &= 0
+\end{align*}
+}{$\ch$}
+
+\demonstration{ 
+\begin{align*}
+\cos^{(k)}(x) &= \cos(x+k\pi/2) \\
+\cos^{(k)}(0) &= \cos(k\pi/2) \\
+\cos^{(2k)}(0) &= (-1)^{k} \\
+\cos^{(2k+1)}(0) &= 0
+\end{align*}
+}{$\cos$}
+
+\demonstration{ 
+\begin{align*}
+\sin^{(k)}(x) &= \sin(x+k\pi/2) \\
+\sin^{(2k)}(0) &= 0 \\
+\sin^{(2k+1)}(0) &= (-1)^{k}
+\end{align*}
+}{$\sin$}
+
+\demonstration{ Par récurrence :
+\begin{align*}
+f^{(k)}(x) &= \alpha(\alpha-1)\ldots(\alpha-k+1)(1+x)^{\alpha-k} \\
+f^{(k)}(0) &= \alpha(\alpha-1)\ldots(\alpha-k+1)
+\end{align*}
+}{$(1+x)^{\alpha}= f(x)$}
+
+\demonstration{ 
+\begin{align*}
+\frac{1-x^{n}}{1-x} &= 1+x+x^{2}+\ldots +x^n \\
+\frac{1}{1-x} &= 1+x+\ldots+x^{n} + x^{n}\cdot\frac{x}{1-x}
+\end{align*}
+}{$1/1-x$}
+
+\demonstration{ 
+Utiliser le théorème sur le développement limité d'une primitive avec le développement limité de $1/1-x$.
+}{$\log(1-x)$}
+
+\demonstration{ 
+\begin{align*}
+\Arctan'(x) &= \frac{1}{1+x^{2}} \\
+\frac{1}{1+x^{2}} &= \sum_{i=1}^{n}(-1)^{i}x^{2i}+x^{2n}\eps(x)
+\end{align*}
+et on conclut avec le théorème du développement limité d'une primitive.
+}{$\Arctan(x)$}
+
+\paragraph{Remarque}On a vu que si \[ f(x)  = \systeme{\exp(-1/x^{2}),\; &\text{si}\ x >0 \\ 0, \; &\text{si}\ x\leq 0}\] alors le développement limité de $f(x)$ en $0$ à l'ordre $n$ est \[f(x) = x^{n}\eps(x). \]Or le développement limité de $0$ en $0$ à l'ordre $n$ est identique.
+\paragraph{Exemple}Soit : \[\fonc{f}{\R}{\R}{x}{\systeme{0 &\ \text{si} \ x = 0 \\ x^{3}\sin(1/x) & \ \text{si} \ x\neq 0}}. \]
+La fonction $f$ est continue en $0$.
+
+ On regarde le développement limité à l'ordre $2$ en $0$ : \[ f(x) = x^{2}\eps(x), \; \eps(x) = \systeme{0 &\ \text{si} \ x = 0 \\ x\sin(1/x) &\ \text{sinon}}, \lim_{x\to 0}\eps(x)  0.\]Donc le développement limité de $f(x)$ en $0$ à l'ordre $2$ est : \[ f(x) = x^{2}\eps(x).\]Dérivabilité de $f$ en $0$ (puisqu'elle est lisse sur $\R^*$) : \[  \frac{f(x) - f(0)}{x-0} = x^{2}\sin(1/x) \underset{x\to 0}{\longrightarrow} 0\]donc $f$ est dérivable et $f'(0) = 0$. \[ \frac{f'(x) - f'(0)}{x-0} = \frac{3x^{2}\sin(1/x) -x\cos(1/x)}{x} = 3x\sin(1/x) - \cos(1/x) \]donc $f$ n'est pas dérivable à l'ordre $2$ en $0$ (même si elle a un développement limité à l'ordre $2$).
+ 
+\subsection{Règles de calcul des développements limités}
+ 
+\proposition{ 
+Soit $f,g$ ayant des développements limités à l'ordre $n$ en $0$ : 
+\[f(x) = P(x) + x^{n}\eps(x), \; g(x) = Q(x) + x^{n}\eps(x)\]avec $P,Q$ des polynômes de degré au plus $n$ et $\lim_{x\to 0}\eps(x) = 0$ (non forcément identiques). Alors
+\begin{enumerate}
+\item le développement limité à l'ordre $n$ en $0$ de $f+g$ est \[ (f+g)(x) = (P+Q)(x) + x^{n}\eps(x) ;\]
+\item pour tout $\lambda\in \R$, le développement $\lambda f$ à l'ordre $n$ en $0$ est : \[ (\lambda f)(x) = \lambda P(x) + x^{n}\eps(x). \]
+\end{enumerate}
+}{} 
+\demonstration{ 
+\'Ecrivons $f(x) =P(x) + x^{n}\eps_f(x)$ et $g(x) = Q(x) + x^{n}\eps_g(x)$.
+\begin{enumerate}
+\item $(f+g)(x) = P(x)+Q(x) + x^{n}(\eps_f + \eps_g)(x)$ et on note $\eps = \eps_f + \eps_g$ qui tend bien en $0$.
+\item De même.
+\end{enumerate}
+}{}
+ 
+\proposition{ 
+Soit $f$ qui admet le développement limité en $0$ à l'ordre $n$ : \[ f(x) = P(x) + x^{n}\eps(x), \; \lim_{x\to 0}\eps(x) = 0.\]Alors pour tout $p\in \ens{0,\ldots,n}$, $f$ admet le développement limité en $0$ à l'ordre $p$ : \[ f(x) = T_p(P)(x) + x^{p}\eps(x)\]avec $T_p(P)$ le polynôme tronqué de $P$ : \[ T_p(P) = \sum_{k=0}^{p}a_kx^{k}, \; P = \sum_{k=0}^{n}a_kx^{k}.\]
+}{} 
+\demonstration{ 
+On a \[ f(x) = T_p(P)(x) + x^{p}\left(\sum_{k=p+1}^{n}a_kx^{k-p} + x^{n-p}\eps(x)\right).\]Et on pose \[ \eps_1(x) = \sum_{k=p+1}^{n}a_kx^{k-p}+x^{n-p}\eps(x).\]On a bien$ \eps_1(x)\to 0$ quand $x\to 0$.
+}{}
+
+\proposition{ 
+Soient $f,g$ admettant les développements limités : \[ f(x) = P(x) + x^{n}\eps_1(x), \; g(x) = Q(x) + x^{n}\eps_2(x).\]Alors $fg$ admet le développement limité à l'ordre $n$ en $0$ suivant : \[ (fg)(x) = T_n(PQ)(x) + x^{n}\eps(x).\]
+}{}
+\paragraph{Remarque}Si $f,g$ admettent les développements limités à l'ordre $n$ en $a$ : \[ f(x) = P(x-a) + (x-a)^{n}\eps_1(x), \; g(x) = Q(x-a) + (x-a)^{n} \eps_2(x)\]alors le développement limité : \[ (fg)(x)  = T_n(PQ)(x-a)\note{On tronque avant d'évaluer en $x-a$.} + (x-a)^{n}\eps(x). \]
+\demonstration{ 
+\begin{align*}
+(fg)(x) &= (PQ)(x) + x^{n}(Q\eps_1(x) + P\eps_2(x))\\
+PQ(x) &= T_n(PQ)(x) + x^{n+1}R(x), \; R\in \R[x]\\
+(fg)(x) &= T_n(PQ)(x) + x^{n}(xR(x) + Q\eps_1(x) + P\eps_2(x))
+\end{align*}
+On pose : 
+\begin{align*}
+\eps(x) &= xR(x) + Q\eps_1(x) + P\eps_2(x) \\
+\lim_{x\to 0}&\ xR(x) = 0 \\
+\lim_{x\to 0}&\ Q\eps_1(x) = 0\\
+\lim_{x\to 0}&\ P\eps_2(x) =0 \\
+\lim_{x\to 0}&\ \eps(x) = 0
+\end{align*}
+}{}
+
+\paragraph{Exemple}On veut le développement limité de : \[ \Arctan(x-1)\exp(x)\]en $1$ d'ordre $3$.
+\begin{align*}
+\Arctan(y) &= y - \frac{y^{3}}{3} +y^{3}\eps(y) \\ 
+\Arctan(x-1) &= (x-1) - \frac{(x-1)^{3}}{3}+(x-1)^{3}\eps(x) \\
+\exp(x) &= \exp(x-1+1) = e\exp(x-1) \\
+\exp(x) &= e\left(  1 + (x-1) + \frac{(x-1)^{2}}{2} + \frac{(x-1)^{3}}{6} + (x-1)^{3}\eps(x)\right)
+\end{align*}
+Et donc 
+\begin{align*}
+f(x) &= e\left( (x-1) - \frac{(x-1)^{3}}{3} + (x-1)^{3}\eps(x) \right)\fois \left( 1 + (x-1) + \frac{(x-1)^{2}}{2} + \frac{(x-1)^{3}}{6} + (x-1)^{3}\eps(x) \right)\\
+f(x) &= e\left( (x-1) + (x-1)^{2} + \frac{(x-1)^{3}}{2} - \frac{(x-1)^{3}}{3} \right) + (x-1)^{3}\eps(x)
+\end{align*}
+
+
 \end{document}
 
 
