@@ -405,7 +405,7 @@ et on conclut avec le théorème du développement limité d'une primitive.
 La fonction $f$ est continue en $0$.
 
  On regarde le développement limité à l'ordre $2$ en $0$ : \[ f(x) = x^{2}\eps(x), \; \eps(x) = \systeme{0 &\ \text{si} \ x = 0 \\ x\sin(1/x) &\ \text{sinon}}, \lim_{x\to 0}\eps(x)  0.\]Donc le développement limité de $f(x)$ en $0$ à l'ordre $2$ est : \[ f(x) = x^{2}\eps(x).\]Dérivabilité de $f$ en $0$ (puisqu'elle est lisse sur $\R^*$) : \[  \frac{f(x) - f(0)}{x-0} = x^{2}\sin(1/x) \underset{x\to 0}{\longrightarrow} 0\]donc $f$ est dérivable et $f'(0) = 0$. \[ \frac{f'(x) - f'(0)}{x-0} = \frac{3x^{2}\sin(1/x) -x\cos(1/x)}{x} = 3x\sin(1/x) - \cos(1/x) \]donc $f$ n'est pas dérivable à l'ordre $2$ en $0$ (même si elle a un développement limité à l'ordre $2$).
- 
+ \section{Calculs avec les développements limités}
 \subsection{Règles de calcul des développements limités}
  
 \proposition{ 
@@ -464,6 +464,139 @@ f(x) &= e\left( (x-1) - \frac{(x-1)^{3}}{3} + (x-1)^{3}\eps(x) \right)\fois \lef
 f(x) &= e\left( (x-1) + (x-1)^{2} + \frac{(x-1)^{3}}{2} - \frac{(x-1)^{3}}{3} \right) + (x-1)^{3}\eps(x)
 \end{align*}
 
+\subsection{Développement limité d'une fonction composée}
+Puisque la composition de deux fonctions polynômiales est encore un polynôme :
+
+\proposition{ 
+Soient $f,g$ admettant un développement limité en $0$ à l'ordre $n$ : \[f(x) = P(x) + x^{n}\eps(x), \; g(x) = Q(x) + x^{n}\eps(x) \]avec $P,Q$ deux polynômes de degré inférieur à $n$.
+
+Supposons que $g(0) = 0$ alors $f\rond g$ admet le développement limité suivant à l'ordre $n$ en $0$ : \[ (f\rond g)(x) = T_n(P\rond Q)(x) + x^{n}\eps(x).\]
+}{}
+\demonstration{ 
+Supposons $n=0$, alors $P$ et $Q$ sont deux polynômes constants donc $f(x) = P(0) + \eps(x)$ et $g(x) = Q(0) + \eps(x)$. Comme $Q(0) = 0$ on a bien $f(g(x)) = (P\rond Q)(x) + \eps(x)$ par continuité.
+
+Supposons que $n\geq 1$. On note $f(x) = P(x) + x^{n}\eps_1(x)$ et $g(x) = Q(x) + x^{n}\eps_2(x)$. Posons $P(x) = a_0 + a_1 x + \ldots + a_nx^{n}$.
+\begin{align*}
+(f\rond g)(x) &= P(g(x)) + g(x)^{n}\eps_1(g(x)) \\
+P(g(x)) &= \sum_{i=0}^{n}a_ig(x)^{i} \\
+P(g(x)) &=\footnotemark T_n\left(\sum_{i=0}^{n}a_iQ(x)^{i}\right) + x^{n}\eps_3(x)
+\end{align*}
+Puisque $Q(0) = 0$, on a $Q(x) = b_1x+\ldots + b_nx^{n}$ et donc : 
+\begin{align*}
+g(x) &= b_1x + \ldots+ b_nx^{n} + x^{n}\eps_2(x) \\
+g(x) &= x(b_1+\ldots+ b_nx^{n-1} + x^{n-1} \eps_2(x))\\
+g(x) &= xh(x)\\
+(f\rond g)(x) &= P(xh(x)) + x^{n}h(x)^{n}\eps_1(xh(x))\\
+(f\rond g)(x) &= T_n(P\rond Q)(x)  + x^{n}(h(x)^{n}\eps_1(xh(x)) + \eps_3(x))
+\end{align*}
+On pose $\eps_4(x) = h(x)^{n}\eps_1(xh(x)) + \eps_3(x)$ et : 
+\begin{align*}
+\lim_{x\to 0} xh(x) &= 0\\
+\lim_{x\to 0}\eps_3(x) &= 0 \\
+\lim_{x\to 0} h(x)^{n} &= b_1^{n} \\
+\lim_{x\to 0} \eps_4(x) &= 0.
+\end{align*}
+}{}
+\footnotetext{D'après les formules de développements limités d'une somme et d'un produit.}
+
+\paragraph{Exemple}Développement limité de $\cos(\sin(x))$ à  l'ordre $5$ en $0$ :
+\begin{align*}
+\sin(x) &= x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!}+x^{6}\eps(x) \\
+\cos(x) &= 1-\frac{x^{2}}{2!} + \frac{x^{4}}{4!} + x^{5}\eps(x)\\
+\cos(\sin(x)) &= T_5\left(1 - \frac{\left(x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!} \right)^{2}}{2!} + \frac{\left(x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!}\right)^{4}}{4!} \right) + x^{5}\eps(x)\\
+\cos(\sin(x)) &= 1 - \frac{x^{2}}{2} + \frac{x^{4}}{3!}+ \frac{x^{4}}{4!}  + x^{5}\eps(x) \\
+\cos(\sin(x)) &= 1 - \frac{x^{2}}{2} + \frac{5x^{4}}{24} + x^{5}\eps(x)
+\end{align*}
+
+\proposition{ 
+Soient $f,g$ admettant des développements limités à l'ordre $n$ en $0$. Alors si $g(0) \neq 0$ alors la fonction $f/g$ admet un développement limité à l'ordre $n$ en $0$.
+}{}
+\demonstration{ 
+Puisque $g(0)\neq 0$, $f/g$ est définie et continue en $0$.
+Comme $f/g = f \times 1/g$, il suffit de vérifier que $1/g$ admet un développement limité en $0$ (puis on applique la règle de produit).
+
+Posons $a = g(0) \neq 0$. On a : \[\frac{1}{g(x)} = \frac{1}{a +(g(x) - a)} = \frac{1}{a} \cdot\frac{1}{1 + \left(\frac{g(x)}{a} - 1 \right)} \]
+Il suffit de vérifier que : \[ \frac{1}{1 + \left(\frac{g(x)}{a} - 1 \right)} \]admet un développement limité à l'ordre $n$ en $0$.
+Posons \[h(x) = \frac{1}{1+x} \]on a alors \[ \frac{1}{1 + \left(\frac{g(x)}{a} - 1 \right)}  = h\left( \frac{g(x)}{a}-1\right) = (h\rond k)(x)\]où $k(x) = g(x)/a - 1$. Or $k(x)$ admet un développement limité à l'ordre $n$ en $0$ et $h(x)$ admet également un développement limité à l'ordre $\infty$ en $0$. Enfin, $k(0) = 0$ et donc on conclut avec le résultat précédent.
+}{}
+\paragraph{Exemple}Développement limité de $f : f(x) = 1/(a-x)$ en $0$ à l'ordre $n$.
+\begin{align*}
+f(x) &= \frac{1}{a}\frac{1}{1-x/a}\\
+\frac{1}{1-t} &= 1 + t + t^{2} + \ldots + t^{n} + t^{n}\eps(t) \\
+f(x) &= \frac{1}{a}\left( 1 + \frac{x}{a} + \frac{x^{2}}{a^{2}} + \ldots + \frac{x^{n}}{a^{n}} \right) + x^{n}\eps(x) \\
+\frac{1}{a-x} &= \frac{1}{a}+\frac{x}{a^{2}} + \ldots + \frac{x^{n}}{a^{n+1}}+ x^{n}\eps(x).
+\end{align*}
+
+La méthode précédente ne donne pas de formule générale pour le développement limité de $f/g$.
+\paragraph{Rappel}Si $P,Q\in \R[x]$, $n\in \N$ et si $Q(0)\neq 0$. Alors la division de $P$ par $Q$ suivant les puissances croissantes à l'ordre $n$ est l'unique polynôme $A$ tel que :
+\begin{itemize}
+\item $P-AQ$ est divisible par $X^{n+1}$ ;
+\item soit $A=0$, soit $\deg A \leq n$.
+\end{itemize}
+\proposition{Soient $f,g$ avec les développements limités suivants à l'ordre $n$ en $0$ :
+\begin{align*}
+f(x) &= A(x) + x^{n}\eps_1(x), \\
+g(x) &= B(x) + x^{n}\eps_2(x).
+\end{align*}
+Supposons que $g(0)=B(0)\neq 0$. Le développement limité à l'ordre $n$ de $f/g$ en $0$ est : 
+\[ \frac{f}{g}(x) = Q(x) + x^{n}\eps(x)\]où $Q$ est la division de $A$ par $B$ à l'ordre $n$ suivant les puissances croissantes.
+}{}
+\demonstration{ 
+On a $A(x) = Q(x)B(x) + x^{n+1}R(x)$ où $R$ est un polynôme et $Q=0$ ou $\deg Q \leq n$. Ainsi 
+\begin{align*}
+ f(x) &= Q(x)B(x) + x^{n+1}R(x) + x^{n}\eps_1(x)\\
+f(x) - Q(x)g(x) &= x^{n+1}R(x) + x^{n}\eps_1(x) - Q(x)x^{n}\eps_2(x) \\
+f(x) - Q(x)g(x) &= x^{n}(\eps_1(x) - Q(x) \eps_2(x) + xR(x))\\
+\frac{f}{g}(x) &= Q(x) + x^{n}\eps_3(x)\\
+\eps_3(x) &= \frac{1}{g(x)}(\eps_1(x) - Q(x)\cdot \eps_2(x) + xR(x)) \underset{x\to 0}{\longrightarrow}0
+\end{align*}
+}{}
+\paragraph{Exemple}Développement limité de $\tan(x)$ à l'ordre $5$ en $0$.
+\begin{align*}
+\tan(x) &= \frac{\sin(x)}{\cos(x)}\\
+\sin(x) &= x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!} + x^{5}\eps(x) \\
+\cos(x) &= 1 - \frac{x^{2}}{2!} + \frac{x^{4}}{4!} + x^{5}\eps(x) \\
+x - \frac{x^{3}}{3!} + \frac{x^{5}}{5!}  &= \left(1 - \frac{x^{2}}{2!} + \frac{x^{4}}{4!} \right)\left( x + \frac{x^{3}}{3} + \frac{2x^{5}}{15}\right) + x^{6}R(x) \\
+\frac{f(x)}{g(x)} &= x + \frac{x^{3}}{3} + \frac{2}{15}x^{5} + x^{5}\eps(x)
+\end{align*}
+
+\section{Applications}
+
+\paragraph{Applications}Les développements limités peuvent être utiles pour : 
+\begin{enumerate}
+\item les calculs de limites (pour des \og formes indéterminées \fg{}) ;
+\item études de fonctions ou courbes paramétrées.
+\end{enumerate}
+
+\subsection{Calculs de limites}
+\paragraph{Exemple}On veut calculer : \[ \lim_{x\to 0} \frac{x\log\ch x}{1+x\sqrt{1+x} - \exp(\sin x)}.\]
+\begin{align*}
+\ch(x) &= 1 +\frac{x^{2}}{2!} + x^{2}\eps(x) \\
+\log(1+x) &= x - \frac{x^{2}}{2} +x^{2}\eps(x), \\
+\log \ch x &= \log(1+(\ch x - 1)) \\
+\log \ch x &= T_2\left( \frac{x^{2}}{2}  - \frac{\left(\frac{x^{2}}{2} \right)^{2}}{2}\right) + x^{2}\eps(x) \\
+\log \ch x &= \frac{x^{2}}{2} + x^{2}\eps(x) \\
+x\log\ch x &= \frac{x^{3}}{2} + x^{3}\eps(x) \ ;
+\end{align*}
+\begin{align*}
+\sqrt{1+x} &= 1 + \frac{x}{2} + \frac{\frac{1}{2}\left(\frac{1}{2}-1\right)x^{2}}{2!} + x^{2}\eps(x) \\
+\sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^{2}}{8} + x^{2}\eps(x)\\
+x\sqrt{1+x} &= x + \frac{x^{2}}{2} - \frac{x^{3}}{8} + x^{3}\eps(x) \\
+\sin(x) &= x - \frac{x^{3}}{6} + x^{3}\eps(x) \\
+\exp(x) &= 1 + x + \frac{x^{2}}{2} + \frac{x^{3}}{6} +x^{3}\eps(x), \\
+\exp(\sin x)) &= T_3\left( \left(x\donne 1 + x + \frac{x^{2}}{2} + \frac{x^{3}}{6} \right) \left( x - \frac{x^{3}}{6}\right)\right) + x^{3}\eps(x) \\
+\exp(\sin x)) &= 1 + x - \frac{x^{3}}{6} + \frac{x^{2}}{2} + \frac{x^{3}}{6} + x^{3}\eps(x) \\
+\exp(\sin x)) &= 1 + x + \frac{x^{2}}{2} + x^{3}\eps(x) \ ;
+\end{align*}
+Ainsi 
+\begin{align*}
+\frac{x\log\ch x}{1+x\sqrt{1+x} - \exp(\sin x)} &= \frac{ \frac{x^{3}}{2} + x^{3}\eps(x)}{1 +x + \frac{x^{2}}{2} - \frac{x^{3}}{8}  -1 - x - \frac{x^{2}}{2} + x^{3}\eps(x)}\\
+\frac{x\log\ch x}{1+x\sqrt{1+x} - \exp(\sin x)} &= \frac{\frac{x^{3}}{2} + x^{3}\eps(x)}{-\frac{x^{3}}{8} + x^{3}\eps(x)} \\
+\lim_{x\to 0}\frac{x\log\ch x}{1+x\sqrt{1+x} - \exp(\sin x)} &=\lim_{x\to 0} \frac{1/2 + \eps(x)}{-1/8 + \eps(x)} = -4.
+\end{align*}
+
+\paragraph{Remarque}Un calcul de dérivée s'obtient par un calcul de limite et donc parfois par développements limités.
+\paragraph{Exemple}On prend \[ f(x) = \frac{\cos x}{1+x+x^{2}}\]et on cherche $f^{(i)}(0)$ pour $i \in \ens{0,\ldots,4}$.
 
 \end{document}
 
