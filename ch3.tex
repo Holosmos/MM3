@@ -596,7 +596,151 @@ Ainsi
 \end{align*}
 
 \paragraph{Remarque}Un calcul de dérivée s'obtient par un calcul de limite et donc parfois par développements limités.
-\paragraph{Exemple}On prend \[ f(x) = \frac{\cos x}{1+x+x^{2}}\]et on cherche $f^{(i)}(0)$ pour $i \in \ens{0,\ldots,4}$.
+\paragraph{Exemple}On prend \[ f(x) = \frac{\cos x}{1+x+x^{2}}\]et on cherche $f^{(i)}(0)$ pour $i \in \ens{0,\ldots,4}$, c'est-à-dire que l'on cherche le développement limité de $f$ en $0$ à l'ordre $4$.
+\begin{align*}
+\cos x &= 1 - \frac{x^{2}}{2} + \frac{x^{4}}{4!} + x^{4}\eps(x).
+\end{align*}
+On cherche le développement limité de \[ g(x) = \frac{1}{1+x+x^{2}}\]que l'on peut voir comme \[ g(x) = (a\rond b)(x)\; ; \; a(x) = \frac{1}{1+x} \; ; \; b(x) = x+x^{2}.\]
+
+\begin{align*}
+a(x) &= 1 - x + x^{2} - x^{3} + x^{4} + x^{4}\eps(x) \\
+g(x) &= T_4((x\donne  1 - x + x^{2} - x^{3} + x^{4} )(x+x^{2})) + x^{4}\eps(x) \\
+g(x) &= 1 - x - x^{2} + x^{2} + x^{4} + 2x^{3} +x^{4} - x^{3} - 3x^{4} + x^{4 }+ x^{4}\eps(x)\\
+g(x) &= 1 - x + x^{3} - x^{4} + x^{4}\eps(x) \\
+f(x) &= T_4\left( (1-x+x^{3}-x^{4})\left(1 - \frac{x^{2}}{2} + \frac{x^{4}}{24}\right)\right) + x^{4}\eps(x) \\
+f(x) &= 1 - x -\frac{x^{2}}{2} + \frac{3x^{3}}{2} - \frac{23x^{4}}{24} + x^{4}\eps(x)
+\end{align*}
+Comme $f$ admet un développement limité à l'ordre $4$ en $0$, elle est dérivable quatre fois. De plus 
+\begin{align*}
+f(0) &= 1 \\
+f'(0) &= -1 \\
+f^{(2)}(0) &= -1 \\
+f^{(3)}(0) &= 9 \\
+f^{(4)}(0) &= -23.
+\end{align*}
+
+\subsection{Courbes paramétrées}
+
+\paragraph{Rappels sur les fonctions classiques}Quelques rappels :
+\begin{itemize}
+\item on définit le logarithme népérien par : \[ \log(x) = \int_{1}^{x}\frac{\dt}{t}.\]Ainsi $\log : \R^{*}_{+} \to \R$ est croissante, $C^{\infty}$, 
+\begin{align*}
+\frac{\dd}{\dx}\log x &= \frac{1}{x}\\
+\lim_{x\to 0, x>0} \log x &= -\infty \\
+\lim_{x\to \infty} \log x &= +\infty \\
+\log(ab) = \log a + \log b.
+\end{align*}
+\item on définit l'exponentielle, $\exp : \R \vers \R$, qui est croissante, lisse et stable par dérivation.
+\begin{align*}
+\lim_{x\to -\infty}\exp(x) &= 0 \\
+\lim_{x\to + \infty} \exp(x) &= \infty\\
+\exp(a+b) &= \exp(a)\exp(b).
+\end{align*}
+\item soient $a\in \R_+^{*}, b\in \R$ alors on définit : \[ a^{b} = \exp(b\log a).\]
+\begin{align*}
+a^{b+b'} &= a^{b}a^{b'} \\
+(aa')^{b} &= a^{b} (a')^{b} \\
+\left(a^{b}\right)^{c} &= a^{bc}\\
+a^{0} &= 1 = 1^{b}\\
+\frac{\dd }{\dx}x^{b} &= bx^{b-1} \\
+\frac{\dd }{\dx}a^{x} &= \log (a)a^{x} \\
+\lim_{x\to 0, x >0} x^{a}(\log x)^{n} &= 0\; \; ,\; a >0 \et n\in \Z \\
+\lim_{x\to+\infty} x^{a} e^{x} &= +\infty \\
+\lim_{x\to -\infty} x^{a}e^{x} &= 0.
+\end{align*}
+\item trigonométrie :
+\begin{align*}
+\lim_{x\to 0}\frac{\sin x}{x} &= 1 \\
+\sin(x+t) &= \cos(t)\sin(x) + \cos(x)\sin(t) \\
+\cos(x+t) &= \cos(x)\cos(t) - \sin(x)\sin(t)\\
+\tan(x+t) &= \frac{\tan(t) + \tan(x)}{1 - \tan(x)\tan(t)}.
+\end{align*}
+\item $\Arcsin : [-1,1] \vers [-\pi/2,\pi/2]$ est lisse sur $]-1,1[$ et : \[ \Arcsin' (x) = \frac{1}{\sqrt{1-x^{2}}}.\]$\Arccos : [-1,1] \vers [0,\pi]$ est la réciproque de $\cos$ et on a la relation : \[ \Arccos(x) + \Arcsin(x) = \frac{\pi}{2}.\]$\Arctan : \R\vers ]-\pi/2,\pi/2[$ est lisse et : \[ \Arctan'(x) = \frac{1}{x^{2}+1}.\]
+\item trigonométrie hyperbolique : 
+\begin{align*}
+\sh(x) &= \frac{e^{x} - e^{-x}}{2} \\
+\ch(x) &= \frac{e^{x} + e^{-x}}{2} \\
+\th(x) &= \frac{\sh(x)}{\ch(x)}
+\end{align*}leurs réciproques $\Argsh : \R \vers \R$, $\Argch : [-1,\infty]\vers \R_+$ et $\Argth:]-1,+1[ \vers \R$ sont lisses sur l'intérieur de leur domaine de définition.
+\begin{align*}
+\Argsh'(t) &= \frac{1}{\sqrt{1+t^{2}}} \\
+\Argch'(t) &= \frac{1}{\sqrt{t^{2}-1}} \\
+\Argsh(t) &= \log(t + \sqrt{t^{2}+1}) \\
+\Argch(t) &= \log(t + \sqrt{t^{2}-1}).
+\end{align*}
+\end{itemize}
+
+\definition{ 
+Soit $f : I \vers \R^{2}$ avec $I$ un intervalle ou une union finie d'intervalles dans $\R$. Soient $u,v$ telles que \[ \forall t, \; f(t) = (u(t),v(t)).\]
+\begin{enumerate}
+\item On dit que $\lim_{t\to t_0}f(t) = l$ où $l = (l_1,l_2)$ si $\lim_{t\to t_0}u(t) = l_1$ et $\lim_{t\to t_0}v(t) = l_2$.
+\item On dit que $f$ est continue en $t_0$ si les fonctions $u$ et $v$ sont continues en $0$. $f$ est continue sur $I$ si elle est continue en tout point de $I$.
+\item On dit que $f$ est dérivable en $t_0$ si $u$ et $v$ le sont et on note $f'(t_0) = (u'(t_0),v'(t_0))$.
+\end{enumerate}
+}{}
+
+\proposition{ 
+Si $f,g :  I \vers \R^{2}$ et si $t_0 \in I$ alors :
+\begin{enumerate}
+\item si $\lim_{t\to t_0} f(t) = l$ et $\lim_{t\to t_0}g(t) = m$ alors $\lim_{t\to t_0}(f+g)(t) = l+m$ ;
+\item si $f,g$ sont dérivables en $t_0$ alors $f+g$ aussi et on a $(f+\lambda g)'(t_0) = f'(t_0) + \lambda g'(t_0)$.
+\end{enumerate}
+}{}
+\proposition{ 
+Soit $(r,s)$ une base de $\R^{2}$ et soit $f : I \vers \R^{2}$ telle que $f(t) = (u(t),v(t))$. Soit $(a(t),b(t))$ les coordonnées de $f(t)$ dans la base $(r,s)$.
+\begin{enumerate}
+\item On a : \[\lim_{t\to t_0}f(t) = l \ssi \systeme{ \lim_{t\to t_0} a(t) = \alpha \\ \lim_{t\to t_0}b(t) = \beta} \]où $(\alpha,\beta)$ sont les coordonnées de $l$ dans la base $(r,s)$.
+\item Idem pour la dérivée.
+\end{enumerate}
+}{}
+
+\demonstration{ 
+Soient $\alpha,\beta\in \R$ et $r,s\in \R^{2}$. On a $l = \alpha \cdot r + \beta\cdot s$, \[f(t) = (u(t),v(t)) = a(t)\cdot r + b(t) \cdot s \]avec $a(t),b(t) \in \R$.
+\begin{enumerate}
+\item On a que $\lim_{t\to t_0}f(t) = l$ c'est par définition : \[ \systeme{\lim_{t \to t_0}u(t) =l_1 \\ \lim_{t\to t_0}v(t) = l_2}.\]
+\begin{align*}
+\systeme{\lim_{t\to t_0}a(t) = \alpha \\ \lim_{t\to t_0}b(t) = \beta} &\ssi \systeme{\lim_{t\to t_0}(a(t)r_1 + b(t)s_1) = \alpha r_1 + \beta s_1 \\ \lim_{t\to t_0}(a(t)r_2 + b(t)s_2) = \alpha r_2 + \beta s_2} \\
+& \ssi \systeme{\lim_{t\to t_0} a(t) r_1 + b(t) s_1 = l_1 \\ \lim_{t \to t_0}a(t) r_2 + b(t) s_2 = l_2 }
+\end{align*}
+\item De même ... 
+\end{enumerate}
+}{}
+
+\definition{ 
+On dit que $f : I \vers \R^{2}, f(t) = (u(t),v(t))$ admet un développement limité à l'ordre $n$ en $t_0$ si $u(t)$ et $v(t)$ admettent un développement limité à l'ordre $n$ en $t_0$.
+
+Si $u(t) = u_0 + u_1(t-t_0) + \ldots + u_n(t-t_0)^{n} + (t-t_0)^{n}\eps_1(t)$ et $v(t) = v_0 + v_1(t-t_0) + \ldots + v_n(t-t_0)^{n} + (t-t_0)^{n}\eps_2(t)$ alors on appelle \[ f(t) = (u_0,v_0) + (t-t_0) (u_1,v_1) + \ldots + (t-t_0)^{n}(u_n,v_n) + (t-t_0)^{n}\eps(t)\]le développement limité de $f$ à l'ordre $n$ en $t_0$ avec $\lim_{t\to t_0} \eps(t) = (0,0)$.
+}{}
+\paragraph{Exemple}Le développement limité de $f : t\donne (2t^{3}-t\sin t, t^{3}+\cos t)$ à l'ordre $4$ en $0$ :
+\begin{align*}
+2t^{3} -t\sin t &= -t^{2} + 2t^{3} +\frac{t^{4}}{6} + t^{4}\eps(t) \\
+t^{3}+\cos t &= 1 - \frac{t^{2}}{2} + t^{3} + \frac{t^{4}}{24} + t^{4}\eps(t)\\
+f(t) &= (0,1) - t^{2}(1,1/2) + t^{3}(2,1) + t^{4}(1/6,1/24) + t^{4}\eps(t).
+\end{align*}
+
+\definition{ 
+On appelle \textit{courbe paramétrée} de $\R^{2}$ une fonction $f:I\vers \R^{2}$.
+}{}
+\paragraph{Exemple}$f:R\vers \R^{2}, t \donne (\cos t,\sin t)$.
+\begin{center}
+\sageplot[width = 8cm]{parametric_plot((cos(x),sin(x)),(x,0,2*pi))}
+\end{center}
+
+\paragraph{Remarque}
+Supposons que $f$ soit dérivable en $t\in I$. Alors $u(t),v(t)$ admettent des développements limités à l'ordre $1$ en $t_0$ et donc $f$ admet aussi un développement limité à l'ordre $1$ en $t_0$. Or si \[ f(t) = f(t_0) + (t-t_0) f'(t_0) + (t-t_0)\eps(t)\] alors \[ \lim_{t\to t_0}\frac{1}{t-t_0}(f(t) - f(t_0)) = f'(t_0).\]
+
+\definition{
+On appelle $f'(t_0)$ \textit{vecteur tangent} de $f$ en $t_0$. La droite affine passant par $f(t_0)$ et de vecteur directeur $f'(t_0)$ s'appelle la \textit{tangente} à $f$ en $t_0$.
+}{}
+
+\paragraph{Remarque}Le vecteur tangent dépend du paramétrage de la courbe et non seulement de sa représentation.
+
+\paragraph{Exemple}Soit $f: \R \vers \R^{2}, t \donne (\cos(t),\sin(t))$ et soit $g : \R \vers \R^{2},t\donne (\cos(2t),\sin(2t))$. Remarquons que $f$ et $g$ on même représentation graphique. Cependant les vecteurs tangents en $0$ à $f$ et $g$ sont :  
+\begin{align*}
+f'(0) &= (0,1) \\
+g'(0) &= (0,2).
+\end{align*}
+La tangente à $f$ en $t_0$ est la droite d'équation : \[\det \matrice{y - v(t_0) & v'(t_0) \\ x - u(t_0) & u'(t_0)} = 0 \]c'est-à-dire : \[(y-v(t_0))u'(t_0) - (x-u(t_0))v'(t_0) = 0. \]
 
 \end{document}
 
