@@ -1,0 +1,32 @@
+\documentclass{livre}
+\titre{Cours complet de MM3}
+
+\renewcommand{\note}[1]{\marginnote{#1}}
+
+\newcommand{\card}{\sharp}
+\renewcommand{\div}{\mid}
+\newcommand{\iR}{\barre{\R}}
+
+\begin{document}
+
+
+\tableofcontents
+\printbibliography
+
+\mainmatter
+
+\part{Algèbre}
+\parttoc
+\chapter{Groupes et groupes symétriques}
+\input{source_ch1.tex}
+\newpage
+\chapter{Déterminants et réduction}
+\input{source_ch2.tex}
+
+\newpage
+\part{Analyse}
+\parttoc
+\chapter{Développements limités}
+\input{source_ch3.tex}
+
+\end{document}

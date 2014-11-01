@@ -1,0 +1,608 @@
+\section{Déterminants}
+
+\subsection{Différentes définitions}
+
+Soit $A \in M_n(\R)$ avec $A = (a_{i,j})_{1\leq i,j\leq n}$
+
+\definition{
+On définit en premier lieu : \[ \det A = \sum_{w \in S_n} \eps(w) a_{w(i),1}\cdot a_{w(2),2}\cdot \ldots \cdot a_{w(n),n}. \]
+C'est la formule de \textsc{Cramer}.
+}{Déterminant}
+
+\definition{ 
+Une seconde définition possible :
+
+Pour tous $i,j \in \ens{1,\ldots,n}$, soit $A_{i,j}\in M_{n-1}(\R)$ la matrice (extraite) obtenue en enlevant la $i$-ième ligne et la $j$-ième colonne de $A$.
+
+On a alors : \[ \det' A  =  a_{1,1}\cdot \det'(A_{1,1}) -a_{1,2}\cdot \det'(A_{1,2}) + \ldots + (-1)^{n-1}a_{1,n}\cdot \det'(A_{1,n}) = \sum_{i=1}^{n}(-1)^{i+1}a_{1,i}\cdot \det'(A_{1,i})\]
+}{}
+
+\paragraph{Exemple}Prenons : \[A = \matrice{2 & 1 & -1 \\ 0 & 2 & 1 \\ 4 & -1 & 0}. \] On a : \[ A_{1,1} = \matrice{2 & 1 \\ -1 & 0} \; ; \; A_{1,2} = \matrice{0 & 1 \\ 4 & 0}.\]Ce qui donne avec la seconde définition : \[ \det A = 2 \det \matrice{2 & 1 \\ -1 & 0} - \det \matrice{0 & 1  \\ 4 & 0} - \det \matrice{0 & 2 \\ 4 & -1}.\]
+\paragraph{Exemple 2}On vérifie que les deux définitions coïncident : \[ \det \matrice{a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2}} = a_{1,1}a_{2,2} - a_{2,1}a_{1,2}.\] \[\det \matrice{a_{1,1} & a_{1,2} \\ a_{2,1} & a_{2,2}} = a_{1,1}\det(a_{2,2}) - a_{1,2}\det(a_{2,1}) = a_{1,1}a_{2,2} - a_{2,1}a_{1,2}.\]
+
+\paragraph{Remarque}Soient $E$ un $\R$-espace vectoriel de dimension $n$ et $B = (e_1,\ldots,e_n)$  une base de $E$. Soit $(u_1,u_2,\ldots,u_n) \in E^{n}$ un $n$-uplet  de vecteurs de $E$. Pour tout $j$, on pose : \[ u_j = \sum_{i=1}^{n}a_{i,j}\cdot e_{i}  \; \; a_{i,j}\in \R.\]On appelle \textit{déterminant} dans la base $B$ de $(u_1,\ldots,u_n)$ le réel : \[ \det_B(u_1,u_2,\ldots,u_n) = \det(a_{i,j}).\]
+
+\paragraph{Exemple}Pour $n=2$. On prend :
+\begin{align*}
+u_1 &= 2e_1 + 3e_2, \\
+u_2 &= -e_1 + 6e_2.
+\end{align*}
+On a alors : \[ \det_B(u_1,u_2) = \det \matrice{2 & -1 \\ 3 & 6} = 15.\]
+
+\paragraph{Remarque}Si $u_j = e_j$ pour tout $j \in \ens{1,\ldots,n}$ alors $\det_B(e_1,\ldots,e_n) = \det(I_d) = 1$. 
+
+\proposition{ On a les énoncés :
+\begin{enumerate}
+\item pour tout $w \in S_n$ : \[ \det_B(u_{w(1)},u_{w(2)},\ldots,u_{w(n)}) = \eps(w) \det_B(u_1,u_2,\ldots,u_n) ;\]
+\item on en déduit que le déterminant change de signe si on échange deux colonnes ;
+\item si pour $i\neq j$ on a $u_i = u_j$ alors le déterminant est nul (puisque négatif et positif simultanément).
+\end{enumerate}
+}{}
+\demonstration{ 
+Il suffit de montrer le premier point.
+
+On sait que $S_n$ est engendré par les transpositions. On suppose donc que $w\in S_n$ est une transposition. 
+
+En fait, $S_n$ est engendré par les transpositions simples, i.e. les transpositions de la forme $(k,k+1)$ avec $1\leq k < n$.\footnotemark
+
+On suppose donc que $w$ est de la forme $(k,k+1)$. Soit $A$ la matrice $(u_1,u_2,\ldots,u_n)$ de ces $n$ vecteurs dans les coordonnées de la base $B$. Soit $A'$ la matrice obtenue en permutant les colonnes $k$ et $k+1$ de $A$. Il faut donc vérifier que : \[ \det A' = \eps(w) \det A = -\det A.\]On calcule à gauche et à droite :
+\begin{align*}
+\det A &= \sum_{j=1}^{n}(-1)^{j+1}a_{1,j}\det(A_{1,j}), \\
+\det A'&= \sum_{j=1}^{n}(-1)^{j+1}a_{1,j}'\det(A_{1,j}').
+\end{align*}
+\begin{itemize}
+\item Pour $j\neq k,k+1$ on a $a_{1,j}' = a_{1,j}$ et $A_{1,j}'$ est obtenue en échangeant les colonnes $k$ et $k+1$ de $A_{1,j}$
+\item Pour $j=k$ on a $a_{1,k}' = a_{1,k+1}$ et donc $A_{1,k}' = A_{1,k+1}$.
+\item Pour $j=k+1$ on a $a_{1,k+1}' = a_{1,k}$ et donc $A_{1,k+1}' = A_{1,k}$.
+\end{itemize}
+On en déduit :
+\begin{align*}
+\det A' &= \sum_{j\neq k,k+1}(-1)^{j+1}\det(A_{i,j}')\footnotemark + (-1)^{k+1}a_{1,k}'\det(A_{1,k}') + (-1)^{k}a_{1,k+1}'\det(A_{1,k+1}'),\\
+\det A' &= \sum_{j\neq k,k+1}(-1)^{j+1}(-\det(A_{i,j}))+ (-1)^{k+1}a_{1,k+1}(-\det(A_{1,k+1}))+ (-1)^{k}a_{1,k}(-\det(A_{1,k})),\\
+\det A' &= -\det A.
+\end{align*}
+}{}
+\footnotetext[1]{
+En effet, toute transposition est un produit de transpositions simples par une conjugaison adaptée : on \og renomme\fg{} les éléments.}
+\footnotetext[2]{Par récurrence sur $n$ on a $\det(A_{i,j}') = - \det(A_{i,j})$.}
+
+\subsection{Formes $n$-linéaires alternées}
+
+\definition{ 
+Soit $E$ un $\R$-espace vectoriel de dimension $n\geq 1$. Une forme $n$-linéaire sur $E$ est une application $\varphi : E^{n}\vers \R$ qui est linéaire sur chaque composante.
+}{Forme $n$-linéaire}
+
+\proposition{ 
+Soit $B$ une base de $E$ avec $\dim E = n$.\[\fonc{\det_B}{E^{n}}{\R}{(u_1,\ldots,u_n)}{\det_B(u_1,\ldots,u_n)}\] est une forme $n$-linéaire.
+}{}
+\demonstration{ 
+On pose : 
+\[A = \matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & aa_{1,k}' + ba_{1,k}'' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & aa_{2,k}' + ba_{2,k}'' & a_{2,k+1} & \ldots & a_{2,n} \\
+\vdots & & \vdots & \vdots & \vdots & & \vdots 
+}\]
+\[ A' =\matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & a_{1,k}' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & a_{2,k}' & a_{2,k+1} & \ldots & a_{2,n}\\
+\vdots & & \vdots & \vdots & \vdots & &\vdots
+}\]
+\[ A'' =\matrice{ 
+a_{1,1} & \ldots & a_{1,k-1} & a_{1,k}'' & a_{1,k+1} & \ldots & a_{1,n} \\
+a_{2,1} & \ldots & a_{2,k-1} & a_{2,k}'' & a_{2,k+1} & \ldots & a_{2,n}\\
+\vdots & & \vdots & \vdots & \vdots & &\vdots
+}\]
+On veut montrer : \[\det A  = a \det A' + b\det A''. \]
+On calcule :
+\begin{align*}
+\det A &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}) + (-1)^{k+1}(aa_{1,k}'+ba_{1,k}'')\det(A_{1,k}), \\
+\det A' &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}') + (-1)^{k+1}a_{1,k}'\det(A_{1,k}), \\
+\det A'' &= \sum_{j\neq k}(-1)^{j+1}a_{1,j}\det(A_{i,j}'') + (-1)^{k+1}a_{1,k}''\det(A_{1,k}) 
+\end{align*}
+On doit alors montrer : \[\forall j \neq k, \; \det A_{i,j} = a \det (A_{i,j}') + b\det(A_{i,j}'') \]ce qui est démontré par hypothèse de récurrence.
+}{}
+
+\definition{ 
+Soit $\varphi : E^{n}\vers \R$ une forme $n$-linéaire alternée avec $E$ un $\R$-espace vectoriel.
+
+$\varphi$ est une forme $n$-linéaire alternée si on a : \[ \varphi(u_1,u_2,\ldots,u_n) = 0 \] dès que deux composantes $u_i,u_j$ avec $i\neq j$ coïncident.
+}{Forme $n$-linéaire alternée}
+\paragraph{Remarque}On en déduit que le déterminant dans une base donnée est une forme $n$-linéaire alternée.
+
+\proposition{ 
+Soit $\varphi$ une forme $n$-linéaire alternée. Alors pour tout $w\in S_n$, $\varphi(u_{w(1)},\ldots,u_{w(n)}) = \eps(w) \varphi(u_1,\ldots,u_n)$.
+}{}
+\demonstration{ 
+On peut supposer que $w$ est une transposition simple : $w = (k,k+1)$ avec $1\leq k < n$.
+
+On veut montrer : \[ \varphi(u_1,\ldots,u_{k-1},u_{k+1},u_k,u_{k+2},\ldots,u_n) = - \varphi(u_1,\ldots,u_n).\]Pour simplifier les notations, on oublie les indices $u_i$ avec $i\neq k,k+1$. On a : \[ \varphi(u_k + u_{k+1}, u_k + u_{k+1}) = 0\] et donc par linéarité : \[\varphi(u_k,u_k) + \varphi(u_k,u_{k+1}) + \varphi(u_{k+1},u_k) + \varphi(u_{k+1},u_{k+1}) = 0 \ssi \varphi(u_k,u_{k+1}) = - \varphi(u_{k+1},u_k).\]
+}{}
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$ et $B=(e_1,\ldots,e_n)$ une base de $E$.
+
+Soit $\varphi : E^{n}\vers \R$ une forme $n$-linéaire alternée. Alors : \[ \varphi(u_1,\ldots,u_n) = \det_B(u_1,\ldots,u_n)\varphi(e_1,\ldots,e_n)\]où les $u_i$ sont exprimés dans la base $B$.
+}{}
+\paragraph{Remarque}Toutes les formes $n$-linéaires alternées sont proportionnelles au déterminant.
+\demonstration{ 
+Soit $u_j = \sum_{i=1}^{n}a_{i,j}e_i$, les $a_{i,j}$ sont les coordonnées des $u_j$ dans la base $B$.
+
+On a : \[ \varphi(u_1,\ldots,u_n) = \varphi\left( \sum_{i=1}^{n}a_{i,1}e_i, \ldots, \sum_{i=1}^{n}a_{i,n}e_i \right).\]Comme $\varphi$ est $n$-linéaire alternée :
+\begin{align*}
+\varphi(u_1,\ldots,u_n) &= \sum_{w \in S_n}a_{w(1),1}a_{w(2),2}\ldots a_{w(n),n}\varphi(e_{w(1)},\ldots,e_{w(n)}) \\
+\varphi(u_1,\ldots,u_n) &= \sum_{w \in S_n}a_{w(1),1}a_{w(2),2}\ldots a_{w(n),n}\eps(w)\varphi(e_1,\ldots,e_n) \\
+\varphi(u_1,\ldots,u_n) &=\det_B(u_1,\ldots,u_n)\varphi(e_1,\ldots,e_n)
+\end{align*}
+}{}
+\paragraph{Remarques}On a démontré :
+\begin{enumerate}
+\item Pour une base $B$ choisie, le déterminant $\det_B$ est une forme $n$-linéaire alternée ;
+\item pour toute forme $n$-linéaire alternée, $\varphi$, on a : $\varphi (\cdot) = \det_B(\cdot)\varphi(B)$ ;
+\item en particulier, les deux déterminants coïncident.
+\end{enumerate}
+
+\proposition{ 
+Pour tout $A \in M_n(\R)$ on a : \[ \det(A) = \det(A^{t}).\]
+}{}
+\demonstration{ 
+On a :
+\begin{align*}
+A &= (a_{i,j}) \\
+A^{t} &= (b_{i,j}), \; b_{i,j} = a_{j,i}
+\end{align*}
+On calcule par la formule de \textsc{Cramer} : 
+\begin{align*}
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{i=1}^n b_{w(i),i}, \\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{i=1}^n a_{i,w(i)}.
+\end{align*}
+Pour $w$ fixé, dans $i$ décrit $1$ à $n$ alors $w(i)$ décrit également $1$ à $n$. On effectue un changement de variable $j = w(i)$ et alors $i = w^{-1}(j)$ et on a :
+\begin{align*}
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{j=1}^na_{w^{-1}(j),j},\\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w^{-1})\prod_{j=1}^na_{w(j),j}, \\
+\det(A^{t}) &= \sum_{w\in S_n}\eps(w)\prod_{j=1}^na_{w(j),j}, \\
+\det(A^{t}) &= \det(A).
+\end{align*}
+}{}
+\paragraph{Remarque}On peut calculer $\det(A)$ en développant par rapport à la première ligne ou la première colonne (au choix). On a alors : 
+\[\det(A) = \sum_{i=1}^{n}(-1)^{n}a_{i,1}\det(A_{i,1}).\]
+
+\proposition{ 
+Si $A\in M_n(\R)$ est triangulaire alors : \[ \det A = \prod_{i=1}^{n} a_{i,i}.\]
+}{}
+\demonstration{ 
+Supposons $A$ triangulaire supérieure, c'est-à-dire $a_{i,j}=0$ si $i>j$. 
+
+Par la formule de \textsc{Cramer} :\[
+\det(A) = \sum_{w\in S_n}\eps(w)\prod_{i=1}^{n}a_{i,w(i)}.\]
+Or les seuls $w$ qui contribuent à cette somme sont ceux tels que : \[\forall i \in \ens{1,\ldots,n}, i\leq w(i),\] c'est-à-dire : $w = \id$\footnotemark.
+
+En développant par rapport à une ligne (ou une colonne quelconque) : 
+\[\det A = \sum_{i=1}^{n}(-1)^{i+j}a_{j,i}\det(A_{j,i}).\]
+Si $A'$ désigne la matrice obtenue en permutant les lignes de $A$ par $w= \matrice{1 & 2 & \ldots & j}$ : \[\det (A') = \eps(w)\det(A) = (-1)^{j+1}\det (A) .\]On note $A' = (a_{k,l}')_{k,l \in \ens{1,\ldots,n}}$.
+
+En choisissant $j>1$ :
+\begin{align*}
+\det(A') &\overset{\footnotemark}{=} \sum_{i=1}^{n}(-1)^{i+1}a_{1,i}'\det(A_{1,i}'), \\
+\det(A') &= \sum_{i=1}^{n}(-1)^{i+1}a_{j,i}\det(A_{j,i}) ;\\
+\det(A) &= (-1)^{j+1}\det(A'), \\
+\det(A) &= \sum_{i=1}^{n}(-1)^{j+i}a_{j,i}\det(A_{j,i}).
+\end{align*}
+}{}
+\footnotetext[3]{Soit $w\in S_n$, $w : \ens{1,2,\ldots,n} \overset{\sim}{\vers}\ens{1,2,\ldots,n}$.
+
+Si $i\leq w(i)$ pour tout $i$ alors $w(k) = k$ pour tout $k$ par récurrence descendante sur $k$ : 
+\begin{itemize}
+\item $n\leq w(n)$ et donc $w(n)=n$ ;
+\item $k-1\leq w(k-1)$ et donc $w(k-1) = w(k)$. 
+\end{itemize}
+}
+\footnotetext{En développant par rapport à la première ligne.}
+
+
+\section{Déterminant d'un endomorphisme}
+
+\subsection{Invariance par changement de base}
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $B = (e_1,e_2,\ldots,e_n)$ une base de $E$ et $C = (u_1,\ldots,u_n)$ un système de $n$ vecteurs de $E$. Alors $C$ est une base de $E$ si, et seulement si : \[ \det_B(C) \neq 0.\]
+}{}
+\demonstration{ 
+Supposons que $C$ est une base de $E$.
+
+On a vu que si $\varphi : E^{n}\vers \K$ est une forme $n$-linéaire alternée alors : \[\forall (u_1,u_2,\ldots,u_n)\in E^{n}, \; \varphi(u_1,u_2,\ldots,u_n) = \det_B(u_1,u_2,\ldots,u_n)\cdot \varphi(e_1,e_2,\ldots,e_n).\]
+
+On applique cette formule avec $ \varphi = \det_C$ et on a : 
+\begin{align*}
+\det_C(u_1,u_2,\ldots,u_n)&= \det_B(C) \det_C(B),\\
+1 = \det_C(C) &= \det_B(C)\det_C(B),
+\end{align*}
+et donc $\det_B(C)\neq 0$.
+
+Supposons maintenant que $C$ est liée. Il existe alors $i$ tel que $u_i$ est combinaison linéaire des $u_j$ avec $j\neq i$.
+Par exemple :
+\begin{align*}
+u_i &= \sum_{j\neq i}^{}a_j\cdot u_j, \; (a_j\in \R) \\
+\det_B(C) &= \det_B(u_1,u_2,\ldots,u_{i-1},\sum_{j\neq i}^{}a_j\cdot u_j,u_{i+1},\ldots,u_n), \\
+\det_B(C) &= \sum_{j\neq i}^{}a_j\det_B(u_1,u_2,\ldots,u_{i-1},\underset{j\neq i}{u_j},u_{i+1},\ldots,u_n),
+\end{align*}
+or $\det_B$ est alternée et comme $u_j$ apparaît deux fois dans la dernière expression, on a $$\det_B(C) = 0.$$ 
+}{}
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $B = (e_1,\ldots,e_n)$, $C = (u_1,\ldots,u_n)$ deux bases de $E$ et $f$ un endomorphisme de $E$. Alors : \[\det_B(f(e_1),\ldots,f(e_n)) = \det_C(f(u_1),\ldots,f(u_n)). \]
+}{}
+\paragraph{Remarque}En d'autres termes, $\det_B(f(B))$ ne dépend pas du choix de la base $B$. On l'appelle $\det(f)$.
+\demonstration{ 
+On utilise la formule : \[\forall (u_1,u_2,\ldots,u_n)\in E^{n}, \; \varphi(u_1,u_2,\ldots,u_n) = \det_B(u_1,u_2,\ldots,u_n)\cdot \varphi(e_1,e_2,\ldots,e_n),\] où $\varphi$ est une forme $n$-linéaire alternée.
+
+On pose : \[\varphi(u_1,\ldots,u_n) = \det_B(f(u_1),f(u_2),\ldots,f(u_n)) \]et on a alors : 
+\[\varphi(u_1,\ldots,u_n) = \det_B(f(u_1),\ldots,f(u_n)) = \det_C(f(u_1),\ldots,f(u_n)) \det_B(C).\]
+De même : 
+\[\det_B(f(u_1),\ldots,f(u_n)) = \det_B(C)\det_B(f(e_1),\ldots,f(e_n)).\]
+Et donc :
+\[\det_B(f(u_1),\ldots,f(u_n)) \det_B(C) = \det_B(f(e_1),\ldots,f(e_n))\det_B(C) \]
+et $\det_B(C)\neq 0$. Donc l'égalité voulue est obtenue. 
+}{}
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ et $g$ deux endomorphismes de $E$. Alors :
+\[ \det(fg)=\det(f)\det(g).\]
+}{}
+\demonstration{ 
+Soit $B=(e_1,\ldots,e_n)$ une base de $E$, \[ \det(fg) = \det_B(fg(e_1),\ldots,fg(e_n)).\]
+
+Considérons la forme $n$-linéaire alternée $\varphi$ telle que : \[\varphi(u_1,\ldots,u_n) = \det_B(g(u_1),\ldots,g(u_n)), \] alors on a : 
+\begin{align*}
+\varphi(f(u_1),\ldots,f(u_n)) &= \det_B(f(u_1),\ldots,f(u_n))\varphi(e_1,\ldots,e_n), \\
+\det_B(gf(e_1),\ldots,gf(e_n)) &= \det_B(f(e_1),\ldots,f(e_n))\det_B(g(e_1),\ldots,g(e_n)), \\
+\det(gf)& = \det(g)\det(f).
+\end{align*}
+}{}
+\paragraph{Remarque}Si $A,B\in M_n(\R)$ alors \[ \det(AB) = \det(A) \det(B).\]
+
+
+\section{Diagonalisation}
+
+\definition{ 
+Une matrice $A$ est \textit{diagonalisable} si elle est conjugué par un isomorphisme à une matrice diagonale. 
+}{}
+
+\subsection{Valeur propre et vecteur propre}
+Soit $E$ un $\R$-espace vectoriel de dimension $n$. Soit $f$ un endomorphisme de $E$.
+
+\definition{ 
+On appelle \textit{valeur propre} de $f$ un réel $\lambda$ tel qu'il existe un $v\in E-\ens{0}$ tel que $f(v) = \lambda \cdot v$.
+
+On dit que $v$ est un \textit{vecteur propre} de valeur propre $\lambda$.
+}{}
+
+Quitte à prendre la matrice $A$ de $f$ dans une base $(e_1,\ldots,e_n)$ fixée de $E$, $\lambda$ est une valeur de $f$ (ou de $A$) si, et seulement si \[\det (A-\lambda I_d) = 0. \]
+
+\paragraph{Remarque}Soient $A\in M_n(\R)$, $B$ la base canonique et $C = AB$. $\det(A)$ est non nul si, et seulement si, $A$ est inversible. D'autre part s'il existe un vecteur propre $v$ de valeur propre $\lambda$ alors \[ \ker(f-\lambda I_d) \neq \ens{0}.\] Or $f-\lambda I_d$ est un endomorphisme de $E$ et $E$ est de dimension finie. Donc il y a équivalence : \[ \ker(f-\lambda I_d) \neq\ens{0} \ssi \det(A-\lambda I_d) = 0.\]
+
+\definition{ 
+On appelle polynôme caractéristique de $f$ (ou de $A$) le polynôme : \[ \chi_f(t) = \chi_A(t) = \det(A-t I_d).\]
+}{}
+\paragraph{Exemple}En dimension $2$ : $A = \matrice{a & b \\ c & d}$ on a \[\chi_A(t) = t^2 -(a+d)t +ad-bc = t^2 - \tr(A)t + \det(A). \]
+
+\paragraph{Remarque}$\chi_A(t)$ est un polynôme de degré $n$ de coefficient dominant $(-1)^{n}$ et de terme constant $\chi_A(0) = \det(A)$.
+\subsection{Sous-espaces propres}
+\definition{ 
+Soit $f$ un endomorphisme de $E$ et de matrice $A$. Soit $\lambda\in \R$. On appelle \textit{sous-espace propre} de $f$ (ou de $A$) de valeur propre $\lambda$ le sous-espace vectoriel $\ker(f-\lambda I_d)$.
+}{}
+
+\proposition{ 
+Soient $\lambda,\mu \in \R$. Alors si $\lambda\neq\mu$ on a \[\ker(f-\lambda I_d)\ker(f-\mu I_d) = \ens{0}. \]
+Plus généralement si, $\lambda_1,\ldots,\lambda_k\in \R$ distincts alors on a : \[ \sum_{i=1}^{k}\ker(f-\lambda_i I_d) = \bigoplus_{i=1}^{k}\ker(f-\lambda_i I_d)\]
+}{}
+\demonstration{ 
+Il s'agit de vérifier que pour tout $i\neq j$ on a : \[ \ker(f-\lambda_i I_d)\inter \ker(f-\lambda_j I_d) = \ens{0}.\]
+
+Si $v \in \ker(f-\lambda_i I_d)\inter \ker(f-\lambda_j I_d) $ alors : \[ f(v) = \lambda_i v = \lambda_j v\implique v = 0.\]
+}{}
+
+\corollaire{ 
+Soient $\dim E=n$, $f$ est un endomorphisme de $E$, $\lambda_1,\lambda_2,\ldots,\lambda_k$ valeurs propres de $f$ et $E_i$ le sous-espace associé à la valeur propre $\lambda_i$. Alors si \[ E = \bigoplus_{i=1}^{k}E_i,\]l'endomorphisme $f$ est diagonalisable.
+}{}
+\demonstration{ 
+Si on fait la réunion : \[ B = \Union_{i=1}^{k}B_i,\]où $B_i$ est une base de $E_i$ on obtient une base de $E$. Dans cette base la matrice de $f$ est diagonale où l'élément diagonal $\lambda_i$ est la valeur propre correspondante. La matrice de passage de la base canonique à la base $B$ donne la diagonalisablisation.
+}{}
+
+Donc pour diagonaliser $A$ il faut vérifier si $E = \bigoplus_{i=1}^{k}E_i$ où les $E_i$ sous les sous-espaces propres.
+
+\paragraph{Exemple}Soit :
+\begin{align*}
+A &= \matrice{1 & 2 & -3 \\ 1 & 4 & -5 \\ 0 & 2 & -2}.\\
+\chi_A(\lambda) &= \det\matrice{1-\lambda & 2 & -3 \\ 1 & 4-\lambda & -5 \\ 0 & 2 & -2-\lambda},\\
+\chi_A(\lambda) &= (1-\lambda)((4-\lambda)(-2-\lambda)+10) - (2(-2-\lambda)+6),\\
+\chi_A(t) &= -\lambda(\lambda-1)(\lambda-2).
+\end{align*}
+Les trois valeurs propres sont $0,1,2$ et sont de multiplicité $1$.
+
+\begin{align*}
+E_0 = \ker (A) &= \enstq{x\in \R^{3}}{Ax = 0} = \left\langle \matrice{1 \\ 1 \\ 1}\right\rangle,\\
+E_1 = \ker (A-I_d) &= \enstq{x\in \R^{3}}{\matrice{0 & 2 & -3 \\ 1 & 3 & -5 \\ 0 & 2 & -1}x = 0} =\left\langle\matrice{1 \\ 3 \\ 2} \right\rangle,\\
+E_2 = \ker(A-2I_d) &= \enstq{x\in \R^{3}}{\matrice{-1 & 2 & -3 \\ 1 & 2 & -5 \\ 0 & 2 & -4}x = 0} = \left\langle \matrice{1 \\ 2 \\ 1}\right\rangle.
+\end{align*}
+On a l'égalité : \[ E_0 \oplus E_1 \oplus E_2 = \R^{3}.\]
+On en déduit les matrices de passage : 
+\begin{align*}
+P &= \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}, \\
+P^{-1}AP &= \matrice{0 & 0& 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2}.
+\end{align*}
+\subsection{Conditions de diagonalisabilité}
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$, $\chi_f(t) \in \R[t]$, $\deg \chi_f = n$.
+
+Si $\chi_f$ admet $n$ racines distinctes alors $f$ est diagonalisable.
+}{}
+\demonstration{ 
+Si : \[ \chi_f(t)  = \prod_{i=1}^{n}(\lambda_i - t)\]avec $\lambda_1,\lambda_2,\ldots,\lambda_n$ racines distinctes.
+On a alors que pour tout $i$ : \[ E_i = \ker(f-\lambda_i \id) \neq \ens{0}\] et donc $\dim E_i\geq 1$. On a alors que \[ \sum_{i=1}^{n}E_i = \bigoplus_{i=1}^{n}E_i\] est de dimension supérieure à $n$ ce qui implique $\bigoplus E_i = \R^{n}$.
+}{}
+\paragraph{Remarque}La condition donnée est nécessaire mais non suffisante. On cherche donc une condition nécessaire et suffisante.
+
+\proposition{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$, $\lambda$ une valeur propre de $f$, $m_\lambda$ la multiplicité de $\lambda$ en tant que racine de $\chi_f(t)$ et $E_\lambda$ le sous-espace propre associé à $\lambda$.
+
+Alors $\dim E_\lambda \leq m_\lambda$.
+}{}
+\demonstration{ 
+Soit $k = \dim E_\lambda$ et $(e_1,e_2,\ldots,e_k)$ une base de $E_\lambda$. On peut compléter $(e_1,\ldots,e_k)$ en une base $(e_1,\ldots,e_n)=B$ de $E$. \[ {\rm Mat}_B(f) = \matrice{\lambda I_d& \vline &X \\ \hline 0 & \vline&  A}.\]
+
+Or le déterminant d'une matrice triangulaire par blocs est le produit des déterminants des matrices diagonales.\footnotemark
+
+Ainsi : \[ \chi_f(t) = \det\matrice{(\lambda - t)I_d & \vline & X \\ \hline 0 & \vline & A-t I_d} = (\lambda -t)^{k}\chi_A(t)\] et donc $m_\lambda \geq k$.
+}{}
+\footnotetext{En effet, en utilisant la règle de \textsc{Cramer} la preuve est assez aisée.}
+
+\corollaire{ 
+On a les propositions suivantes :
+\begin{enumerate}
+\item Si $\chi_f(t)$ n'est pas scindé sur $\R$ alors $f$ n'est pas diagonalisable.
+\item S'il existe une valeur propre $\lambda$ de $f$ telle que $\dim E_\lambda < m_\lambda$ alors $f$ n'est pas diagonalisable.
+\end{enumerate}
+}{}
+\demonstration{ 
+On démontre :
+\begin{enumerate}
+\item[2.] Soient $\lambda_1,\ldots,\lambda_k$ les valeurs propres de $\chi_f(t)$, $m_i$ la multiplicité de $\lambda_i$ et $E_i$ l'espace propre associé à $\lambda_i$. Alors la proposition nous dit que $\dim E_i \leq m_i$.
+
+Or $\deg \chi_f(t) = $n et donc 
+\begin{align*}
+\sum_{i=1}^{k} m_i &\leq n \\
+\sum_{i=1}^{k}\dim E_i &\leq \sum_{i=1}^{k}m_i \leq n
+\end{align*}
+S'il existe $i_0$ tel que $\dim E_{i_0} < m_{i_0}$ alors cela implique \[\sum_{i=1}^{k}\dim E_i < \sum_{i=1}^{k}m_i \leq n.\] Et donc \[ \bigoplus_{i=1}^{n}E_i < n.\]
+\item[1.] Idem.
+\end{enumerate}
+}{}
+
+\theoreme{ 
+Soient $E$ un $\R$-espace vectoriel de dimension $n$, $f$ un endomorphisme de $E$.
+
+$f$ est diagonalisable si, et seulement si, on a les conditions suivantes :
+\begin{enumerate}
+\item $\chi_f(t)$ est scindé sur $\R$ ;
+\item pour tout $\lambda \in \chi_f^{-1}(0)$, la dimension du $\ker (f-\lambda \id)$ est égal à la multiplicité de $\lambda$ dans $\chi_f(t)$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Le corollaire nous dit que ces conditions sont nécessaires.
+
+Remarquons que : \[ \sum_{i=1}^{r}E_i = \bigoplus_{i=1}^{r} E_i\] où $E_i$ est le sous-espace propre de $\lambda_i$ et $r$ le nombre de racines deux à deux distinctes. Or la dimension de la somme est la somme des dimensions, c'est-à-dire la somme des multiplicité qui est égale à $n$. Donc $f$ est diagonalisable.
+}{}
+
+\paragraph{Exemple}On prend
+\begin{align*}
+A &= \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1 & 0}.\\
+\chi_A(t) &= \det\matrice{-t & 1 & -1 \\ -1 & 2-t & -1 \\ -1 & 1 & -t },\\
+ \chi_A(t) &= -t(t-1)^{2}.
+\end{align*}
+Les racines sont $0,1$ de multiplicités respectives $1$ et $2$.
+On a : 
+\begin{align*}
+E_0 = \ker A &= \left\langle \matrice{1 \\ 1 \\ 1}\right\rangle,\\
+E_1 &= \ker A - \id &= \left\langle\matrice{1\\1\\0},\matrice{0\\1\\1}\right\rangle.
+\end{align*}
+On a \[ \dim E_0 = 1 \et \dim E_1 = 2\] et donc $f$ est diagonalisable.
+
+\paragraph{Contre-exemple de minimalité}On a que \[A = \matrice{0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0} \]n'a comme valeurs propres que $0$, elle n'est pas diagonalisable parce que si elle est nulle dans une base elle l'est dans toutes.
+
+\section{Polynômes en un endomorphisme de $E$}
+
+\subsection{Polynômes évalué en un endomorphisme}
+
+\definition{ 
+Soit $P\in \R[t]$ un polynôme : \[ P(t) = \sum_{k=0}^{d}a_kt^{k}.\]On note pour $f$ un endomorphisme de $E$ : \[ P(f) = \sum_{k=0}^{d}a_kf^{k}\in {\rm End}_\R(E).\]
+
+Avec la convention $f^{0} = \id$ et la notation $f^{k+1} = f\rond f^{k}$.
+}{}
+\definition{ 
+On dit qu'un polynôme $P\in \R[t]$ annule $f$ si $P(f) = 0_{{\rm End}_\R}$.
+}{}
+
+\proposition{
+On a que : \[ \fonc{\phi}{\R[t]}{{\rm End}_{\R}(E)}{P(t)}{P(f)}\] est un morphisme d'anneaux.
+
+C'est-à-dire : \[\forall P,Q \in \R[t], \; \phi(P+Q) = \phi(P) + \phi(Q) \; ; \; \phi(PQ) = \phi(P)\phi(Q). \]
+}{}
+\paragraph{Remarque}Ainsi l'ensemble des polynômes annulateurs de $f$ est un idéal de $\R[t]$. Or $\R[t]$ est un anneau principal donc l'ensemble des polynômes annulateurs de $f$ est principal. Il existe donc un polynôme $Q\in \R[t]$ tel que tout polynôme annulateur de $f$ s'écrit $RQ$ avec $R\in \R[t]$.
+
+\definition{ 
+On appelle polynôme minimal de $f$ le polynôme unitaire de plus petit degré, $m_f$ annulant $f$.
+}{}
+On a évidemment que tout polynôme annulateur de $f$ est de la forme $P\cdot m_f, P \in \R[t]$.
+
+\paragraph{Exemple}Avec \[A = \matrice{0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0} \] qui est une matrice nilpotente, c'est-à-dire $A^{3} = 0$. On a \[m_A(t) \mid t^{3} \implique m_A = 1,t,t^{2} \ou t^{3}.\] Or $(t\donne 1)(A) = \id \neq 0$, $(t\donne t)(A) = A \neq 0$ et $(t\donne t^{2})(A) = A^{2} = \matrice{0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 }\neq 0$ et donc $m_A(t) = t^{3}$. 
+
+\proposition{ 
+Soit $f\in {\rm End}_\R(E)$. Alors :
+\begin{enumerate}
+\item si $f$ est diagonalisable, alors il existe un polynôme scindé $P\in \R[t]$ annulant $f$ ayant que des racines simples ;
+\item si $P \in \R[t]$ annule $f$ alors toute valeur propre de $f$ est racine de $P$.
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item Soit $B = (e_1,\ldots,e_n)$ une base de vecteurs propres. Soient $\mu_1,\ldots,\mu_r$ des scalaires deux à deux distinctes tels que \[ \ens{\mu_1,\mu_2,\ldots,\mu_r} = \ens{\lambda_1,\lambda_2,\ldots,\lambda_n}\]avec $r\leq n$.
+
+On pose : \[ P(t) = \prod_{i=1}^{r}(t-\mu_i).\] On cherche à savoir si $P(f) = 0$.
+\begin{align*}
+P(f) = 0 &\ssi P(f)(e_j) = 0, \; \forall j, \\
+P(f)(e_j) &= \left( \prod_{i=1}^{r}(f-\mu_i \id) \right)(e_j), \\
+f(e_j) = \lambda_j e_j & \implique \exists i, \mu_i = \lambda_i.
+\end{align*}
+Or pour tous $k,l$ : \[ (f-\mu_k \id)(f - \mu_l \id) =(f - \mu_l \id)(f - \mu_ k\id)    \]et donc :
+\begin{align*}
+P(f)(e_j) &= \left( \prod_{k\neq i} (f-\mu_k \id)\right)(f-\mu_i \id)(e_j), \\
+P(f)(e_j) &= \left( \prod_{k\neq i} (f-\mu_k \id)\right)(f(e_j) - \mu_i e_j) = 0.
+\end{align*} 
+\item On suppose que $P(f) = 0$ et $\chi_f(\lambda) = 0$ avec $P \in \R[t]$ et $\lambda\in \R$. 
+
+Soit $v\in \ker(f-\lambda \id), v\neq 0$, alors :
+\begin{align*}
+P(f)(v) &= \sum_{k=1}^{d}a_{k}f^{k}(v), \\
+P(f)(v) &= \sum_{k=1}^{d}a_k\lambda^{k}v.
+\end{align*}
+Donc $P(\lambda)\cdot v = 0$ et comme $v\neq 0$ : $P(\lambda) = 0$.
+\end{enumerate}
+}{}
+
+\subsection{Lemme des noyaux}
+
+\proposition{ 
+Soit $f\in {\rm End}_\R(E)$.
+\begin{enumerate}
+\item Soit $P \in \R[t]$ de la forme $P = ST$ avec $S,T \in \R[t]$ avec $S$ et $T$ premiers entre eux.
+
+Alors si $P(f) = 0$ alors $$E = \ker(S(f))\oplus \ker(T(f)).$$
+\item Soit $P\in \R[t]$, $P = P_1P_2\ldots P_k$ avec $P_i \in \R[t]$ premiers entre eux deux à deux.
+
+Alors si $P(f) = 0$ alors $$E = \bigoplus_{i=1}^{k}\ker P_i(f).$$
+\end{enumerate}
+}{Théorème des noyaux}
+
+\theoreme{ 
+$f \in {\rm End}_\R(E)$ avec $\dim E = n$.
+
+Supposons qu'il existe $P\in \R[X]$ est un polynôme scindé avec des racines simples. Alors $P(f) = 0$ implique que $f$ est diagonalisable.
+}{}
+\paragraph{Remarque}C'est équivalent à $m_f(t)$ scindé avec des racines simples. En effet si $P$ est scindé avec des racines simples et qui annulent $f$ alors $m_f$ divise $P$ et donc $m_f$ est scindé avec des racines simples.
+
+\demonstration{ 
+Soit : \[ P(X) = (X-\lambda_1)\ldots(X - \lambda_k)\]
+avec $\lambda_1,\lambda_2,\ldots,\lambda_k$ réels distincts. Ainsi $X-\lambda_i$ et $X-\lambda_j$ sont premiers entre eux pour tous $i\neq j$.
+
+Ainsi d'après le théorème des noyaux : \[ E = \bigoplus_{i=1}^{k}\ker(f-\lambda_i \id). \] Donc $f$ est diagonalisable.
+}{}
+
+\corollaire{ 
+Soit $f\in {\rm End}(E)$. $f$ est diagonalisable si, et seulement si, son polynôme minimal $m_f$ est scindé avec des racines simples.
+}{}
+\demonstration{ 
+Le sens d'implication a déjà été fait, l'autre sens est donné par le théorème précédent.
+}{}
+
+\subsection{Trigonalisation}
+\definition{ 
+On dit que $f\in {\rm End}(E)$ est \textit{trigonalisable} s'il existe une base $B$ de $E$ telle que la matrice en base $B$ de $f$ est triangulaire supérieure.
+
+De même, une matrice $A\in M_n(\R)$ est trigonalisable si elle est conjuguée à une matrice triangulaire supérieure, i.e. s'il existe $P\in \GL_n(\R)$ telle que $P^{-1}AP$ est trigonalisable.
+}{}
+
+\proposition{ 
+Soit $f\in {\rm End}(E)$.
+
+ $\chi_f$ est scindé dans $\R[X]$ si, et seulement si, $f$ trigonalisable.
+}{}
+\paragraph{Remarque}On peut remplacer partout $\R$ par $\K = \C,\R,\Q$ et $E$ par un $\K$-espace vectoriel. Si $E$ est un $\C$-espace vectoriel de dimension finie et si $f\in {\rm End}_\C(E)$ alors la proposition assure la trigonalisation de $f$ (et ainsi de tout endomorphisme).
+
+\demonstration{ 
+Si $f$ est trigonalisable, alors il existe une base $B$ telle que la matrice, $(a_{i,j})$ de  $f$ soit trigonale supérieure dans cette base. Alors le polynôme caractéristique (qui est indépendant de la base) est exactement : $\chi_f(t) = \prod_{i=1}^{n} (a_{ii}-t)$. Ce polynôme est bien scindé. 
+
+Pour la réciproque on effectue une récurrence sur $n=\dim E$. On suppose que c'est vrai pour tout espace vectoriel de dimension strictement inférieure à $n$ : \[ \chi_f(t) = (\lambda_1 - t)(\lambda_2 - t)\ldots(\lambda_n-t)\]avec $\lambda_1,\ldots,\lambda_n \in \R$.
+
+$\lambda_1$ est une valeur propre.
+Il existe par hypothèse $v_1\in E$ un vecteur propre tel que $v_1\neq 0$ et $f(v_1) = \lambda_1 v_1$. Par le théorème de la base incomplète, il existe une base $B$ de la forme $B = (v_1,e_2,e_3,\ldots,e_n)$. Soit $A$ la matrice de $f$ dans la base $B$. On a : \[ A =\matrice{ 
+\lambda_1 & \vline & \star & \vline & \star & \vline & \ldots \\
+\hline
+0 &\vline \\
+0 & \vline &  & & B\\
+0 & \vline
+}\]
+Avec $B\in M_{n-1}(\R)$ qui peut être la matrice d'un endomorphisme de $\R^{n-1}$.
+\begin{align*}
+\chi_A(t) &= \det \matrice{\lambda_1 - t &\vline & \star \\ \hline 0 & \vline & B - t I_d}, \\
+\chi_A(t) &= (\lambda_1 - t)\chi_B(t), \\
+\chi_A(t) &= (\lambda_1 - t)(\lambda_2 - t)\ldots (\lambda_n - t).
+\end{align*}
+et donc $\chi_B(t) = (\lambda_2 - t)\ldots(\lambda_n -t)$ est scindé.
+
+Par récurrence, il existe $Q\in \GL_{n-1}(\R)$ tel que $Q^{-1}BQ$ soit triangulaire supérieure. Posons : 
+\[ P = \matrice{ 1 & \vline & 0 \\ \hline 0 & \vline & Q}, \;  P^{-1} = \matrice{ 1 & \vline & 0 \\ \hline 0 & \vline & Q^{-1}}.\]
+On a alors que $P^{-1}AP$ est triangulaire.
+}{}
+
+\subsection{Comment calculer $m_f$ ? (\textsc{Cayley-Hamilton})}
+\theoreme{ 
+Soit $f \in {\rm End}_\R(E)$. On a que $m_f$ divise $\chi_f$, c'est-à-dire : $\chi_f(f) = 0$.
+}{\textsc{Cayley-Hamilton}}
+\demonstration{ 
+On veut montrer que $\chi_A(A) = 0$ où $A\in M_n(\R)$. Puisque $M_n(\R)\dans M_n(\C)$ on peut se placer dans se dernier.
+
+On sait alors que $A$ est trigonalisable dans $M_n(\C)$, c'est-à-dire qu'il existe $P \in \GL_n(\C)$ tel que $P^{-1}AP$ est triangulaire supérieure.
+
+Or pour tout $k$ : $(P^{-1}AP)^{k} = P^{-1}A^{k}P$. Donc : \[\chi_A(P^{-1}AP) = P^{-1}\chi_A(A) P.\]Comme $P$ est inversible, $\chi_A(0)$ si, et seulement si, $\chi_A(P^{-1}AP) = 0$. Posons $A' = P^{-1}AP$. On a $\chi_{A'} = \chi_A$.
+\begin{align*}
+T &= (\lambda_n I_d - A')(\lambda_{n-1} I_d - A')\ldots(\lambda_1 I_d - A') \\
+T(v_1) &= \left( \prod_{i=2}^{n} (\lambda_i I_d - A') \right)(\lambda_1 I_d - A')(v_1) = 0 \\
+T(v_2) &= \left( \prod_{i=3}^{n} (\lambda_i I_d - A') \right)(\lambda_2 I_d - A')(\lambda_1 I_d - A')(v_2) \\
+(\lambda_2 I_d - A')(\lambda_1 I_d - A')(v_2) &= (\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2)\\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= (\lambda_1 I_d - A')(-a_{1,2}'v_1) \\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= -a_{1,2}'(\lambda_1 I_d - A')(v_1) \\
+(\lambda_1 I_d -A')(\lambda_2 I_d - A')(v_2) &= -a_{1,2}'(\lambda_1 v_1 - \lambda_1 v_1) = 0
+\end{align*}
+Par récurrence on trouve $T(v_i) = 0$ pour tout $i$.
+}{}
+\paragraph{Exercice}Calculer $T(v_3)$.
+
+\paragraph{Remarque}À noter :
+\begin{enumerate}
+\item \'Etant donné $f\in {\rm End}(E)$, pour calculer $m_f$ on cherche le plus petit diviseur de $\chi_f$ qui annule $f$.
+\item Soit $f\in {\rm End}(E)$. Supposons que $f$ est inversible, alors $\det(f)\neq 0$, i.e. $\chi_f(0) \neq 0$. Soit $\chi_f(t) = (-1)^{n}t^{n} + a_{n-1}t^{n-1}+\ldots + a_1t + a_0$, $a_0$ est donc non nul. On a :
+\[ 0 = a_0^{-1}\chi_f(f) = (-1)^{n}a_0^{-1}f^{n} + \ldots +a_1a_0^{-1}f + I_d\]ce qui donne : \[I_d = f\left( (-1)^{n+1}a_0^{-1}f^{n-1} + \ldots + (-1)a_1a_0^{-1}I_d  \right).\]
+\end{enumerate}
+
+\paragraph{Exemple}Soit : \[ A = \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1 & 0}.\]On a : \[ \chi_A(t) = -t(t-1)^{2}\] on en déduit : \[ t(t-1) \mid m_A(t) \mid t(t-1)^{2}.\] Donc soit $m_A(t) = t(t-1)$ soit $m_A(t) = t(t-1)^{2}$. Dans le premier cas si $m_A(A) = 0$ alors $A$ est diagonalisable. Dans le second, $A$ est non diagonalisable.
+\[ A(A-I_d) = \matrice{0 & 1 & -1 \\ -1 & 2 & -1 \\ -1 & 1&0}\matrice{-1 & 1 & -1 \\ -1 & 1 & -1 \\ -1 & 1 & -1} = \matrice{0 & 0 & 0\\0 & 0 & 0\\0 & 0 & 0}.\]
+
+\section{Applications}
+\subsection{Calculs de puissances}
+Soit $A\in M_n(\R)$, si $A$ est diagonalisable alors : \[ A = P A'P^{-1}\]où $P$ est inversible et $A'$ diagonale. Et donc pour tout $k$ : \[ A^{k} = P \matrice{\lambda_1^{k} \\ & \lambda_2^{k} \\
+ & &\ddots \\ && & \lambda_n^{k}}P^{-1}.\]
+
+De même, si \[ \exp(A) = \sum_{k=0}^{\infty} \frac{1}{k!}A^{k}\] alors \[ \exp(A) = P \matrice{e^{\lambda_1} \\ & e{\lambda_2} \\ && \ddots \\ &&& e{\lambda_n}}P^{-1}.\]
+
+\subsection{Systèmes différentiels}
+Soient $x_1,x_2,x_3 : \R \vers \R$ et le système différentiel : \[ \systeme{ 
+x_1' &= x_1 + 2x_2 - 3x_3 \\
+x_2' &= x_1 + 4x_2 - 5x_3 \\
+x_3' &= 2x_2 - 2x_3
+}.\] 
+On pose $X = \matrice{x_1\\x_2\\x_3} : \R \vers \R^{3}$ et $A = \matrice{ 1  & 2 & -3 \\ 1 & 4 & -5 \\ 0 & 2 & -2}$. On a : \[ X' = AX. \]
+$A$ a pour vecteurs propres : \[ v_1 = \matrice{1 \\ 1 \\ 1}, \; v_2 = \matrice{1 \\ 3 \\ 2}, \; v_3 = \matrice{1 \\ 2 \\1}\] de valeurs propres respectives : \[\lambda_1 = 0, \; \lambda_2 = 1 , \; \lambda_3 = 2. \]De matrice de passage : \[ P = \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}. \] \[A' = P^{-1}AP = \matrice{0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 2}. \] On pose $Y = P^{-1}X = \matrice{y_1 \\ y_2 \\ y_3}.$ Ainsi :\[ X' = AX \ssi P^{-1}X' = P^{-1}APP^{-1}X \ssi Y' = BY\] \[ Y' = BY \ssi \systeme{y_1' &= 0 \\ y_2' &= y_2 \\ y_3' &= 2y_3} \ssi \systeme{y_1 &= c_1 \\ y_2 &= c_2 e^{t} \\y_3 &= c_3 e^{2t} }, \; c_1,c_2,c_3 \in \R.\]On a alors : 
+\begin{align*}
+X &= PY, \\
+\matrice{x_1 \\ x_2 \\ x_3} &= X = PY = \matrice{1 & 1 & 1 \\ 1 & 3 & 2 \\ 1 & 2 & 1}\matrice{c_1 \\ c_2 e^{t} \\ c_3 e^{2t}}, \\
+\matrice{x_1 \\ x_2 \\ x_3} &= \matrice{c_1 + c_2e^{t} + c_3e^{2t} \\ c_1 + 3c_2e^{t} + 2c_3e^{2t} \\ c_1 + 2c_2e^{t} + c_3 e^{2t}}.
+\end{align*}
+
+\subsection{Application aux suites récurrentes}Soit $(u_n)_{n\in \N}$ une suite de réels telle que \[ \forall n\in \N, \; u_{n+2} = u_{n+1} + u_n. \]
+On introduit une seconde suite $v_n$ telle que $v_n = u_{n+1}$ pour tout $n$.
+La relation de récurrence s'écrit alors : 
+\[ \systeme{ u_{n+1} &= v_n \\ v_{n+1} = u_n + v_n }\]si on pose $X_n = \matrice{u_n \\ v_n}$ et $A = \matrice{0 & 1 \\ 1 & 1}$ on a alors que la relation de récurrence est \[X_{n+1} = A X_n.\]
+On diagonalise $A$ : \[ \chi_A(t) = t^2 - t -1 \ssi  t \in \ens{r_1 = \frac{1+\sqrt{5}}{2},r_2=\frac{1-\sqrt{5}}{2}}.\]On a : \[ A' = P^{-1}AP = \matrice{r_1 & 0 \\ 0 & r_2}\] avec $P = \matrice{1 & 1 \\ r_1 & r_2}$.
+On pose $Y_n = P_1X_n = \matrice{a_n \\b_n}$ : \[ X_{n+1} = AX_n \ssi Y_{n+1} = A' Y_n.\]
+On en déduit : \[ Y_n = \matrice{c_1 r_1^{n} \\ c_2 r_2^{n}} \implique \matrice{u_n \\ v_n} = P\matrice{c_1 r_1^{n} \\ c_2 r_2^{n}} = \matrice{1 & 1 \\ r_1 & r_2}\matrice{c_1 r_1^{n} \\ c_2 r_2^{n}}  = \matrice{c_1r_1^{n} + c_2r_2^{n} \\ c_1r_1^{n+1} + c_2r_2^{n+1}}.\]Ainsi $u_n$ est de la forme : \[ u_n = c_1r_1^{n} + c_2r_2^{n}, \; c_1,c_2 \in \R.\]
