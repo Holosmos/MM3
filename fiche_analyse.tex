@@ -1,0 +1,96 @@
+\documentclass{mybourbaki}
+\titre{Analyse}
+
+\newcommand{\iR}{\barre{\mathbf{R}}}
+
+\begin{document}
+
+
+\propt{} Soit $f : V \dans \R$ une application définie dans un voisinage $V$ de $a\in \R$. Si $g : V\vers\R$ est une autre application définie au voisinage de $a$. Alors s'il existe $\eps : I \vers \R$ une application continue telle que $\lim_{x\to a}\eps(x-a) = 0$ et telle que pour tout $x\in V$ on ait $f(x) = g(x)\eps(x)$ alors on note \textit{$f = \oo(g)$ au voisinage de $a$}.
+
+Pour $\eps_1,\eps_2$ tels que $\eps$, puisque : \[ \lim_{x\to a} \eps_1(x-a)\eps_2(x-a)  = 0,\]
+
+\propt{} $\oo(\cdot)$ est une relation transitive et compatible avec la multiplication.
+\bigbreak
+
+\propt{} Supposons $f$ de classe $C^n$. Soient $a$ et $a+h$ deux points de $V$. Posons : 
+\begin{equation}
+f(a+h) = f(a) + hf'(a) + \frac{h^{2}}{1.2}f''(a) + \ldots + \frac{h^{n-1}}{(n-1)!}f^{(n-1)}(a) + R_n. \label{DL1}
+\end{equation}
+C'est la formule de \textsc{Taylor-Lagrange}.
+Le \textit{reste} $R_n$ sera une nouvelle fonction de $h$ que nous allons déterminer.
+
+En prenant les dérivées successives de (\ref{DL1}) par rapport à $h$ on voit que : 1. la dérivée $n$-ième de $R_n$ est égale à $f^{(n)}(a+h)$ ; 2. $R_n$ et ses $n-1$ premières dérivées s'annulent pour $h=0$.
+
+Ces deux conditions permettent de définir complètement $R_n$. En effet si $\phi$ est une autre fonction qui satisfait ces conditions, alors $R_n-\phi$, ayant sa $n$-ième dérivée nulle, sera un polynôme entier d'ordre $n-1$ mais ce polynôme et ses $n-1$ premières dérivées s'annulent pour $h=0$ et est donc identiquement nul.
+
+La formule \[ R_n = \int_{0}^{h}\frac{(h-t)^{n-1}}{(n-1)!}f^{(n)}(a+t)\dt\]convient.
+
+\propt{} Posons $t = uh$ avec $u$ variant de $0$ à $1$. On a alors : \[R_n = \frac{h^{n}}{(n-1)!}\int_{0}^{1}(1-u)^{n-1}f^{(n)}(a+uh)\dd u.\]Cela montre que $R_n = \oo(h^{n})$.
+
+\propt{} Soit $p$ un entier positif arbitraire non supérieur à $n$. La fonction à intégrer sera le produit des deux facteurs : \[(1-u)^{p-1} \et (1-u)^{n-p}f^{(n)}(a+uh), \]dont le premier est positif et le second étant continu, on en déduit par le théorème de la moyenne : \[ R_n = h^{n}\frac{(1-\theta)^{n-p}f^{(n)}(a+\theta h)}{(n-1)!}\int_{0}^{1}(1-u)^{p-1}\dd u,\]$\theta$ désignant une quantité comprise entre $0$ et $1$. De plus : \[ \int_{0}^{1} (1-u)^{p-1}\dd u = \left[ -\frac{(1-u)^{p}}{p}\right]^{1}_0 = \frac{1}{p}.\]On en déduit donc, avec $p=n$ : \[ R_n = \frac{h^{n}}{n!}f^{(n)}(a+\theta h).\]
+
+\bigbreak
+
+\propt{} Soit $f: V \vers \R$ et soit $a\in V$ un point intérieur. On dit que $f$ admet un développement limité à l'ordre $n$ en $a$ s'il existe un polynôme $P$ de degré au plus $n$ tel que : \[ f(a+h) = P(h) + \oo(h^{n}).\]
+La formule de \textsc{Taylor} garantit l'existence d'un développement limité pour une application $f$ de classe $C^{n\boldsymbol{+1}}$.
+
+\propt{}Un développement limité d'ordre $n$, s'il existe, est unique.
+
+En effet soient $P,Q$ deux polynômes à priori distincts tels que $f(a+h) = P(h) + \oo(h^{n}) = Q(h) + \oo(h^{n})$. On a alors l'existence de $\eps$ une application définie au voisinage de $a$ de limite nulle telle que : \[ P(h) - Q(h) = h^{n}\eps(h)\]or terme à terme le membre de gauche s'annule quand on fait tendre $h$ vers $a$.
+
+\bigbreak
+
+\propt{}Si $f$ admet un développement limité à l'ordre $0$ alors $f$ est continue.
+
+En effet, \[\lim_{h\to 0}f(a+h) = \lim_{h\to 0}f(a) + \eps(h) = f(a). \]
+La réciproque est vraie : \[ \eps(h) = f(a+h) - f(a).\]
+
+\propt{}Si $f$ admet un développement limité à l'ordre $1$ alors $f$ est dérivable.
+
+En effet, si $f(a+h) = f(a) + a_1 h + \eps(h)h$ alors : \[ \lim_{h\to 0}\frac{f(a+h) - f(a)}{h} = a_1.\]
+La réciproque est vraie : \[ \eps(h) = f(a+h) - f(a) - f'(a)h.\]
+
+\bigbreak
+
+\propt{}Soient $f,g : V \vers \R$ admettant $P,Q$ respectifs comme développement limité à l'ordre $n$. Alors pour $\alpha\in \R$, $\alpha f +g$ admet pour développement limité : \[ (\alpha f+g)[a+h] = (\alpha P+Q)[h] + \oo(h^{n}).\]
+En effet, pour $\eps_f,\eps_g$ correspondants on a bien : \[ h^{n}(\alpha \eps_f(h) + \eps_g) = \oo(h^{n}).\]
+
+\propt{}Soient $f : V \vers \R$ et $g : U \vers \R$ admettant respectivement pour développements limités à l'ordre $n$ $P$ et $Q$. Alors $fg$ admet pour développement limité à l'ordre $n$ \[ (fg)(a+h) = (T_n(P Q))(h) + \oo(h^{n})\]où $T_n$ est le tronqué du polynôme à l'ordre $n$.
+
+En effet : \[ PQ(x)= (T_n(PQ))(x) + x^{n+1}R(x), R\in \R[x]\]et d'où : \[ (fg)(a+h) = (T_n(PQ))(h) + h^{n}(Q\eps_f(h) + P\eps_g(h) + hR(h))\]ce qui convient.
+
+\propt{}Soient $f : V\vers \R$ et $g : V \vers \R$ admettant pour développements limités respectifs à l'ordre $n$ $P$ et $Q$ et avec $a=0=g(a)$. Alors $f\rond g$ admet pour développement limité : \[ (f\rond g)(h) = (T_n(P\rond Q))(h) + \oo(h^{n}).\]
+
+Pour $n=0$ c'est vérifié, de plus on a $Q(0) = 0$. Supposons $f = P + \eps_1$ et $g = Q + \eps_2$.
+
+Posons $P(x) = a_0 + a_1 x +\ldots + a_nx^{n}$ et $Q(x) = b_0 + b_1 x +\ldots + b_nx^{n}$. On a : \[ P(g(x)) = \sum_{i=0}^{n}a_ig(x)^{i} = T_n\left(\sum_{i=0}^{n}a_iQ(x)^{i}\right) + x^{n}\eps_3(x).\]
+Comme $Q(0) = 0$ on a $b_0 = 0$.
+On pose (possible car on peut supposer $n>0$) $h$ tel que : \[g(x) = xh(x) \]ce qui donne : \[ (f\rond g)(x) = P(xh(x)) + x^{n}h(x)^{n}\eps_1(xh(x)) = T_n(P\rond Q)(x) + x^{n}(h(x)^{n}\eps_1(g(x))+\eps_3(x)).\]
+
+\propt{}Soient $f,g$ admettant un développement limité à l'ordre $n$ en $a$. Puisque le développement limité à l'ordre $n$ de $1/(1-x)$ est : \[ \frac{1}{1-x}=\sum_{k=0}^{n} x^{k} + \oo(x^{n})\]alors si $f/g$ est bien défini, un développement limité existe.
+
+
+\propt{}Soit $f : V\dans \R$ admettant pour développement limité à l'ordre $n$ : \[ f(a+h) = \sum_{k=0}^{n} \frac{a_k}{k!}h^{k}+ \oo(h^{n}). \]Alors si $F$ est une primitive de $f$, le développement limité de $F$ est : \[ F(a+h) = F(a) + \sum_{k=0}^{n}\frac{a_k}{(k+1)!}h^{k+1} + \oo(h^{n+1}).\]
+
+Il s'agit de montrer que si $f(a+x) = P(x) + x^{n}\eps(x)$ alors $x^{n}\eps(x)$ admet bien une primitive en $\oo(x^{n+1})$. Par le théorème de la moyenne : \[ \int_{0}^{x}x^{n}\eps(x) \dx = x \theta^{n}\eps(\theta) = u(x)\]pour un certain $\theta$ entre $0$ et $x$. Maintenant \[ \abs{u(x)} \leq \abs{x}^{n+1}\abs{\eps(\theta)}\] et comme $\eps(\theta)$ tend vers $0$ pour $x$ tendant vers $0$ on a bien $u(x) = \oo(x^{n+1})$.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
