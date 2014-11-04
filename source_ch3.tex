@@ -736,3 +736,154 @@ f'(0) &= (0,1) \\
 g'(0) &= (0,2).
 \end{align*}
 La tangente à $f$ en $t_0$ est la droite d'équation : \[\det \matrice{y - v(t_0) & v'(t_0) \\ x - u(t_0) & u'(t_0)} = 0 \]c'est-à-dire : \[(y-v(t_0))u'(t_0) - (x-u(t_0))v'(t_0) = 0. \]
+
+
+\subsection{\'Etude de fonctions}
+
+Soit $f : I \vers \R$, où $I$ est un intervalle de $\R$. On procède à l'étude de $f$ au voisinage de $x_0\in \iR$. En particulier, on s'intéresse notamment au graphe de $f$.
+
+\subsubsection{\'Etude locale}
+
+\proposition{ 
+Soit $x_0\in I, f : I \vers \R$. On suppose que $f$ admet un développement limité à l'ordre $n$ en $x_0$ : \[ f(x) = P(x-x_0) + (x-x_0)^{n}\eps(x), \; \lim_{x\to x_0}\eps(x) = 0\]où $P \in \R[x], P(x) = a_px^{p} + \ldots + a_nx^{n}$ avec $0\leq p \leq n$ et $a_p\neq 0$.
+
+Alors il existe $\alpha\in \R_+^{*}$ tel que pour tout $x\in ]x_0 - \alpha, x_0 + \alpha[$ et $x\neq x_0$, $f(x)$ est non nul et a le signe de $a_p(x-x_0)^{p}$.
+}{}
+\demonstration{ 
+Puisque $p\leq n$, le développement limité de $f$ en $x_0$ à l'ordre $p$ est : \[ f(x) = (T_p(P))(x-x_0) + (x-x_0)^{p}\eps(x).\]
+C'est-à-dire : \[ f(x) = a_p(x-x_0)^{p} + (x-x_0)^{p}\eps(x).\]
+
+Pour tout $x\neq x_0$, on a : \[ \frac{f(x)}{(x-x_0)^{p}} = a_p + \eps(x)\]et $a_p \neq 0$, $\lim_{x\to x_0}\eps(x) = 0$. Ainsi il existe $\alpha$ tel que pour tout $x\in ]x_0 - \alpha, x_0 + \alpha[$ et $x\neq x_0$, $\abs{\eps(x)} < \frac{1}{2}(a_p)$. C'est-à-dire que pour un tel $x$, $f(x)\neq 0$ et est du même signe que $a_p(x-x_0)$.
+}{}
+
+\definition{ 
+Si $I\dans \R$ est un intervalle et $f : I \vers \R$ est une fonction numérique et si $x_0 \in \barre{I}$\footnotemark, on dit que $f$ est \textit{positive au voisinage de $x_0$} s'il existe un voisinage $J\dans I$ de $x_0$ tel que pour tout $x\in J$ et $x\neq x_0$, $f(x) > 0$.
+}{}
+\footnotetext{Dans $I$ ou l'une de ses bornes.}
+
+\paragraph{Exemple}Prenons : \[ f(x) = e\cdot\sqrt{x}-e^{x}.\]On cherche le signe de $f$ quand $x$ tend vers $1$.
+\begin{align*}
+f(x) &= e\left[(1+(x-1))^{1/2}  - e^{x-1}\right] \\
+&\systeme{ (1+(x-1))^{1/2} &= 1 + \frac{1}{2}(x-1) + (x-1)\eps(x)\\ e^{x-1} &= 1 + (x-1) + (x-1)\eps(x)}\\
+f(x) &= e\left(-\frac{1}{2}(x-1) + (x-1)\eps(x)\right)\\
+f(x) &= \frac{-e}{2}(x-1) + (x-1)\eps(x).
+\end{align*}
+Ainsi au voisinage de $1$, le signe de $f$ est le même que celui de $1-x$.
+\begin{center}
+\sageplot[width = 9cm]{plot(exp(1)*sqrt(x) - exp(x),(x,0,1.5))}
+\end{center}
+
+\definition{ 
+Soit $f : I\vers \R$ une fonction dérivable en $x_0\in I$.
+La \textit{tangente} en $(x_0,f(x_0))$ au graphe de $f$ est la droite affine d'équation : \[ y = f'(x_0)\cdot(x-x_0) + f(x_0). \]
+}{}
+
+\definition{ 
+Soit $f : I \vers \R$ une fonction dérivable en $x_0\in I$.
+
+On dit que $f$ admet une \textit{inflexion} au point $(x_0,f(x_0))$ si la fonction \[ x\donne f(x) - (f'(x_0)\cdot(x-x_0) + f(x_0))\]s'annule en $x_0$ en changeant de signe.
+}{}
+
+\proposition{ Soit
+$f : I\vers \R$ une fonction dérivable en $x_0\in I$. On a : 
+\begin{enumerate}
+\item si $f(x) = a_0 + a_1(x-x_0) + (x-x_0)\eps(x)$ est le développement limité de $f$ à l'ordre $1$ en $x_0$, alors la tangente au graphe de $f$ en $(x_0,f(x_0))$ est donnée par : \[ y = a_0 + a_1(x-x_0) \ ;\]
+\item si $f(x) = a_0 + a_1(x-x_0) + a_2(x-x_0)^{2} + (x-x_0)^{2}\eps(x)$ est le développement limité de $f$ à l'ordre $2$ en $x_0$, alors 
+\begin{itemize}
+\item si $a_2 > 0$ alors pour tout $x\neq x_0$ dans un voisinage suffisamment petit de $x_0$, le point $(x,f(x))$ est au-dessus de la tangente ;
+\item si $a_2 < 0$ alors pour tout $x\neq x_0$ dans un voisinage suffisamment petit de $x_0$, le point $(x,f(x))$ est en-dessous de la tangente ;
+\end{itemize}
+\item si $f(x) = a_0 + a_1(x-x_0) + a_3(x-x_0)^{3} +  (x-x_0)^{3}\eps(x)$ est le développement limité de $f$ à l'ordre $3$ en $x_0$, alors si $a_3 \neq 0$, $f$ admet un point d'inflexion en $(x_0,f(x_0))$.
+\end{enumerate}
+}{}
+
+\demonstration{ 
+Dans l'ordre : 
+\begin{enumerate}
+\item Comme $f$ est dérivable en $x_0$, on a $a_1 = f'(x_0)$ et $a_0 = f(x_0)$, l'équation de la tangente est \[ y = a_1(x-x_0) + a_0.\]
+\item Posons \[ u(x) = f(x) - (f'(x_0)(x-x_0) + f(x_0)).\]On a alors : \[u(x) = a_0 + a_1(x-x_0) + a_2(x-x_0)^{2} - a_1(x-x_0) - a_0 + (x-x_0)^{2}\eps(x) = a_2(x-x_0)^{2} + (x-x_0)^{2}\eps(x). \]
+Comme $a_2\neq 0$ (par hypothèse) alors la proposition précédente entraine que le signe de $u(x)$ au voisinage de $0$ est celui de $a_2(x-x_0)^{2}$, c'est-à-dire le signe de $a_2$.
+\item Posons de même\[u(x) = a_3(x-x_0)^{3} + (x-x_0)^{3}\eps(x). \]D'après la proposition précédente, le signe de $u(x)$ au voisinage de $x_0$ est celui de $a_3(x-x_0)$ puisque $a_3\neq 0$. Comme $(x-x_0)^{3}$ n'est pas de signe constant, c'est un point d'inflexion.
+\end{enumerate}
+}{}
+
+\paragraph{Remarque}Si $a_2\neq 0$, alors :
+\begin{itemize}
+\item si $a_2>0$, $f(x)$ admet un minimum local en $x_0$ ;
+\item sinon, $f(x)$ admet un maximum local en $x_0$.
+\end{itemize}
+
+\paragraph{Remarque, généralisation du résultat}Supposons que le développement limité de $f$ en $x_0$ est de la forme \[ f(x) = a_0 + a_1(x-x_0) + a_p(x-x_0)^{p} + (x-x_0)^{p}\eps(x),\]avec $p\geq 2$. De plus on suppose $a_p\neq 0$. Alors en posant \[u(x) = f(x) - (f'(x_0)\cdot(x-x_0) + f(x_0))\]est du signe de $a_p(x - x_0)^{p}$ au voisinage de $x_0$.
+\begin{itemize}
+\item Si $p$ est pair alors $a_p>0$ implique que $x_0$ est un minimum local,  $a_p <0$ implique que $x_0$ est un maximum local.
+\item Si $p$ est impair alors $x_0$ est un point d'inflexion.
+\end{itemize}
+
+\paragraph{Exemple}
+Prenons : \[f(x) = \sqrt[3]{x^{3} + 6x^{2} -5} \]définie sur $\R$ et étudions $f$ au voisinage de $x_0 = 2$.
+On a :
+\begin{align*}
+f(x+2) &= \left( (x+2)^{3} + 6x^{2} - 5\right)^{1/3} \\
+f(x+2) &= \left( 27 + 36x + 12x^{2} + x^{3}\right)^{1/3}\\
+f(x+2) &= 3\cdot \left( 1 + \frac{4}{3}x + \frac{4}{9}x^{2} + \frac{1}{27}x^{3}\right)^{1/3} \\
+f(x+2) &= 3\cdot\left( 1 + \frac{1}{3}\left( \frac{4}{3}x + \frac{4}{9}x^{2} \right) + \frac{\frac{1}{3}\left(\frac{-2}{3}\right)}{2}\left(\frac{16}{9}x^{2}\right) \right)+ x^{2}\eps(x)\\
+f(x+2) &= 3 + \frac{4}{3}x - \frac{4}{27}x^{2} + x^{2}\eps(x).
+\end{align*}
+L'équation de la tangente est : \[ y = 3 + \frac{4}{3}(x-2).\]Comme le terme en $x^{2}$ est non nul et négatif, la courbe est en-dessous de la tangente.
+\begin{sagesilent}
+p = plot((x**3 + 6*x*x -5)**(1/3),(x,1,3))
+p += plot(3+4/3*(x-2),(x,1,3),rgbcolor = 'red')
+\end{sagesilent}
+\begin{center}
+\sageplot[width = 9cm]{p}
+\end{center}
+
+
+\subsubsection{Branches infinies}Soit $f : \R \vers \R$ une fonction numérique.
+
+\definition{ 
+Si $\lim_{x\to a}f(x) = \pm \infty$, avec $a\in \R$ alors la droite $x = a$ est une \textit{asymptote verticale} de $f$.
+
+Si $\lim_{x\to +\infty}f(x) = +\infty$ ou si $\lim_{x\to +\infty}f(x) = -\infty$ alors $f$ admet une \textit{branche infinie} en $+\infty$.
+
+Si $\lim_{x\to -\infty}f(x) = +\infty$ ou si $\lim_{x\to-\infty}f(x) = -\infty$ alors $f$ admet une \textit{branche infinie} en $-\infty$.
+
+Soit $a,b\in \R$. La droite $y = ax+b$ est \textit{asymptote} à $f$ quand $x$ tend vers $\pm \infty$ si : \[ \lim_{x\to \pm \infty}f(x) -ax - b = 0.\] Si $a=0$ on dit que l'asymptote est \textit{horizontale}.
+
+Soit $a\in \R$, si \[ \lim_{x\to \pm\infty} \frac{f(x)}{x} = a\]alors on dit que $f$ a une \textit{direction asymptotique de pente $a$ en $\pm \infty$}.
+
+Si \[ \lim_{x\to \pm \infty}\frac{f(x)}{x} = \pm \infty\]alors on dit que $f$ a une \textit{direction asymptotique verticale} en $\pm \infty$.
+}{}
+\proposition{ 
+Soient $a,b\in \R$. La droite $y = ax+b$ est asymptote à $f$ quand $x$ tend vers $+\infty$ (resp. en $-\infty$) si, et seulement si :
+\begin{itemize}
+\item on a \[ \lim_{x\to +\infty}\frac{f(x)}{x} = a \ ;\]
+\item et de plus \[ \lim_{x\to \infty} f(x) -ax = b.\]
+\end{itemize}
+}{}
+
+\paragraph{Exemple}Soit $f : \R \vers \R$ définie par : \[ f(x) = 1 + \frac{\sin x}{x^{2} +1}.\]On a \[ \lim_{x\to +\infty} \abs{f(x) - 1} = 0\]et donc $y=1$ est asymptote à $f$ en $+\infty$. La différence \[f(x) - 1 = \frac{\sin x}{x^{2} +1} \]est du signe de $\sin x$ qui oscille.
+\begin{center}
+\sageplot[width = 9 cm]{plot(1+sin(x)/(x*x + 1),(x,0,20))}
+\end{center}
+
+\paragraph{Exemple}Avec \[ f(x) = \sqrt[3]{x^{3} + 6x^{2} - 5}\]on regarde s'il y a une asymptote quand $x$ tend vers $\pm \infty$ et la position par rapport à la possible asymptote. On écrit $f$ sous la forme : \[ f(x) = x u(1/x)\]avec \[ u(x) = \sqrt[3]{1 + 6x - 5x^{3}}.\]
+Le développement limité de $u$ en $0$ à l'ordre $2$ est : 
+\begin{align*}
+u(x) &= (1+6x - 5x^{3})^{1/3} \\
+u(x) &= 1 + \frac{1}{3}(6x) + \frac{1}{3}\left(\frac{-2}{3}\right)\frac{1}{2}(36x^{2}) + x^{2}\eps(x) \\
+u(x) &= 1 + 2x - 4x^{2} + x^{2}\eps(x).
+\end{align*}
+Ainsi pour $x$ au voisinage de $\infty$ en valeur absolue : \[ f(x) = x\left(1+\frac{2}{x}-\frac{4}{x^{2}}+\frac{\eps(1/x)}{x^{2}} \right) = x+2 -\frac{4}{x} + \frac{1}{x}\eps(1/x),\]c'est-à-dire que \[ \lim_{\abs{x}\to\infty}f(x) - (x+2) = 0.\]
+On regarde maintenant la position de $f$ par rapport à $y = x+2$. On a \[ f(x) - (x+2) = \frac{-4}{x} + \frac{1}{x}\eps(1/x).\]Ainsi quand $x\to+\infty$, $f$ est en-dessous de l'asymptote, quand $x\to -\infty$, $f$ est au-dessus de l'asymptote.
+
+\subsubsection{\'Etude de fonction}Par exemple avec \[ f(x) = 2 \log\abs{2 + \frac{1}{x}}\]de domaine de définition $\R\prive{0,-1/2}$.
+
+\paragraph{Dérivée}On calcule la dérivée de $f$ : 
+\begin{align*}
+\log\abs{2 + \frac{1}{x}} &= \log\abs{2x +1}- \log \abs{x} \\
+f'(x) &= 2\left(-\frac{1}{x}+ \frac{2}{2x+1}\right)\\
+f'(x) &= \frac{-2}{x(2x+1)}
+\end{align*}
+
+
