@@ -877,13 +877,131 @@ u(x) &= 1 + 2x - 4x^{2} + x^{2}\eps(x).
 Ainsi pour $x$ au voisinage de $\infty$ en valeur absolue : \[ f(x) = x\left(1+\frac{2}{x}-\frac{4}{x^{2}}+\frac{\eps(1/x)}{x^{2}} \right) = x+2 -\frac{4}{x} + \frac{1}{x}\eps(1/x),\]c'est-à-dire que \[ \lim_{\abs{x}\to\infty}f(x) - (x+2) = 0.\]
 On regarde maintenant la position de $f$ par rapport à $y = x+2$. On a \[ f(x) - (x+2) = \frac{-4}{x} + \frac{1}{x}\eps(1/x).\]Ainsi quand $x\to+\infty$, $f$ est en-dessous de l'asymptote, quand $x\to -\infty$, $f$ est au-dessus de l'asymptote.
 
-\subsubsection{\'Etude de fonction}Par exemple avec \[ f(x) = 2 \log\abs{2 + \frac{1}{x}}\]de domaine de définition $\R\prive{0,-1/2}$.
+\subsubsection{\'Etude de fonction}Par exemple avec \[ f(x) = x \log\abs{2 + \frac{1}{x}}\]de domaine de définition $\R\prive{0,-1/2}$.
 
 \paragraph{Dérivée}On calcule la dérivée de $f$ : 
 \begin{align*}
-\log\abs{2 + \frac{1}{x}} &= \log\abs{2x +1}- \log \abs{x} \\
-f'(x) &= 2\left(-\frac{1}{x}+ \frac{2}{2x+1}\right)\\
-f'(x) &= \frac{-2}{x(2x+1)}
+f(x) &= x(\log\abs{2x+1} - \log\abs{x}) \\
+f'(x) &= \log\abs{2+\frac{1}{x}} + x\left(\frac{2}{2x+1} -\frac{1}{x}\right)\\
+f'(x) &= \log\abs{2+\frac{1}{x}} - \frac{1}{2x+1}\\
+f''(x) &= \frac{2}{2x+1} - \frac{1}{x} - \frac{2}{(2x+1)^{2}}\\
+f''(x) &= \frac{-1}{x(2x+1)^{2}}
 \end{align*}
+
+Une étude des signes montre qu'il existe un unique $\alpha$ entre $-1/2$ et $0$ (strictement) tel que $f'(\alpha) = 0$.
+En conclusion, $f$ est croissante partout sauf sur $]-1/2,\alpha[$ où elle est décroissante.
+\begin{align*}
+\lim_{x\to+\infty}f(x) &= +\infty \\
+\lim_{x\to -\infty}f(x) &= -\infty
+\end{align*}
+ce qui nous donne deux branches infinies.
+\begin{align*}
+\lim_{x\to -1/2}f(x) &=+\infty
+\end{align*}
+et donc il y a une asymptote verticale en $x=-1/2$.
+\begin{align*}
+\lim_{x\to 0}f(x) &= ?\\
+f(x) &= x\log\abs{2+\frac{1}{x}}\\
+f(x) &= x\log\abs{2x+1}-x\log x
+\end{align*}
+or les deux termes tendent vers $0$ en $0$ et donc \[ \lim_{x\to 0}f(x) = 0\]et donc $f$ admet un prolongement par continuité à $0$ en $0$.
+
+Il reste à regarder les branches infinies :
+\begin{itemize}
+\item Quand $x\to \infty$, on cherche un développement limité de $f$ en $+\infty$.
+\begin{align*}
+f(x) &= x\log(2+1/x) \\
+f(x) &= x\log2+x\log\left(1+\frac{1}{2x}\right)\\
+f(x) &= x\log 2 + x\left(\frac{1}{2x}-\frac{1}{8x^{2}}+\oo(1/x^{2})\right)\\
+f(x) &= (\log 2)x + \frac{1}{2} -\frac{1}{8x} + \oo(1/x)
+\end{align*}
+On en déduit que la droite d'équation \[y = (\log 2)x +\frac{1}{2} \]est asymptote oblique à $f$  en $+\infty$ et la courbe est en-dessous de l'asymptote.
+\item En $-\infty$ la droite d'équation \[ y = (\log 2)x + \frac{1}{2}\]est également asymptote oblique à $f$ en $-\infty$ et la courbe est au-dessus de l'asymptote.
+\item Pour ce qui est de la tangente en $0$ : \[f'(x) = \log\abs{2+\frac{1}{x}} - \frac{1}{2x+1}\]et alors \[ \lim_{x\to 0}\frac{f(x)}{x} = \lim_{x\to 0}\log\abs{2 + \frac{1}{x}} = +\infty.\]
+\end{itemize}
+\begin{center}
+\begin{sagesilent}
+p = plot(x*log(2+1/x),(x,-2,2))
+p += plot(log(2)*x + 1/2,(x,-2,2),rgbcolor = 'red')
+\end{sagesilent}
+\sageplot[width = 10cm]{p}
+\end{center}
+
+
+\subsection{Courbes paramétrées}
+Soit $I\dans \R$ un intervalle et $f : I\vers \R^{2}$ telle que $f(t) = (u(t),v(t))$.
+
+\definition{ 
+Supposons que $u,v$ sont continues.
+
+Si $u$ et $v$ admettent un développement limité à l'ordre $n$ au point $t_0$ : 
+\begin{align*}
+u(t) = u_0 + u_1(t-t_0) + \ldots + u_n(t-t_0)^{n} + (t-t_0)^{n}\eps(t) \\
+v(t) = v_0 + v_1(t-t_0) + \ldots + v_n(t-t_0)^{n} + (t-t_0)^{n}\eps(t)
+\end{align*}
+alors $f$ admet un développement limité à l'ordre $n$ en $t_0$ : 
+\begin{align*}
+f(t) &= f_0 + (t-t_0)f_1 + \ldots+ (t-t_0)^{n}f_n + (t-t_0)^{n}\eps(t) \\
+\forall i\in \ens{0,\ldots,n}, \; f_i& = (u_i,v_i).
+\end{align*}
+
+L'égalité précédente s'appelle le \textit{développement limité de $f$ en $t_0$ à l'ordre $n$}. 
+}{}
+\paragraph{Remarque}On a bien \[ \lim_{t\to t_0}\eps(t) = (0,0).\]
+
+\definition{ 
+Une fonction $f : I \vers \R^{2}$ s'appelle \textit{courbe paramétrée de $\R^{2}$}.
+}{}
+
+
+Supposons que $f$ est dérivable en $t_0\in I$. $f$ admet le développement limité en $t_0$ à l'ordre $1$ suivant : \[ f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)\eps(t).\]
+
+\definition{ 
+Si $f'(t_0)\neq 0$ alors la tangente à la courbe au point $f(t_0)$ est la droite affine passant par $f(t_0)$ et de vecteur directeur $f'(t_0)$. L'équation est \[ \det\matrice{x -u(t_0) & u'(t_0) \\ y - v(t_0) & v'(t_0)} = 0.\]En d'autres termes, c'est l'équation : \[ (y-v(t_0))\cdot u'(t_0) - (x-u(t_0))\cdot v'(t_0) = 0.\]
+}{}
+
+On se demande quelles sont les conditions à l'existence de la tangente en un point ainsi que la position de la tangente par rapport à la courbe.
+
+\paragraph{Remarque}On retrouve l'étude des fonctions à valeurs dans $\R$ si on a \[f(t) = (t,v(t)). \]
+
+Supposons que $u,v$ admettent des développements limités en $t_0$ à l'ordre $n\geq 2$. On a \[f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)^{2}w_2 + \ldots + (t-t_0)^{n}w_n + (t-t_0)^{n}\eps(t)\]où $w_2,\ldots,w_n\in \R^{2}$ et $\lim_{t\to t_0}\eps(t) = 0_{\R^{2}}$.
+\begin{enumerate}
+\item Supposons que $f'(t_0)\neq 0$ et $f'(t_0)$ est non colinéaire à $w_2$. On tronque le développement limité à l'ordre $2$  : \[ f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)^{2}w_2 + (t-t_0)^{2}\eps(t).\]Soient $(a(t),b(t))$ les coordonnées de $\eps(t)$ dans la base $(f'(t_0),w_2)$. Ainsi :
+\begin{align*}
+f(t) - f(t_0) &= \left(t-t_0 + (t-t_0)^{2}a(t)\right)f'(t_0) + (t-t_0)^{2}(b(t) +1)w_2\\
+\lim_{t\to t_0} a(t) &= \lim_{t\to t_0} b(t) = 0.
+\end{align*}
+Selon la coordonnée de $f'(t_0)$ on a que $(t-t_0)^{2}a(t)$ tend vers $0$ et alors $t-t_0$ détermine le signe. Selon la coordonnée $w_2$, dans un voisinage suffisamment petit de $t_0$ on a que la coordonnée est de signe positif.
+\item Supposons que $f'(t_0)\neq 0$, $w_2 = \lambda f'(t_0)$ et enfin $w_3$ et $f'(t_0)$ non colinéaires. On a alors dans la base $(f'(t_0),w_3)$ : \[f(t) - f(t_0) = \left(t-t_0 + \lambda(t-t_0)^{2}\right)f'(t_0) + (t-t_0)^{3}w_3 + (t-t_0)^{3}\eps(t). \]
+On décompose $\eps(t)$ dans cette base : \[\eps(t) = a(t) f'(t_0) + b(t) w_3.\]On sait que \[ \lim_{t\to t_0}a(t) = \lim_{t\to t_0}b(t) = 0.\]
+Dans cette base, on a : \[ f(t) - f(t_0) = \matrice{t-t_0 + \lambda(t-t_0)^{2} + (t-t_0)^{3}a(t) \\ (t-t_0)^{3} + (t-t_0)^{3}b(t) }\]
+Sur chaque coordonnée, le signe est celui de $t-t_0$.
+
+
+\paragraph{Remarque}Supposons $f'(t_0)\neq 0, n\geq 3$ et il existe un entier $p\in\ens{3,\ldots,n}$ tel que les vecteurs $w_2,w_3,\ldots,w_{p-1}$ sont colinéaires à $f'(t_0)$ et tel que $w_p$ n'est pas colinéaire à $f'(t_0)$. Ainsi, $(f'(t_0),w_p)$ est une base de $\R^{2}$.
+
+On écrit le développement limité de $f(t)-f(t_0)$ dans cette base. On étudie le signe des coordonnées de $f(t)-f(t_0)$ quand $t\to t_0$. Si $p$ est pair alors la courbe est comme dans le cas $p=2$ (la courbe est du côté de $w_p$ par rapport à la tangente), sinon comme dans le cas $p=3 $(elle traverse la tangente).
+
+\item Supposons que $f'(t_0) = 0$ et que $w_2,w_3$ forme une base de $\R^{2}$. On a \[f(t) - f(t_0) = (t-t_0)^{2}w_2 + (t-t_0)^{3}w_3 + (t-t_0)^{3}\eps(t).\]
+On décompose $\eps(t)$ dans la base $(w_2,w_3)$ : $\eps(t)= a(t)w_2 + b(t)w_3$ avec $\lim_{t\to t_0}a(t) = \lim_{t\to t_0}b(t) = 0$. Les coordonnées dans cette base de $f(t)-f(t_0)$ sont alors : \[ f(t)-f(t_0) = \matrice{ (t-t_0)^{2} + (t-t_0)^{3}a(t) \\ (t-t_0)^{3} + (t-t_0)^{3}b(t) }. \]
+Ainsi, la première coordonnée est positive et la seconde est du signe de $t-t_0$.
+Une telle situation est un \textit{point de rebroussement}.
+
+\item Supposons que $f'(t_0) = 0$, $w_3=\lambda w_2$ et $w_2,w_4$ forme une base. On pose $\eps(t) = a(t)w_2 + b(t)w_4$. Dans ces coordonnées : \[ f(t)-f(t_0) = \matrice{ (t-t_0)^{2} + \lambda (t-t_0)^{3} + (t-t_0)^{4}a(t) \\ (t-t_0)^{4}(1+b(t)) }.\]
+Les deux coordonnées sont positives quand $t\to t_0$. C'est aussi un point de rebroussement
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
