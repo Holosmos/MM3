@@ -3,4 +3,174 @@
 
 \begin{document}
 
+\tableofcontents
+
+\section{Définitions}
+Soit $I\dans \R$ un intervalle et $f : I\vers \R^{2}$ telle que $f(t) = (u(t),v(t))$.
+
+\definition{ 
+Supposons que $u,v$ sont continues.
+
+Si $u$ et $v$ admettent un développement limité à l'ordre $n$ au point $t_0$ : 
+\begin{align*}
+u(t) = u_0 + u_1(t-t_0) + \ldots + u_n(t-t_0)^{n} + (t-t_0)^{n}\eps(t) \\
+v(t) = v_0 + v_1(t-t_0) + \ldots + v_n(t-t_0)^{n} + (t-t_0)^{n}\eps(t)
+\end{align*}
+alors $f$ admet un développement limité à l'ordre $n$ en $t_0$ : 
+\begin{align*}
+f(t) &= f_0 + (t-t_0)f_1 + \ldots+ (t-t_0)^{n}f_n + (t-t_0)^{n}\eps(t) \\
+\forall i\in \ens{0,\ldots,n}, \; f_i& = (u_i,v_i).
+\end{align*}
+
+L'égalité précédente s'appelle le \textit{développement limité de $f$ en $t_0$ à l'ordre $n$}. 
+}{}
+\paragraph{Remarque}On a bien \[ \lim_{t\to t_0}\eps(t) = (0,0).\]
+
+\definition{ 
+Une fonction $f : I \vers \R^{2}$ s'appelle \textit{courbe paramétrée de $\R^{2}$}.
+}{}
+
+
+Supposons que $f$ est dérivable en $t_0\in I$. $f$ admet le développement limité en $t_0$ à l'ordre $1$ suivant : \[ f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)\eps(t).\]
+
+
+\section{Tangentes}
+
+
+\definition{ 
+Si $f'(t_0)\neq 0$ alors la tangente à la courbe au point $f(t_0)$ est la droite affine passant par $f(t_0)$ et de vecteur directeur $f'(t_0)$. L'équation est \[ \det\matrice{x -u(t_0) & u'(t_0) \\ y - v(t_0) & v'(t_0)} = 0.\]En d'autres termes, c'est l'équation : \[ (y-v(t_0))\cdot u'(t_0) - (x-u(t_0))\cdot v'(t_0) = 0.\]
+}{}
+
+On se demande quelles sont les conditions à l'existence de la tangente en un point ainsi que la position de la tangente par rapport à la courbe.
+
+\paragraph{Remarque}On retrouve l'étude des fonctions à valeurs dans $\R$ si on a \[f(t) = (t,v(t)). \]
+
+Supposons que $u,v$ admettent des développements limités en $t_0$ à l'ordre $n\geq 2$. On a \[f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)^{2}w_2 + \ldots + (t-t_0)^{n}w_n + (t-t_0)^{n}\eps(t)\]où $w_2,\ldots,w_n\in \R^{2}$ et $\lim_{t\to t_0}\eps(t) = 0_{\R^{2}}$.
+\begin{enumerate}
+\item Supposons que $f'(t_0)\neq 0$ et $f'(t_0)$ est non colinéaire à $w_2$. On tronque le développement limité à l'ordre $2$  : \[ f(t) = f(t_0) + (t-t_0)f'(t_0) + (t-t_0)^{2}w_2 + (t-t_0)^{2}\eps(t).\]Soient $(a(t),b(t))$ les coordonnées de $\eps(t)$ dans la base $(f'(t_0),w_2)$. Ainsi :
+\begin{align*}
+f(t) - f(t_0) &= \left(t-t_0 + (t-t_0)^{2}a(t)\right)f'(t_0) + (t-t_0)^{2}(b(t) +1)w_2\\
+\lim_{t\to t_0} a(t) &= \lim_{t\to t_0} b(t) = 0.
+\end{align*}
+Selon la coordonnée de $f'(t_0)$ on a que $(t-t_0)^{2}a(t)$ tend vers $0$ et alors $t-t_0$ détermine le signe. Selon la coordonnée $w_2$, dans un voisinage suffisamment petit de $t_0$ on a que la coordonnée est de signe positif.
+\item Supposons que $f'(t_0)\neq 0$, $w_2 = \lambda f'(t_0)$ et enfin $w_3$ et $f'(t_0)$ non colinéaires. On a alors dans la base $(f'(t_0),w_3)$ : \[f(t) - f(t_0) = \left(t-t_0 + \lambda(t-t_0)^{2}\right)f'(t_0) + (t-t_0)^{3}w_3 + (t-t_0)^{3}\eps(t). \]
+On décompose $\eps(t)$ dans cette base : \[\eps(t) = a(t) f'(t_0) + b(t) w_3.\]On sait que \[ \lim_{t\to t_0}a(t) = \lim_{t\to t_0}b(t) = 0.\]
+Dans cette base, on a : \[ f(t) - f(t_0) = \matrice{t-t_0 + \lambda(t-t_0)^{2} + (t-t_0)^{3}a(t) \\ (t-t_0)^{3} + (t-t_0)^{3}b(t) }\]
+Sur chaque coordonnée, le signe est celui de $t-t_0$.
+
+
+\paragraph{Remarque}Supposons $f'(t_0)\neq 0, n\geq 3$ et il existe un entier $p\in\ens{3,\ldots,n}$ tel que les vecteurs $w_2,w_3,\ldots,w_{p-1}$ sont colinéaires à $f'(t_0)$ et tel que $w_p$ n'est pas colinéaire à $f'(t_0)$. Ainsi, $(f'(t_0),w_p)$ est une base de $\R^{2}$.
+
+On écrit le développement limité de $f(t)-f(t_0)$ dans cette base. On étudie le signe des coordonnées de $f(t)-f(t_0)$ quand $t\to t_0$. Si $p$ est pair alors la courbe est comme dans le cas $p=2$ (la courbe est du côté de $w_p$ par rapport à la tangente), sinon comme dans le cas $p=3 $(elle traverse la tangente).
+
+\item Supposons que $f'(t_0) = 0$ et que $w_2,w_3$ forme une base de $\R^{2}$. On a \[f(t) - f(t_0) = (t-t_0)^{2}w_2 + (t-t_0)^{3}w_3 + (t-t_0)^{3}\eps(t).\]
+On décompose $\eps(t)$ dans la base $(w_2,w_3)$ : $\eps(t)= a(t)w_2 + b(t)w_3$ avec $\lim_{t\to t_0}a(t) = \lim_{t\to t_0}b(t) = 0$. Les coordonnées dans cette base de $f(t)-f(t_0)$ sont alors : \[ f(t)-f(t_0) = \matrice{ (t-t_0)^{2} + (t-t_0)^{3}a(t) \\ (t-t_0)^{3} + (t-t_0)^{3}b(t) }. \]
+Ainsi, la première coordonnée est positive et la seconde est du signe de $t-t_0$.
+Une telle situation est un \textit{point de rebroussement}.
+
+\item Supposons que $f'(t_0) = 0$, $w_3=\lambda w_2$ et $w_2,w_4$ forme une base. On pose $\eps(t) = a(t)w_2 + b(t)w_4$. Dans ces coordonnées : \[ f(t)-f(t_0) = \matrice{ (t-t_0)^{2} + \lambda (t-t_0)^{3} + (t-t_0)^{4}a(t) \\ (t-t_0)^{4}(1+b(t)) }.\]
+Les deux coordonnées sont positives quand $t\to t_0$. C'est aussi un point de rebroussement
+\end{enumerate}
+
+\section{Branches infinies}
+
+\definition{ 
+Soit $f:I\vers \R^{2}$ une courbe paramétrée avec $f=(u,v)$. Soit $t_0\in \barre{I}\union\ens{\infty}\union\ens{-\infty}$.
+\begin{itemize}
+\item On a une \textit{branche infinie} quand $t\to t_0$ si soit $u$ ou soit $v$ n'est pas bornée.
+\item Si $\lim_{t\to t_0}u(t) = a\in \R$ et si $\lim_{t\to t_0}v(t) = \pm\infty$ alors la droite $x=a$ est une \textit{asymptote verticale}.
+\item Si $\lim_{t\to t_0}u(t) = \pm\infty$ et $\lim_{t\to t_0}v(t) =a\in \R$ alors la droite $y=a$ est \textit{asymptote horizontale}.
+\item Si $u$ et $v$ tendent vers $\pm\infty$ en $t_0$ :
+\begin{itemize}
+\item Si $\lim_{t\to t_0}u(t)/v(t) =a\in \R$ alors la droite $y=ax$ est direction asymptotique.
+\item Si de plus $\lim_{t\to t_0}(v(t)-au(t)) = b$ alors la droite $y=ax+b$ est asymptote.
+\end{itemize}
+\end{itemize}
+}{}
+
+\paragraph{Exemple}Soit $f$ : \[ \fonc{f}{\left]-\frac{\pi}{2},\frac{\pi}{2}\right[}{\R^{2}}{t}{(\tan(t),2t-1/\cos(t))}.\]On étudie l'asymptote en $t_0 = \pi/2$. \[\lim_{t\to t_0} u(t) = +\infty, \; \lim_{t\to t_0}v(t) = -\infty.\]On étudie le rapport $v/u$ en $t\to t_0$. On pose $t=\pi/2+h$.
+\begin{align*}
+u(t) &= \tan(\pi/2-h) = \frac{\sin(\pi/2-h)}{\cos(\pi/2-h)}\\
+u(t) &= \frac{\cos (h)}{\sin (h)} = \frac{1 -h^{2}/2 + h^{2}\eps(h)}{h-h^{3}/6 + h^{3}\eps(h)}\\
+u(t) &= \frac{1}{h}\left(1-\frac{h^{2}}{2}+h^{2}\eps(h)\right)\frac{1}{1-\frac{h^{2}}{6} + h^{2}\eps(h)}\\
+u(t) &= \frac{1}{h}\left(1 -\frac{h^{2}}{2} + h^{2}\eps(h) \right)\left( 1+ \frac{h^{2}}{6} + h^{2}\eps(h) \right)\\
+u(t) &= \frac{1}{h}\left( 1 - \frac{h^{2}}{3} + h^{2}\eps(h)\right)\\
+\end{align*}
+\begin{align*}
+v(t) &= \pi - 2h - \frac{1}{\cos(\pi/2-h)} = \pi - 2h - \frac{1}{\sin(h)}\\
+v(t) &= \pi - 2h - \frac{1}{h-\frac{h^{3}}{6} + h^{3}\eps(h)}\\
+v(t) &= \pi - 2h- \frac{1}{h}\left(\frac{1}{1-\frac{h^{2}}{6}+h^{2}\eps(h)}\right)\\
+v(t) &=-\frac{1}{h} + \pi-\frac{13}{6}h + h\eps(h) \\
+\frac{v(t)}{u(t)} &= \frac{-\frac{1}{h}+\pi-\frac{13}{6}h + h\eps(h)}{\frac{1}{h}-\frac{1}{3}h + h\eps(h)}\\
+\frac{v(t)}{u(t)} &= \frac{-1+\pi h -\frac{13}{6}h^{2} + h^{2}\eps(h)}{1-\frac{1}{3}h^{2}+h^{2}\eps(h)}\\
+\lim_{t\to \frac{\pi}{2}^{-}} v(t)/u(t) &= -1.
+\end{align*}
+Et donc $y=-x$ est direction asymptotique.
+\begin{align*}
+v(t) + u(t) &= -\frac{1}{h} + \pi -\frac{13}{6}h - \frac{1}{h} + \frac{1}{3}h + h\eps(h) \\
+\lim_{t\to \frac{\pi}{2}^{-}}v(t)+u(t) = \pi.
+\end{align*}
+Et donc la droite d'équation $y=-x+\pi$ est asymptote en $t_0$.
+
+\section{\'Etude de courbes paramétrées}
+
+Soit : \[ \fonc{f}{\R\prive{-1,+1}}{\R^{2}}{t}{\left(\frac{t^{2}+1}{t^{2}-1},\frac{t^{2}}{t-1}\right)}.\]
+On a :
+\begin{align*}
+u'(t) &= \frac{-4t}{(t^{2}-1)^{2}}\\
+v'(t) &= \frac{t(t-2)}{(t-1)^{2}}.
+\end{align*}
+%\[ \begin{matrix}
+%t & \vline & -\infty& & -1&  0 &1& 2&+\infty\\
+%\hline
+%u'(t) & \vline & &+& \vline\vline& + &\vline & - &\vline\vline & - && - \\
+%\hline
+%u(t) & \vline & _1\nearrow^{+\infty} & \vline\vline&_{-\infty}\nearrow^{-1}\searrow_{-\infty} & \vline\vline& ^{+\infty}\searrow 5/3\searrow 1\\
+%\hline 
+%v'(t) & \vline & + && + & \vline & - & \vline \vline & - & \vline & +\\
+%\hline
+%v(t) & -\infty\nearrow&-1/2&\nearrow &0&\searrow&_{-\infty}&\vline\vline & ^{+\infty}& \searrow 4&\nearrow&+\infty
+%\end{matrix}\]
+
+Au voisinage $t=0$ :
+\begin{align*}
+u(t) &= -1-2t^{2}+t^{3}\eps(t) \\
+v(t) &= -t^{2}-t^{3}+t^{3}\eps(t)\\
+f(t) &= (-1,0) + t^{2}(-2,-1) + t^{3}(0,-1) + t^{3}\eps(t)\\
+f(0) &= (-1,0), \; f'(0)= (0,0).
+\end{align*}
+Les vecteurs $(-2,-1)$ et $(0,-1)$ sont linéairement indépendants.
+
+
+$t=0$ est un point singulier car $f'(0) = (0,0)$.
+\paragraph{Branches infinies}On a :
+\begin{itemize}
+\item Une asymptote horizontale $y = -1/2$ quand $t\to -1$.
+\item Quand $t\to 1$ : \[ \frac{v(t)}{u(t)} \frac{t^{2}(t+1)}{t^{2}+1} \underset{t\to 1}{\longrightarrow} 1\]donc une direction asymptotique $y=x$. \[ v(t) - 1\times u(t) = \frac{t^{2}+t+1}{t+1}\to \frac{3}{2}\]et donc l'asymptote est $y=x+3/2$.
+\item Quand $t\to-\infty$ alors $u\to 1$ et $v\to-\infty$. On a une branche infinie et $x=1$ est asymptote verticale.
+\item Quand $t\to+\infty$ alors $u\to 1$ et $v\to \infty$. $x=1$ est asymptote verticale.
+\end{itemize}
+
+\begin{sagesilent}
+p = plot(x+3/2,(x,-5,5))
+p += parametric_plot((1,x),(x,-5,5))
+p += plot(-1/2,(x,-5,5))
+t= var('t')
+p += parametric_plot(((t**2+1)/(t**2-1),t**2/(t-1)),(t,1.1,5),rgbcolor = 'red')
+p += parametric_plot(((t**2+1)/(t**2-1),t**2/(t-1)),(t,-1,0.8),rgbcolor = 'red')
+p += parametric_plot(((t**2+1)/(t**2-1),t**2/(t-1)),(t,-5,-1.2),rgbcolor = 'red')
+p.set_axes_range(-5,5,-5,5)
+\end{sagesilent}
+\begin{center}
+\sageplot[width = 14cm]{p}
+\end{center}
+
 \end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+\documentclass{mybourbaki}
+\titre{Séries numériques}
+
+\begin{document}
+\tableofcontents
+\section{Définitions}
+On considère des séries  numériques, c'est-à-dire à valeurs dans $\R$.
+
+\definition{ 
+Soit $(u_n)_{n\in \N}$ une suite numérique.
+
+On dit que la série $\Sigma u_n$ de terme général $u_n$ converge si la suite de terme général \[ s_n = \sum_{k=0}^{n}u_k\]converge.
+
+Si la suite $s_n$ diverge, alors on dit que la série $\Sigma u_n$ de terme général $u_n$ diverge.
+
+Les $s_n$ s'appellent les \textit{sommes partielles}.
+}{}
+\definition{ 
+On note \[ \sum_{n=0}^{+\infty}u_n= \lim_{n\to\infty}s_n\](quand elle est définie).
+
+On l'appelle la \textit{somme} de la série $(\Sigma u_n)$.
+}{}
+
+\paragraph{Remarque}La suite de terme général \[ s_n = \sum_{k=0}^{n}u_k\] converge si, et seulement si, la suite de terme général (pour $n_0$ fixé) \[ S_n = \sum_{k=n_0}^{n}u_k\]converge.
+
+
+\proposition{ 
+Si la série $\sum u_n$ converge alors la suite $(u_n)_{n\in\N}$ converge vers $0$.
+}{}
+\demonstration{ 
+Avec \[ s_n = \sum_{k=0}^{n}u_k\]et $l$ la limite de $s_n$.
+Soit $\eps>0$. Par convergence de $s_n$, il existe $n_0$ tel que pour tout $n\geq n$, $\abs{l-s_n}<\eps$. Et donc \[ \abs{s_{n+1} - s_n} = \abs{s_n+1 -l + l-s_n} \leq \abs{s_{n+1}-l} + \abs{s_n-l} < 2\eps. \] Or \[ \abs{s_{n+1}-s_n} = \abs{u_{n+1}}< 2\eps.\]
+}{}
+
+\paragraph{Exemple -- Séries géométriques}Soit $x\in \R$. On pose \[ u_n = a\cdot x^{n}.\]On a 
+\begin{align*}
+s_n &= \sum_{k=0}^{n}u_k\\
+s_n &= a\sum_{k=0}^{n}x^{n}\\
+s_n &= a\frac{1-x^{n+1}}{1-x} = \frac{a}{1-x}(1-x^{n+1}).
+\end{align*}
+\begin{itemize}
+\item Si $\abs{x}<1$ alors $(s_n)_{n\in\N}$ converge vers $a/(1-x)$.
+\item Si $\abs{x}\geq 1$ alors la série $\sum ax^{n}$ diverge.
+\end{itemize}
+\paragraph{Exemple -- Série exponentielle}Soit $x\in \R$. On regarde la série de terme général $x^{n}/n!$. Alors cette série a pour somme partielle : \[s_n = \sum_{k=0}^{n}\frac{x^{k}}{k!}\]et la formule de \textsc{Taylor} nous assure que $s_n$ tend vers $\exp(x)$. La série est convergente pour tout $x$ et de somme $\exp(x)$.
+
+\paragraph{Exemple}Soit $x\in \R$. On considère la série \[ \sum_{n\geq 1}\frac{x^{n}}{n}.\]
+\begin{itemize}
+\item Si $\abs{x}>1$ alors la suite de terme général $x^{n}/n$ ne converge pas et donc la série ne converge pas.
+\item Si $x=1$ alors les sommes partielles sont \[ s_n = \sum_{k=1}^{n}\frac{1}{k}.\]Cependant \[ s_{2n} - s_n \geq \frac{n}{2n} = \frac{1}{2}.\]Ainsi, la série $\sum 1/n$ diverge.
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
