@@ -45,7 +45,7 @@ Si la suite $s_n$ diverge, alors on dit que la série $\Sigma u_n$ de terme gén
 Les $s_n$ s'appellent les \textit{sommes partielles}.
 }{}
 \definition{ 
-On note \[ \sum_{n=0}^{+\infty}u_n= \lim_{n\to\infty}s_n\](quand elle est définie).
+On note \[ \sum_{n=0}^{+\infty}u_n= \lim_{n\to+\infty}s_n\](quand elle est définie).
 
 On l'appelle la \textit{somme} de la série $(\Sigma u_n)$.
 }{}
@@ -91,7 +91,7 @@ Il s'agit donc d'examiner la convergence du dernier terme.
 \int_{0}^{x}\frac{t^{n}}{1-t}\dt &\leq \frac{1}{1-x}\int_{0}^{x}t^{n}\dt \\
 &\leq \frac{1}{1-x}\frac{1}{n+1}x^{n+1}\leq \frac{1}{1-x}\frac{1}{n+1} \to 0
 \end{align*}
-et donc \[ \lim_{n\to\infty} \int_{0}^{x}\frac{t^{n}}{1+t}\dt = 0. \]
+et donc \[ \lim_{n\to+\infty} \int_{0}^{x}\frac{t^{n}}{1+t}\dt = 0. \]
 \item Pour $1\leq x < 0$, on a $1\leq x \leq t \leq 0$ :
 \begin{align*}
 \abs{\int_{0}^{x}\frac{t^{n}}{1-t}\dt} &\leq \int_{x}^{0}\frac{\abs{t}^{n}}{1-t}\dt \\
@@ -103,14 +103,14 @@ et donc \[ \lim_{n\to\infty} \int_{0}^{x}\frac{t^{n}}{1+t}\dt = 0. \]
 \end{align*}
 Et donc on a aussi une limite nulle.
 \end{enumerate}
-Finalement, on peut conclure que \[\lim_{n\to \infty} \int_{0}^{x}\frac{t^{n}}{1+t}\dt. \]Ainsi, les sommes partielles $\sum_{k=1}^{n}x^{k}/k$ ont pour limite $-\log(1-x)$. La série converge donc \[ \sum_{n=1}^{\infty}\frac{x^{n}}{n} = -\log(1-x).\]
+Finalement, on peut conclure que \[\lim_{n\to +\infty} \int_{0}^{x}\frac{t^{n}}{1+t}\dt. \]Ainsi, les sommes partielles $\sum_{k=1}^{n}x^{k}/k$ ont pour limite $-\log(1-x)$. La série converge donc \[ \sum_{n=1}^{+\infty}\frac{x^{n}}{n} = -\log(1-x).\]
 \end{itemize}
 
-\paragraph{Remarque}Posons une suite $(a_n)_{n\in \N}$. On considère la série $\sum u_n$ de terme général $u_n = a_n - a_{n+1}$. On a \[ \sum_{k=0}^{n} u_k = \sum_{k=0}^{n}(a_k - a_{k+1}) = a_0 - a_{n+1}. \]Ainsi $\sum u_n$ converge si, et seulement si, $\lim_{n\to \infty} \sum_{k=0}^{n}u_k$ existe, c'est-à-dire si, et seulement si, $\lim_{n\to \infty} a_n$ existe.
+\paragraph{Remarque}Posons une suite $(a_n)_{n\in \N}$. On considère la série $\sum u_n$ de terme général $u_n = a_n - a_{n+1}$. On a \[ \sum_{k=0}^{n} u_k = \sum_{k=0}^{n}(a_k - a_{k+1}) = a_0 - a_{n+1}. \]Ainsi $\sum u_n$ converge si, et seulement si, $\lim_{n\to +\infty} \sum_{k=0}^{n}u_k$ existe, c'est-à-dire si, et seulement si, $\lim_{n\to +\infty} a_n$ existe.
 
-\paragraph{Exemple}On regarde la série \[\sum_{n\geq 1}\frac{1}{n(n+1)}.\]On a \[ s_n = \sum_{k=1}^{n} \frac{1}{k(k+1)} = \sum_{k=1}^{n}\frac{1}{k}-\frac{1}{k+1} = 1 - \frac{1}{n+1}.\]Ainsi, \[ \sum_{n=1}^{\infty}\frac{1}{n(n+1)} = 1.\]
+\paragraph{Exemple}On regarde la série \[\sum_{n\geq 1}\frac{1}{n(n+1)}.\]On a \[ s_n = \sum_{k=1}^{n} \frac{1}{k(k+1)} = \sum_{k=1}^{n}\frac{1}{k}-\frac{1}{k+1} = 1 - \frac{1}{n+1}.\]Ainsi, \[ \sum_{n=1}^{+\infty}\frac{1}{n(n+1)} = 1.\]
 
-\paragraph{Exemple -- nombres décimaux}On peut écrire un nombre réel comme $\sum_{n=n_0}^{\infty}a_n\cdot 10^{-n}$ où $n_0\in \Z$ et $a_n \in \ens{0,1,\ldots,0}$.
+\paragraph{Exemple -- nombres décimaux}On peut écrire un nombre réel comme $\sum_{n=n_0}^{+\infty}a_n\cdot 10^{-n}$ où $n_0\in \Z$ et $a_n \in \ens{0,1,\ldots,0}$.
 
 \section{Opérations sur les séries}
 
@@ -124,14 +124,14 @@ Soient $\sum u_n$, $\sum v_n$ deux séries.
 \proposition{ 
 On a :
 \begin{enumerate}
-\item Si les séries $\sum u_n$ et $\sum v_n$ convergent alors leur somme converge aussi \[ \sum_{n=0}^{\infty} u_n + v_n = \sum_{n=0}^{\infty} u_n + \sum_{n=0}^{\infty} v_n.\]
-\item Si la série $\sum u_n$ converge alors $\sum \lambda u_n$ aussi et \[ \sum_{n=0}^{\infty}\lambda u_n = \lambda \sum_{n=0}^{\infty} u_n.\]
+\item Si les séries $\sum u_n$ et $\sum v_n$ convergent alors leur somme converge aussi \[ \sum_{n=0}^{+\infty} u_n + v_n = \sum_{n=0}^{+\infty} u_n + \sum_{n=0}^{+\infty} v_n.\]
+\item Si la série $\sum u_n$ converge alors $\sum \lambda u_n$ aussi et \[ \sum_{n=0}^{+\infty}\lambda u_n = \lambda \sum_{n=0}^{+\infty} u_n.\]
 \end{enumerate}
 }{}
 \demonstration{ 
 Dans l'ordre :
 \begin{enumerate}
-\item Notons \[ U_n = \sum_{k=0}^{n}u_k \; ; \; V_n = \sum_{k=0}^{n}v_k.\]Alors \[ \lim_{n\to \infty} U_n = \sum_{n=0}^{\infty}u_n \; ; \; \lim_{n\to\infty} V_n = \sum_{n=0}^{\infty}v_n.\]Donc \[ \lim_{n\to\infty}(U_n + V_n) = \sum_{n=0}^{\infty} u_n + \sum_{n=0}^{\infty}v_n.\]Par définition, $\sum_{n\geq 0}(u_n+v_n)$ converge si, et seulement si, $\sum_{k=0}^{n}(u_k+v_k) = U_n+V_n$ converge. Donc on a bien, si $U_n+V_n$ converge : \[\sum_{n=0}^{\infty}u_n + v_n = \sum_{n=0}^{\infty} u_n + \sum_{n=0}^{\infty}v_n. \]
+\item Notons \[ U_n = \sum_{k=0}^{n}u_k \; ; \; V_n = \sum_{k=0}^{n}v_k.\]Alors \[ \lim_{n\to +\infty} U_n = \sum_{n=0}^{+\infty}u_n \; ; \; \lim_{n\to+\infty} V_n = \sum_{n=0}^{+\infty}v_n.\]Donc \[ \lim_{n\to+\infty}(U_n + V_n) = \sum_{n=0}^{+\infty} u_n + \sum_{n=0}^{+\infty}v_n.\]Par définition, $\sum_{n\geq 0}(u_n+v_n)$ converge si, et seulement si, $\sum_{k=0}^{n}(u_k+v_k) = U_n+V_n$ converge. Donc on a bien, si $U_n+V_n$ converge : \[\sum_{n=0}^{+\infty}u_n + v_n = \sum_{n=0}^{+\infty} u_n + \sum_{n=0}^{+\infty}v_n. \]
 \item De même, en remarquant que $\sum \lambda u_n = \lambda \sum u_n$.
 \end{enumerate}
 }{}
@@ -146,9 +146,9 @@ On a
 \begin{align*}
 \sum_{k=0}^{n} \frac{P(k)}{k!}x^{k} &= P(0) + P(1) a + \sum_{k=2}^{n}\frac{P(k)}{k!}x^{k}\\
 \sum_{k=0}^{n} \frac{P(k)}{k!}x^{k} &=c + (a+b+c)x + \sum_{k=2}^{n}\left( (ax^{2})\frac{x^{k-2}}{(k-2)!} + (a+b)x \frac{x^{k-1}}{(k-1)!} + c\frac{x^{k}}{k!}\right)\\
-\sum_{n=0}^{\infty}\frac{P(n)}{n!}x^{n} &= c + (a+b+c)x + ax^{2}e^{x} + (a+b)x(e^{x}-1) + c(e^{x} -2)\\
-\sum_{n=0}^{\infty}\frac{P(n)}{n!}x^{n} &= ax^{2}e^{x} + (a+b)xe^{x} + ce^{x}\\
-\sum_{n=0}^{\infty}\frac{P(n)}{n!}x^{n} &= (ax^{2}+(a+b)x+c)e^{x}.
+\sum_{n=0}^{+\infty}\frac{P(n)}{n!}x^{n} &= c + (a+b+c)x + ax^{2}e^{x} + (a+b)x(e^{x}-1) + c(e^{x} -2)\\
+\sum_{n=0}^{+\infty}\frac{P(n)}{n!}x^{n} &= ax^{2}e^{x} + (a+b)xe^{x} + ce^{x}\\
+\sum_{n=0}^{+\infty}\frac{P(n)}{n!}x^{n} &= (ax^{2}+(a+b)x+c)e^{x}.
 \end{align*}
 
 \paragraph{Remarque}On a vu qu'une somme de deux séries convergentes est convergente. On a aussi qu'une somme d'une série convergente et d'une série divergente est divergente. En effet, supposons que $\sum u_n$ converge et que $\sum v_n$ diverge. Considérons la série $\sum w_n = \sum (u_n + v_n).$ Supposons que $\sum_{k=0}^{n}w_k$ converge alors $\sum u_n$ et $\sum w_k$ convergent. Or, $\sum v_n = \sum (u_n - w_n)$ et ne peut converger.
@@ -191,9 +191,9 @@ Si $\sum v_n$ converge alors $(U_n)_{n\in \N}$ étant majorée par $(V_n)_{n\in 
 
 D'autre part, dans le second cas, on a :
 \begin{align*}
-\sum_{n=0}^{\infty}u_n &= \lim_{n\to\infty} U_n \\
-&\leq \lim_{n\to \infty} V_n\\
-&\leq \sum_{n=0}^{\infty} v_n.
+\sum_{n=0}^{+\infty}u_n &= \lim_{n\to+\infty} U_n \\
+&\leq \lim_{n\to +\infty} V_n\\
+&\leq \sum_{n=0}^{+\infty} v_n.
 \end{align*}
 }{}
 
@@ -201,8 +201,108 @@ D'autre part, dans le second cas, on a :
 Soient $\sum u_n$, $\sum v_n$ des séries de termes généraux $u_n$ et $v_n$ strictement positifs. Alors si la suite $(u_n/v_n)_{n\in \N}$ a une limite finie non nulle alors on a $\sum u_n$ converge si, et seulement si, $\sum v_n$ converge.
 }{}
 \demonstration{ 
-Soit $l = \lim_{n\to \infty} u_n/v_n$ avec $l\in \R^{*}$. Comme pour tout $n$, $u_n/v_n >0$, on sait que $l>0$. Fixons $a,b$ tels que $0<a<l<b$. Par convergence, il existe $n_0$ tel que pour tout $n\geq n_0$ on ait $a<u_n/v_n<b$, c'est-à-dire $av_n < u_n < bv_n$. Par le théorème de comparaison des séries, $u_n$ converge si, et seulement si, $v_n$ converge.
+Soit $l = \lim_{n\to +\infty} u_n/v_n$ avec $l\in \R^{*}$. Comme pour tout $n$, $u_n/v_n >0$, on sait que $l>0$. Fixons $a,b$ tels que $0<a<l<b$. Par convergence, il existe $n_0$ tel que pour tout $n\geq n_0$ on ait $a<u_n/v_n<b$, c'est-à-dire $av_n < u_n < bv_n$. Par le théorème de comparaison des séries, $u_n$ converge si, et seulement si, $v_n$ converge.
 }{}
+
+\paragraph{Exemple 1}On considère la série de terme général \[\forall n >0, \; u_n = \frac{1}{n^{2}}.\]
+On a vu que la série de terme général $v_n = 1/[n(n+1)]$ pour tout $n>0$, converge. En effet $v_n = \frac{1}{n} - \frac{1}{n+1}$ et $\lim a_n= 0$ donc par le théorème de comparaison, $\sum v_n$ converge. On sait que \[\forall n > 1, \; v_{n-1} > u_n \]et \[ \frac{u_n}{v_n} = \frac{n+1}{n} \underset{n\to +\infty}{\longrightarrow} 1.\]Ainsi par le corollaire, $\sum u_n$ converge.
+
+\paragraph{Exemple 2}Considérons la série de terme général \[u_n = \sin\left(\frac{\pi}{2^{n}}\right). \]
+\begin{align*}
+&\forall n \geq 1, \; 0 < \frac{\pi}{2^{n}}\leq \frac{\pi}{2}\\
+&\forall n \geq 1, \; u_n \geq 0.
+\end{align*}
+De plus \[\forall x \in \R, \; \abs{\sin x}\leq \abs{x}\]et donc \[u_n = \abs{u_n}\leq \frac{\pi}{2^{n}}. \]La série de terme général $v_n$ est une série géométrique de raison $1/2$. Donc elle converge et donc $\sum u_n$ converge.
+
+\paragraph{Exemple 3}Soit $(x_{n})_{n\in \N}$ une suite d'entiers tels que $0\leq x_n\leq 0$ pour tout $n\geq 0$. Considérons la série $\sum_{n\geq 0}x_n10^{-n}$. Le terme général est positif et \[ 0\leq \frac{x_n}{10^{n}} \leq 10^{1-n}\]et $10^{1-n}$ est le terme général d'une série géométrique de raison $1/10$. Cette série converge donc et donc $(x_n)_{n\in \N}$ aussi.
+
+
+\subsection{Séries de \textsc{Riemann}}
+Soit $\alpha\in \R_+^{*}$. On considère la série de terme général $1/n^{\alpha}$.
+
+\proposition{ 
+La série de terme général $1/n^{\alpha}$ avec $\alpha>1$ converge. Elle diverge si $\alpha\leq 1$.
+}{}
+\demonstration{ 
+Si $\alpha\leq 1$ alors pour tout $n\geq 1$, $n^{\alpha}\leq n$ et donc \[ \frac{1}{n^{\alpha}}\geq \frac{1}{n}\]or la série de terme général $1/n$ diverge.
+
+Si $\alpha > 1$, on considère l'application \[f : x \donne -\frac{1}{x^{\alpha-1}}. \]De plus, $\alpha-1>0$. On a : \[f(n+1) - f(n) = \frac{1}{n^{\alpha-1}} - \frac{1}{(n+1)^{\alpha-1}}. \]Par le théorème des accroissements finis sur l'intervalle $[n,n+1]$ : \[f(n+1) - f(n) = f'(c) \]avec $c\in]n,n+1[$. Comme \[ f'(x) = \frac{\alpha-1}{x^{\alpha}}\]on a \[ f'(c) \geq \frac{\alpha-1}{(n+1)^{\alpha}} \]et donc \[ \frac{1}{n^{\alpha-1}} - \frac{1}{(n+1)^{\alpha-1}} \geq \frac{\alpha-1}{(n+1)^{\alpha}}.\]On pose \[ v_n = \frac{1}{n^{\alpha-1}} - \frac{1}{(n+1)^{\alpha-1}}.\]
+Les sommes partielles de $\sum v_n$ sont \[ \sum_{n=1}^{k}v_k = \frac{1}{1	^{\alpha-1}} - \frac{1}{(k+1)^{\alpha-1}} \underset{k\to+\infty}{\longrightarrow} 1.\]Donc la série $\sum_{n\geq 1} v_n$ converge, de somme $1$.
+
+On applique le théorème de comparaison, la série $\sum_{n\geq 1}1/n^{\alpha}$ converge.
+}{}
+
+\subsection{Convergence absolue}
+
+\definition{ 
+Soit $\sum u_n$ une série de terme général $u_n$. Si la série de terme général $\abs{u_n}$ est convergente, on dit que $\sum u_n$ est \textit{absolument convergente}.
+}{}
+
+\paragraph{Remarque}Dans la définition, on peut prendre $u_n\in \R$ avec la valeur absolue ou $u_n\in \C$ avec le module.
+
+\theoreme{ 
+Toute série absolument convergente est convergente.
+}{}
+%\demonstration{ 
+%On a par l'inégalité triangulaire pour tout $k\geq 0$ : \[\abs{\sum_{n=0}^{k} u_n}\leq \sum_{n=0}^{k}\abs{u_n} \]et donc si le terme de droite converge, $s_n$ aussi.
+%}{}
+\demonstration{ 
+Soit $u_n\in \R$. On considère $v_n = \abs{u_n} -u_n$. Par l'inégalité triangulaire : \[ 0\leq v_n \leq 2\abs{u_n}.\]Par hypothèse $\sum 2\abs{u_n} = 2\sum\abs{u_n}$ converge. Donc $\sum v_n$ converge par le théorème de comparaison. Comme $u_n = \abs{u_n} - v_n$ on a que $\sum u_n$ converge.
+
+Si $u_n\in \C$ alors en posant $u_n = a_n +ib_n$ avec $a_n,b_n\in \R$ on a\[ 0\leq \abs{a_n},\abs{b_n}\leq \abs{u_n}.\]Comme $\sum\abs{u_n}$ converge, $\sum \abs{a_n}$ et $\sum \abs{b_n}$ aussi. Donc $\sum a_n$ et $\sum b_n$ converge et donc $\sum u_n$ aussi.
+}{}
+
+\proposition{ 
+Soit $\sum u_n$ une série absolument convergente. Alors \[ \abs{\sum_{n=0}^{+\infty}u_n} \leq \sum_{n=0}^{+\infty}\abs{u_n}.\]
+}{}
+\demonstration{ 
+Pour tout $k\geq 0$ : \[ \abs{\sum_{n=0}^{k}u_n}\leq \sum_{n=0}^{k}\abs{u_n}\]or $\abs{\sum u_n}$ et $\sum \abs{u_n}$ convergent et donc l'égalité tient pour $k=+\infty$.
+}{}
+
+\paragraph{Remarque}Si $\sum u_n$ et $\sum v_n$ sont absolument convergentes alors elles sont convergentes et donc leur $\sum u_n+v_n$ aussi. Mieux, $\sum u_n+v_n$ est absolument convergente. En effet $\abs{u_n + v_n}\leq \abs{u_n} + \abs{v_n}$ et comme $\sum \abs{u_n} + \abs{v_n}$ est convergente, $\sum \abs{u_n + v_n}$ est convergente.
+
+\paragraph{Exemple}Considérons la série de terme général \[ \frac{\cos(nx)}{n^{\alpha}}\]avec $\alpha\in \R$ et $x\in \R$.
+\begin{align*}
+\forall n\geq 1, \; \abs{\frac{\cos nx}{n^{\alpha}}}\leq \frac{1}{n^{\alpha}}
+\end{align*}
+\begin{itemize}
+\item si $\alpha>1$ alors le théorème de comparaison conclut ;
+\item si $\alpha=1$ et $x=0$ alors le terme général est $1/n$ et la série diverge ;
+\item si $\alpha=1$ et $x = \pi$ alors le terme général est $(-1)^{n}/n$ et alors la série converge (mais pas en valeur absolue).
+\end{itemize}
+
+\paragraph{Exemple}Soit \[ u_n = (-1)^{n}\frac{\sqrt{n+2} - \sqrt{n}}{n}, \; \abs{u_n} = \frac{\sqrt{n+2}-\sqrt{n}}{n} = \frac{2}{n\sqrt{n+2} + n\sqrt{n}}.\]On a donc \[\abs{u_n} \leq \frac{1}{n\sqrt{n}}. \]C'est une série de \textsc{Riemann} avec $\alpha = 3/2$ et donc la série $\sum u_n$ converge absolument.
+
+\subsection{Comparaison avec des séries géométriques}
+
+\theoreme{ 
+Soit $\sum u_n$ une série de terme général $u_n>0$. S'il existe $K\in \R$ tel que $K<1$ et pour tout $n$, $u_{n+1}/u_n \leq K$ alors $\sum u_n$ converge.
+}{Règle de \textsc{d'Alembert}}
+\demonstration{ 
+On a : \[ u_n \leq K^{n}u_0\]et donc comme $\sum K^{n}u_0$ converge, par le théorème de comparaison, $\sum u_n$ converge.
+}{}
+
+\corollaire{ 
+Soit $\sum u_n$ la série dont le terme général, $u_n$, est strictement positif.
+
+Supposons que $\lim_{n\to+\infty}u_{n+1}/u_n = l$.
+\begin{itemize}
+\item Si $l>1$ alors $\sum u_n$ diverge ;
+\item Si $l < 1$ alors $\sum u_n$ converge.
+\end{itemize}
+}{}
+\demonstration{ 
+Supposons $l<1$. Par définition, il existe $n_0$ et $K$ entiers tels que $l<K<1$ et pour tout $n\geq n_0$, $u_{n+1}/u_n \leq K$. Donc $\sum u_{n+n_0}$ converge et donc $\sum u_n$ aussi.
+
+Supposons $l>1$. Il existe $n_0$ et $K>1$ tels que  pour tout $n\geq n_0$ on a $u_{n+1}/u_n\geq K$. Donc $u_{n+1}\geq Ku_n >u_n$ et donc $\sum u_n$ est grossièrement divergente.
+}{}
+
+\paragraph{Exemple}Soit $x\in \R$. On pose \[u_n = n^{2}x^{n}. \]Si $x=0$ alors $\sum u_n$ converge. Pour $x\neq 0$ on a \[ \frac{u_{n+1}}{u_n} = \frac{(n+1)^{2}}{n^{2}}x.\] On a \[ \lim_{n\to+\infty}\abs{\frac{u_{n+1}}{u_n}} = \abs{x} >0.\]
+\begin{itemize}
+\item Si $\abs{x}<1$ alors $\sum u_n$ est absolument convergente ;
+\item si $\abs{x}>1$ alors $\sum u_n$ n'est pas convergente ;
+\item si $\abs{x} = 1$ alors la règle de \textsc{d'Alembert} ne permet pas de conclure.
+\end{itemize}
 
 
 \end{document}
