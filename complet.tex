@@ -304,6 +304,120 @@ Supposons $l>1$. Il existe $n_0$ et $K>1$ tels que  pour tout $n\geq n_0$ on a $
 \item si $\abs{x} = 1$ alors la règle de \textsc{d'Alembert} ne permet pas de conclure.
 \end{itemize}
 
+\subsection{Régèle de \textsc{Cauchy}}
+
+\theoreme{ 
+Soit $\sum u_n$ une série numérique à termes positifs. S'il existe $K<1$ tel que \[\forall n\in \N^{*},\; \sqrt[n]{u_n}\leq K\]alors la série $\sum u_n$ converge.
+}{Règle de \textsc{Cauchy}}
+\demonstration{ 
+On a que : \[\forall n\geq 1, \; u_n\leq K^{n}. \]D'autre part, $0<K<1$ donc la série de terme général $K^{n}$ converge et donc $\sum u_n$ converge.
+}{}
+
+\corollaire{ 
+Soit $\sum u_n$ de terme général positif. Supposons $\lim \sqrt[n]{u_n} = l$.
+\begin{enumerate}
+\item Si $l<1$ alors $\sum u_n$ converge.
+\item Si $l>1$ alors $\sum u_n$ diverge.
+\end{enumerate}
+}{}
+\demonstration{ 
+Dans l'ordre :
+\begin{enumerate}
+\item Supposons $l<1$. Fixons $0< l <K<1$. Il existe $n_0$ tel que pour tout $n\geq n_0$, $\sqrt[n]{u_n}\leq K$. On a alors $0\leq u_n\leq K^{n}$ et donc on conclut.
+\item Supposons $l>1$. Fixons $0<1<K<l$. Il existe $n_0$ tel que pour tout $n\geq n_0$, $\sqrt[n]{u_n}\geq K$. Ainsi, $u_n\geq K^{n}$ et donc comme $\sum K^{n}$ diverge, $\sum u_n$ aussi.
+\end{enumerate}
+}{}
+
+\paragraph{Exemple}Si $u_n = x^{n}/n^{n}$ pour tout $n\geq 1$. Ainsi, \[\sqrt[n]{u_n} = \frac{x}{n} \underset{n\to+\infty}{\longrightarrow}0. \]Ainsi, $\sum x^{n}/n^{n}$ converge.
+
+\subparagraph{Règle de Riemann}
+
+On a que $\sum 1/n^{\alpha}$ converge pour $\alpha>1$. Ainsi :
+\theoreme{ 
+Soit $\sum u_n$ de terme général positif et soit $\alpha$ un réel strictement positif.
+\begin{enumerate}
+\item Si $\lim n^{\alpha}u_n$ existe et est non nulle alors la série de terme général $u_n$ converge si, et seulement si, $\alpha>1$.
+\item Si $\lim n^{\alpha}u_n = 0$ et si $\alpha>1$ alors la série de terme général $u_n$ converge.
+\item Si $\lim nu_n = +\infty$ alors la série $\sum u_n$ diverge.
+\end{enumerate}
+}{Règle de \textsc{Riemann}}
+\demonstration{ 
+Posons \[v_n = \frac{1}{n^{\alpha}} .\] On a \[ \frac{u_n}{v_n} = n^{\alpha}u_n.\]
+\begin{enumerate}
+\item Le théorème de comparaison entraine que si $\sum u_n$ et si $\sum v_n$ sont à termes généraux strictement positifs telles que la suite $u_n/v_n$ a une limite non nulle, alors $\sum u_n$ converge si, et seulement si, $\sum v_n$ converge.
+\item On a alors pour $n$ assez grand $u_n \leq 1/n^{\alpha}$ et donc $\sum u_n$ converge si $\alpha >1$.
+\item Pour $n$ assez grand, $nu_n \geq 1$ et donc $u_n\geq 1/n$ et donc $\sum u_n$ diverge puisque $\sum 1/n$ diverge.
+\end{enumerate}
+}{}
+
+\paragraph{Exemple}Avec \[u_n = \frac{\log n}{n^{2}} \]alors, comme \[ \lim n^{\frac{3}{2}}u_n = 0\] et comme $3/2>1$, $u_n \geq 0$ on a bien que $\sum u_n$ converge.
+
+\paragraph{Remarque}On a \[ \frac{u_{n+1}}{u_n} = \frac{\log n+1}{\log n}\frac{n^{2}}{(n+1)^{2}}\]et cela tend vers $1$ quand $n$ tend vers l'infini. Le critère de \textsc{d'Alembert} ne permettait pas de conclure.
+
+\paragraph{Remarque}Les critères de \textsc{d'Alembert}, \textsc{Cauchy} ou \textsc{Riemann} ne sont pas valables pour les séries à termes négatifs. Si $u_n$ est à valeurs négatives, on peut appliquer ces critères à $\abs{u_n}$.
+
+\subsection{Comparaison avec des intégrales}
+
+Soit $f : [a,+\infty[\vers \R$ une fonction numérique. Supposons que $f(x) \geq x$ pour tout $x$ et supposons que $f$ est décroissante. Pour tous entiers $p<q$ supérieurs à $a$ on a \[ \sum_{n=p}^{q}f(n) \leq \int_{p}^{q}f(t)\dt.\]
+
+\lemme{ 
+Pour tous $a\leq p<q$ entiers. On a \[ f(q) + \int_{p}^{q}f(t)\dt \leq \sum_{n=p}^{q}f(n) \leq f(p) + \int_{p}^{q}f(t)\dt.\]
+}{}
+\demonstration{ 
+Soit $n\in \N$ tel que $p<n<q$. Comme $f$ est décroissante, $f(n+1)\leq f(t)\leq f(n)$ pour tout $t\in [p,q]$.
+\begin{align*}
+f(n+1) &= \int_{n}^{n+1}f(n+1)\dt \leq \int_{n}^{n+1}f(t)\dt \leq \int_{n}^{n+1}f(n)\dt = f(n)\\
+f(n+1) &\leq \int_{n}^{n+1}f(t)\dt \leq f(n).
+\end{align*}
+On somme alors sur $n\in [p,q[$ :
+\begin{align*}
+\sum_{n=p}^{q-1}f(n+1) &\leq \int_{p}^{q}f(t)\dt \leq \sum_{n=p}^{q-1}f(n)\\
+f(q) + \int_{p}^{q}f(t)\dt  &\leq \sum_{n=p}^{q}f(n)\leq f(n) + \int_{p}^{q}f(t)\dt.
+\end{align*}
+}{}
+\paragraph{Exemple}Soit $\alpha>0$. On pose \[ u_n = \frac{1}{n(\log n)^{\alpha}}.\]On a $\lim u_{n+1}/u_n = 1$. $n^{\beta}u_n$ ne converge pas pour $\beta>1$. Si $\beta\leq 1$ alors $n^{\beta}u_n$ converge vers $0$. Cependant : \[f : x \donne \frac{1}{x(\log x)^{\alpha}} \]est décroissante sur $[2,+\infty[$. De plus, $f(x)>0$ pour tout $x$ dans cet intervalle. Ainsi, considérons l'intégrale :
+\begin{align*}
+\int f(t)\dt &= \int \frac{1}{t(\log t)^{\alpha}}\dt .\\
+\int f(t)\dt &= \int (\log t)^{-\alpha} \frac{\dt}{t}\\
+\int f(t)\dt &= \systeme{& \frac{1}{1-\alpha}(\log t)^{1-\alpha}  &\text{ si }\alpha\neq 1\\ &\log(\log t) &\text{ si } \alpha = 1}.\\
+\int_{2}^{x}f(t)\dt &= \systeme{& \frac{1}{1-\alpha}((\log x)^{1-\alpha} -(\log 2)^{1-\alpha})  &\text{ si }\alpha\neq 1\\ &\log(\log x) - \log(\log 2) &\text{ si } \alpha = 1}
+\end{align*}
+\begin{itemize}
+\item Si $\alpha = 1$ : 
+\begin{align*}
+\lim_{x\to +\infty} \int_{2}^{x}f(t)\dt &= +\infty.
+\end{align*}
+Le lemme précédent nous dit que :
+\[ \sum_{2\leq n \leq x}^{} f(n) \geq f(x) + \int_{2}^{x}f(t)\dt\]et donc $\sum u_n$ est divergente.
+\item Si $\alpha<1$ alors $1-\alpha>0$ et donc \[ \lim_{x\to +\infty} \int_{2}^{x}f(t)\dt = +\infty. \]De même, la série $\sum u_n$ diverge.
+\item Si $\alpha>1$ alors $1-\alpha<0$ et donc 
+\[ \lim_{x\to+\infty}\int_{2}^{x} f(t)\dt = \frac{1}{\alpha-1}(\log 2)^{1-\alpha}.\]Le lemme dit que \[\sum_{n=2}^{x}u_n \leq f(2) + \int_{2}^{x}f(t)\dt \]et donc $\sum u_n$ converge.
+\end{itemize}
+Ainsi, $\sum u_n$ converge si, et seulement si, $\alpha>1$.
+
+\subsection{Séries alternées}
+\definition{ 
+Une \textit{série alternée} est une série $\sum u_n$ telle que $u_n$ et $-u_{n+1}$ ont le même signe pour $n$ assez grand.
+}{}
+
+\theoreme{ 
+Soit $(a_n)_{n\in \N}$ une suite de termes réels strictement positifs. Si la suite $(a_{n})_{n\in \N}$ est décroissante et a pour limite $0$ alors la série de terme général $(-1)^{n}a_n$ converge.
+
+D'autre part, si $\sum (-1)^{n}a_n = S$ alors pour tout $n$ on a \[s_n \leq S \leq s_{n+1} \]et \[\abs{S-s_n} \leq a_{n+1}. \]
+}{Critère des séries alternées}
+\demonstration{ 
+On considère les sous-suites :
+\begin{align*}
+s_{2p} &= a_0 -a_1 +\ldots + a_{2p} \\
+s_{2p+1} &= a_0 - a_1+\ldots + a_{2p}-a_{2p+1}.
+\end{align*}
+\begin{align*}
+s_{2p+2} - s_{2p} &= a_{2p+2}-a_{2p+1}\leq 0\\
+s_{2p+3}-s_{2p+1} &= a_{2p+2} - a_{2p+3}\geq 0.
+\end{align*}
+Ainsi, les sous-suites $(s_{2p})_{p\in \N}$ et $(s_{2p+1})_{p\in \N}$ sont respectivement décroissante et croissante. D'autre part, \[ \lim s_{2p+1} - s_{2p} = \lim -a_{2p+1}= 0.\]Ces suites sont adjacentes et leurs différences tendent vers $0$. Ainsi, $(s_p)$ est convergente et donc $\sum u_n$ converge.
+}{}
+
 
 \end{document}
 
