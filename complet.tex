@@ -418,8 +418,107 @@ s_{2p+3}-s_{2p+1} &= a_{2p+2} - a_{2p+3}\geq 0.
 Ainsi, les sous-suites $(s_{2p})_{p\in \N}$ et $(s_{2p+1})_{p\in \N}$ sont respectivement décroissante et croissante. D'autre part, \[ \lim s_{2p+1} - s_{2p} = \lim -a_{2p+1}= 0.\]Ces suites sont adjacentes et leurs différences tendent vers $0$. Ainsi, $(s_p)$ est convergente et donc $\sum u_n$ converge.
 }{}
 
+\paragraph{Exemple}Prenons \[ u_n = \frac{(-1)^{n}}{n^{\alpha}}\]avec $\alpha\in \R$. Elle n'est pas absolument convergente pour tout $\alpha$.
+\begin{itemize}
+\item $\alpha =1$ : on a vu que $\sum u_n = -\log(2)$ ;
+\item $\alpha >1$ : $\sum u_n$ est absolument convergente ;
+\item pour $0<\alpha<1$ : on a $a_n = 1/n^{\alpha} \geq 0$ est décroissante et de limite nulle, donc $\sum u_n$ est convergente (mais pas absolument).
+\end{itemize}
+
+
+\subsection{Application des développements limités à la convergence}
+
+\paragraph{Exemple 1}Soit \[ u_n = \frac{1}{\sqrt{n}} - \sqrt{n}\sin\left(\frac{1}{n}\right).\]
+On considère la fonction \[f(x) = \sqrt{x} - \frac{1}{\sqrt{x}}\sin(x). \]On a $u_n = f(1/n)$ et on regarde le développement limité de $f$ au voisinage de $0$ : 
+\begin{align*}
+\sin(x) &= x - \frac{x^{3}}{6} + x^{3}\eps(x) \\
+f(x) &= \sqrt{x} - \frac{1}{\sqrt{x}}\left(x-\frac{x^{3}}{6} + x^{3}\eps(x)\right)\\
+&= \frac{x^{5/2}}{6} + x^{5/2}\eps(x) \\
+u_n = \frac{n^{-5/2}}{6} + n^{-5/2}\eps(1/n),
+\end{align*}
+et donc il existe $n_0$ tel que $u_n$ est du signe de $n^{-5/2}/6$ pour $n\geq n_0$. Donc on peut considérer $u_n$ comme une série de terme général positif telle que $n^{5/2}u_n$ tend vers $1/6$. Par le critère de \textsc{Riemann}, cette série converge et donc $\sum u_n$ aussi.
+
+\paragraph{Exemple 2}Soit $a\in \R$ et soit \[ u_n = (n^{2}+1)^{a} - (n^{2}-1)^{a}.\]
+\begin{itemize}
+\item Si $a = 0$ alors $u_n=0$ et $\sum u_n$ converge.
+\item Si $a\neq 0$, on calcule :
+\begin{align*}
+u_n &= n^{2a}\left( \left( 1 + \frac{1}{n^{2}}\right)^{a} - \left(1-\frac{1}{n^{2}}\right)^{a}\right) \\
+u_n &= f(1/n),\\
+f(x) &= \frac{1}{x^{2a}}\left( (1+ x^{2})^{a} -(1-x^{2})^{a}\right).
+\end{align*}
+On fait un développement limité de $f$ en $0$ :
+\begin{align*}
+f(x) &= x^{-2a}(1+ax^{2}-(1-ax^{2}) + x^{3}\eps(x)) \\
+f(x) &= x^{-2a}(2ax^{2}+x^{3}\eps(x))\\
+f(x) &= 2ax^{2(1-a)} + x^{3-2a}\eps(x).
+\end{align*}
+Ainsi 
+\begin{align*}
+u_n &= \frac{2a}{n^{2(1-a)}} + \frac{\eps(1/n)}{n^{2(1-a)+1}}
+\end{align*}
+Ainsi \[ \lim_{n\to\infty} n^{2(1-a)}u_n = 2a \]et $u_n$ est une suite de terme général du signe de $a$ au moins à partir d'un certain rang.
+Par le critère de \textsc{Riemann} :
+\begin{itemize}
+\item Si $a>0$, alors $u_n$ est à terme général positif ;
+\item si $a\geq 1/2$ alors $2(1-a)\leq 1$ et donc la série $\sum u_n$ est divergente ;
+\item si $a<1/2$ alors $2(1-a)>1$ donc la série $\sum u_n$ est convergente.
+\item Si $a<0$ alors $u_n$ est négatif. On applique le critère à $\sum -u_n$. On a $2(1-a)>2$ et donc $\sum -u_n$ est convergente et donc $\sum u_n$ est convergente.
+\end{itemize}
+\end{itemize}
+
+\section{Transformation d'\textsc{Abel}}
+
+Soient $(a_n)_{n\in \N}$ et $(b_n)_{n\in \N}$ deux suites à valeurs complexes. Soit $p\in \N$. On pose \[ \forall n\geq p, \; B_n = \sum_{k=p}^{n} b_p.\] Dans la somme (avec $q\geq p$) : \[ \sum_{n=p}^{q}a_nb_n\]on remplace les $b_n$ par $B_n - B_{n-1}$, c'est-à-dire :
+\begin{align*}
+\sum_{n=p}^{q}a_nb_n &= \sum_{n=p}^{q}a_n(B_n-B_{n-1})\\
+&= \sum_{n=p}^{q}[a_nB_n]  - \sum_{n=p}^{q}[a_nB_{n-1}].
+\end{align*}
+
+\lemme{ 
+Supposons que les $a_n$ sont des réels positifs et que $(a_n)_{n\in \N}$ est décroissante. Supposons également que les $B_n$ avec $n\geq p$ sont majorés en valeur absolue par $B$. Alors on a : \[\forall q >p, \; \abs{\sum_{n=p}^{q} a_nb_n} \leq a_p B. \]
+}{}
+\demonstration{ 
+On a $a_n-a_{n+1}\geq 0$ puisque $(a_n)_{n\in \N}$ est décroissante. Ainsi $\abs{(a_n-a_{n+1})B_n} = (a_n-a_{n+1})B_n$. Ainsi, \[ \abs{\sum_{n=p}^{q} a_nb_n} = \abs{ \sum_{n=p}^{q-1} [(a_k - a_{k+1})B_k] + a_qB_q} \]et donc 
+\begin{align*}
+ \abs{\sum_{n=p}^{q} a_nb_n}  &\leq  \sum_{k=p}^{q-1}(a_k-a_{k+1})\abs{B_k} + a_q\abs{B_q} \\
+ \abs{\sum_{n=p}^{q} a_nb_n}  &\leq ( \sum_{n=p}^{q-1}(a_k-a_{k+1}) + a_q)B\\
+ \abs{\sum_{n=p}^{q} a_nb_n}  &\leq a_p B.
+\end{align*}
+}{}
+\corollaire{ 
+Soit $(a_n)_{n\in \N}$ une suite à termes réels positifs décroissante. Soit $x\in]0,2\pi[$, posons $z = \cos x + i\sin x$. Pour tous $p,q\in \R$ tels que $p<q$ : \[ \abs{\sum_{n=p}^{q} a_nz^{n}}\leq \frac{a_p}{\sin(x/2)} .\]
+}{}
+\proposition{ 
+Soit $(a_n)_{n\in \N}$ une suite décroissante de réels tels que $\lim a_n = 0$. Alors la série de terme général $a_n\cos(n_x)$ est convergente pour tout $x\in \R-2\pi\Z$. De plus, la série de terme général $a_n\sin(nx)$ converge pour tout $x \in \R$.
+}{}
+
+\demonstration{ 
+On considère la somme partielle : \[ \sum_{n=p}^{q}a_nz^{n}.\]On applique le lemme avec $b_n = z_n$. Il faut vérifier que pour tout $n$, $\abs{B_n} \leq B$ avec $B = 1/\sin(x/2)$ et $B_n = \sum z^{n}$ pour $p\leq n\leq q$.
+\begin{align*}
+B_n &= z^{p} \frac{1-z^{n-p+1}}{1-z},\\
+1-z &= 1-\cos x - i\sin x \\
+1-z &= 2\sin^{2}(x/2) - 2i\sin(x/2)\cos(x/2)\\
+1-z &= 2\sin(x/2)(\sin(x/2)-i\cos(x/2))\\
+\abs{1-z} &= 2\sin(x/2),\\
+\abs{z^{p}\frac{1-z^{n-p+1}}{1-z}} &= \frac{1}{2\sin(x/2)}\abs{z^{p}}\abs{(1-z^{n-p+1})}\\
+\abs{z^{p}\frac{1-z^{n-p+1}}{1-z}} &\leq \frac{1}{2\sin(x/2)}\abs{z^{p}}(1+\abs{z}^{n-p+1})\\
+\abs{z^{p}\frac{1-z^{n-p+1}}{1-z}} &\leq \frac{2}{\sin(x/2)}.
+\end{align*}
+}{Corollaire}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
