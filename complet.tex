@@ -137,6 +137,142 @@ On suppose $f$ croissante. Fixons $n\in \N^{*}$ et posons la subdivision : \[\en
 Ainsi, \[\int_{a}^{b}U(t)\dt - \int_{a}^{b}u(t)\dt = -\frac{b-a}{n}f(x_0) + \frac{b-a}{n}f(x_n) = \frac{b-a}{n}(f(b)-f(a)). \]Donc pour $n$ assez grand, on a bien une majoration par $\eps$ et donc $f$ est intégrable.
 }{}
 
+\definition{ 
+Soit $f:I\vers \R$ une fonction. On appelle \textit{primitive} de $f$ une fonction continue $F : I\vers \R$ telle que $F$ est dérivable de dérivée $F' = f$ sur $\ouv{I}$\footnotemark
+}{}
+\footnotetext{$\ouv{I}$ est le plus grand intervalle ouvert contenu dans $I$.}
+
+\paragraph{Remarque}Si $F$ et $G$ sont deux primitives alors $F-G$ est constante.
+
+\theoreme{ 
+Soit $f : I\vers \R$ continue. Alors pour tout $a\in I$, la fonction $$\fonc{F}{I}{\R}{x}{\int_{a}^{x}f(t)\dt}$$ est une primitive de $F$.
+}{}
+\demonstration{ 
+Soient $a,x\in I$. Le segment d'extrémités $a$ et $x$ est contenu dans $I$. Donc $F$ est bien définie puisque $f$ intégrable sur $I$. Soit $x_0\in \ouv{I}$.
+\begin{align*}
+F(x) - F(x_0) &= \int_{x_0}^{x}f(t)\dt, \\
+(x-x_0)f(x_0) &= \int_{x_0}^{x}f(x_0)\dt, \\
+F(x)-F(x_0) -(x-x_0)f(x_0) &= \int_{x_0}^{x}(f(t)-f(x_0))\dt \\
+\abs{F(x)-F(x_0) -(x-x_0)f(x_0)}&\leq \int_{x_0}^{x}\abs{f(t)-f(x_0)}\dt
+\end{align*}
+Soit $\eps>0$, comme $f$ est continue, il existe $\alpha>0$ tel que pour tout $x$, $\abs{x-x_0}< \alpha\implique \abs{f(x)-f(x_0)}<\eps$.
+
+Pour tout $t$ dans le segment d'extrémités $x$ et $x_0$ on a aussi $\abs{t-x_0}<\alpha$. Ainsi
+\begin{align*}
+\abs{F(x)-F(x_0) -(x-x_0)f(x_0)}&\leq \abs{x-x_0}\eps\\
+\abs{\frac{F(x)-F(x_0)}{x-x_0}-f(x_0)}&\leq \eps \\
+\lim_{x\to x_0}\frac{F(x)-F(x_0)}{x-x_0}&= f(x_0).
+\end{align*}
+}{}
+
+\corollaire{ 
+Toute fonction $f$ continue sur $I$ admet une primitive $F$ et on a \[ \forall x,y\in I , \; F(x)-F(y) = \int_{x}^{y}f(t)\dt.\]
+}{}
+
+\subsection{Primitives de fonctions usuelles}
+
+Soit $a\in \R$.
+
+\propt{} Si $b\neq -1$ : \[\int (t+a)^{b}\dt = \left(\frac{x+a}{b+1}\right)^{b+1} \]et si $b=-1$ : \[ \int \frac{1}{t+a}\dt = \log\abs{x+a}.\]
+
+Avec $a\neq 0$ :
+
+\propt{} $\int \cos(at)\dt = \sin(ax)/a$ 
+
+\propt{} $\int \sin(at)\dt = -\cos(ax)/a$ 
+
+\propt{} $\int \ch(at)\dt = \sh(ax)/a$ 
+
+\propt{} $\int \sh(at)\dt = \ch(ax)/a$
+
+\propt{} $\int \exp(at)\dt = \exp(ax)/a$ 
+
+\propt{} $\int \dt / \cos^{2}t = \tan x$
+
+\propt{} $\int \dt / \sin^{2}t = -\coth x$
+
+\propt{} $\int \dt / \ch^{2}t = \tan x$ 
+
+\propt{} $\int \dt / \sh^{2}t = -1/\tan x$
+
+\propt{} $\int \dt /(1+t^{2}) = \arctan x$
+
+\propt{} $\int \dt / \sqrt{t^{2}-1} = \log \abs{x + \sqrt{x^{2}-1}}$
+
+ \propt{} $\int \dt / \sqrt{t^{2}+1} = \log \abs{x + \sqrt{x^{2}+1}}$
+
+\propt{} $\int \dt / \sqrt{1-t^{2}} = \arcsin x$
+\newpropt
+
+\subsection{Techniques d'intégration}
+\theoreme{ 
+Soient $u,v$ des fonctions définies et dérivables sur un même intervalle. Alors on a : \[ \int u'(t)v(t)\dt = -\int u(t)v'(t) \dt + uv\]
+}{Intégration par parties}
+
+\theoreme{ 
+Soit $u$ une fonction dérivable à valeurs dans $J= u(I)$, un intervalle de $\R$, qui ne s'annule pas. Soit $v : J\vers I$ l'inverse de $u$ (qui définit une bijection). Soit $f:I\vers \R$ continue. Alors \[ \int_a^{b}f(t)\dt = \int_{u(a)}^{u(b)}(f\rond v)(t)v'(t)\dt. \]
+}{Changement de variable}
+
+\section{Intégrales impropres}
+
+\definition{ 
+Soit $f : [a,b[ \vers \R$. Si la fonction \[x\donne \int_{a}^{x}f(t)\dt \]
+est définie sur $[a,b[$ et admet une limite quand $x\to b$ avec $x<b$ alors on note cette limite \[\int_{a}^{b}f(t)\dt. \]
+
+Si cette limite existe et appartient à $\R$, on dit que l'intégrale impropre $\int_{a}^{b}f(t)\dt$ est convergente. Sinon, elle est divergente.
+}{}
+
+\subsection{Exemples fondamentaux}
+\proposition{On a : 
+\begin{enumerate}
+\item Soit $a\in \R^{*}_+$.
+\begin{enumerate}
+\item L'intégrale impropre \[ \int_{a}^{+\infty}\frac{\dt}{t^{\alpha}}\]converge si $\alpha>1$ et diverge si $\alpha\leq 1$.
+\item \[ \int_{0}^{a}\frac{\dt}{t^{\alpha}}\]converge si $\alpha<1$ et diverge si $\alpha \geq 1$.
+\end{enumerate}
+\item Soient $a,b\in \R$ tel que $a<b$. Même résultats que ci-dessus pour l'intégrale impropre : \[ \int_{a}^{b}\frac{\dt}{(b-t)^{\alpha}}.\]
+\end{enumerate}
+}{}
+\demonstration{ Dans l'ordre
+\begin{enumerate}
+\item Si $\alpha \neq 1$ alors \[\int \frac{1}{t^{\alpha}}\dt = \frac{1}{1-\alpha}t^{1-\alpha}. \] Et \[ \int_{a}^{x}\frac{1}{t^{\alpha}}\dt = \frac{1}{1-\alpha}(x^{1-\alpha} -t^{1-\alpha}). \]Si $\alpha >1$ : \[\lim_{x\to\infty}\int_{a}^{x} \frac{1}{t^{\alpha}\dt = -\frac{a^{1-\alpha}}{1-\alpha}}.\]Si $\alpha<1$ alors cette même limite vaut $+\infty$.
+
+Pour \[ \int_{x}^{a}\frac{1}{t^{\alpha}}\dt = \frac{1}{1-\alpha}(a^{1-\alpha}-x^{1\alpha}),\]si $\alpha>1$ alors \[ \lim_{x\to 0, x>0}\int_{x}^{a}\frac{1}{t^{\alpha}}\dt = +\infty.\]Si $\alpha<1$ alors la même limite vaut $a^{1-\alpha}/(1-\alpha)$.
+
+Si $\alpha=1$ alors \[ \int \frac{1}{t}\dt = \log \abs{t}.\]On a \[\lim_{x\to+\infty} \int_{a}^{x}\frac{\dt}{t} = +\infty \]et \[\lim_{x\to 0}\int_{x}^{a}\frac{\dt}{t} = +\infty. \]
+
+\item Avec le changement de variable $u(t) = b-t$ on a \[ \int_{a}^{x}\frac{\dt}{(b-t)^{\alpha}} = \int_{b-x}^{b-a}\frac{-\dd u}{u^{\alpha}}\]et donc on se ramène au premier point.
+\end{enumerate}
+}{}
+
+\paragraph{Remarque}Si $f$ admet un prolongement par continuité, alors l'intégrale est celle d'une fonction continue sur le segment et donc ce n'est pas une intégrale impropre.
+
+\subsection{Méthodes}
+
+\proposition{ 
+Soit $f$ une fonction positive sur $[a,b[$. L'intégrale impropre \[\int_{a}^{b}f(t)\dt \]converge si, et seulement si, la fonction \[x\donne \int_{a}^{x}f(t)\dt\]est majorée.
+}{}
+
+\theoreme{ 
+Soient $f,g : [a,b[\vers \R$ intégrables sur $[a,x]$ pour tout $x\in[a,b[$. Supposons que pour tout $x$, $0\leq f(x)\leq g(x)$. Alors :
+\begin{enumerate}
+\item si l'intégrale impropre $\int_{a}^{b}g(t)\dt$ converge, celle de $f$ aussi et on a \[\int_{a}^{b}f(t)\dt \leq \int_{a}^{b}g(t)\dt \ ; \]
+\item si l'intégrale impropre de $f$ diverge, celle de $g$ aussi.
+\end{enumerate}
+}{}
+
+\theoreme{ 
+Soit $f : [a,b[\vers \R$. Si \[ \int_{a}^{b}\abs{f(t)}\dt\]converge, alors \[ \int_{a}^{b}f(t)\dt\]converge et : \[\abs{\int_{a}^{b} f(t)\dt} \leq \int_{a}^{b}\abs{f(t)}\dt.\]L'intégrale est alors absolument convergente.
+}{}
+
+\theoreme{ 
+On a :
+\begin{enumerate}
+\item Soit $f:[a,b[\vers \R$ intégrable sur $[a,x]$ pour tout $x\in [a,b[$. Alors \[\int_{a}^{b}f(t)\dt \]est convergente si, et seulement si, \[\forall \eps >0, \exists \alpha >0, \forall (x,y)\in[a,b[^{2}, \; (\abs{b-x}< \alpha \et \abs{b-y} < \alpha) \implique \abs{\int_{x}^{y}f(t)\dt}<\eps. \]
+\item Soit $f:[a,+\infty[\vers \R$ intégrable sur $[a,x]$ pour tout $x\in [a,+\infty[$. Alors \[\int_{a}^{+\infty}f(t)\dt \]est convergente si, et seulement si, \[\forall \eps >0, \exists A >0, \forall (x,y)\in]a,+\infty[^{2}, \; (x>A \et y>A) \implique \abs{\int_{x}^{y}f(t)\dt}<\eps. \]
+\end{enumerate}
+}{Critère de \textsc{Cauchy}}
+
 \end{document}
 
 
